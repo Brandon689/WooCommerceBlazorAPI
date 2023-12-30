@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerceAPI", "WooCommerceAPI\WooCommerceAPI.csproj", "{E27B492A-3D82-4402-B428-2641EB0F1EC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerceAPI.Tests", "WooCommerceAPI.Tests\WooCommerceAPI.Tests.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E27B492A-3D82-4402-B428-2641EB0F1EC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E27B492A-3D82-4402-B428-2641EB0F1EC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E27B492A-3D82-4402-B428-2641EB0F1EC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
