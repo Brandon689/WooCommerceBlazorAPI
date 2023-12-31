@@ -4,7 +4,7 @@
 
 This is a new standards compliant library for ecommerce developers. It is under heavy development.
 
-Thanks to [@hassanhabib] for his coding Standard.
+Thanks to [hassanhabib](https://github.com/hassanhabib) for his coding Standard.
 
 
 ## Hello World
