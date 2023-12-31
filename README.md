@@ -9,7 +9,7 @@ Thanks to [hassanhabib](https://github.com/hassanhabib) for the coding Standard.
 
 ## Hello World
 
-```
+```csharp
 using WooCommerceAPI.Clients.WooCommerces;
 using WooCommerceAPI.Models.Configurations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
