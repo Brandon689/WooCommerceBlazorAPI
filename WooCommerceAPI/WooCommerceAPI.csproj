@@ -8,8 +8,25 @@
 
   <ItemGroup>
     <PackageReference Include="DotNetEnv" Version="2.5.0" />
+    <PackageReference Include="RESTFulSense" Version="2.16.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="System.Text.RegularExpressions" Version="4.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Brokers\WordPresses\" />
+    <Folder Include="Models\Clients\" />
+    <Folder Include="Models\Services\Foundations\Media\" />
+    <Folder Include="Models\Services\Foundations\Customers\" />
+    <Folder Include="Models\Services\Foundations\Coupons\" />
+    <Folder Include="Models\Services\Foundations\Settings\" />
+    <Folder Include="Models\Services\Foundations\Refunds\" />
+    <Folder Include="Models\Services\Foundations\ProductTags\" />
+    <Folder Include="Models\Services\Foundations\ProductCategories\" />
+    <Folder Include="Models\Services\Foundations\ProductAttributes\" />
+    <Folder Include="Models\Services\Foundations\ProductVariations\" />
+    <Folder Include="Models\Services\Foundations\Orders\" />
+    <Folder Include="Models\Services\Foundations\Products\Exceptions\" />
   </ItemGroup>
 
 </Project>
