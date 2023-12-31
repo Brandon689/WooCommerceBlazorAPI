@@ -1,7 +1,7 @@
-﻿using WooCommerceAPI.Clients.WooCommerces;
+﻿using dotenv.net;
+using WooCommerceAPI.Clients.WooCommerces;
 using WooCommerceAPI.Models.Configurations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
-using dotenv.net;
 
 DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { "../../../.env" }));
 

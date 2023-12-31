@@ -1,6 +1,4 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
-
-namespace WooCommerceAPI.Models.Services.Foundations.Products
+﻿namespace WooCommerceAPI.Models.Services.Foundations.Products
 {
     public class ProductRequest
     {

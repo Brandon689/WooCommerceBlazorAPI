@@ -1,11 +1,6 @@
-﻿// ---------------------------------------------------------------------------------- 
-// Copyright (c) The Standard Organization, a coalition of the Good-Hearted Engineers 
-// ----------------------------------------------------------------------------------
+﻿using Xeptions;
 
-using System;
-using Xeptions;
-
-namespace Standard.AI.OpenAI.Models.Services.Foundations.Products.Exceptions
+namespace WooCommerceAPI.Models.Services.Foundations.Products.Exceptions
 {
     public class FailedProductServiceException : Xeption
     {

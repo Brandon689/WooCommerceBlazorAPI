@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WooCommerceAPI.Brokers.WooCommerces;
+﻿using WooCommerceAPI.Brokers.WooCommerces;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.Products;
-using WooCommerceAPI.Services.Foundations.Products.Exceptions;
 
 namespace WooCommerceAPI.Services.Foundations.Products
 {
@@ -24,13 +18,13 @@ namespace WooCommerceAPI.Services.Foundations.Products
         TryCatch(async () =>
         {
             ValidateProductOnSend(Product);
-           
+
             ExternalProductRequest externalProductRequest =
                 ConvertToProductRequest(Product);
             string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
             ExternalProductResponse externalProductResponse =
                 await this.openAIBroker.PostProductRequestAsync(externalProductRequest);
-            
+
             return ConvertToProduct(Product, externalProductResponse);
         });
 
@@ -91,7 +85,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 DateCreated = externalProductResponse.DateCreated,
                 DateModified = externalProductResponse.DateModified,
                 DateModifiedGmt = externalProductResponse.DateModifiedGmt,
-                DateOnSaleFrom  = externalProductResponse.DateOnSaleFrom,
+                DateOnSaleFrom = externalProductResponse.DateOnSaleFrom,
                 DateOnSaleFromGmt = externalProductResponse.DateOnSaleFromGmt,
                 DateOnSaleTo = externalProductResponse.DateOnSaleTo,
                 DateOnSaleToGmt = externalProductResponse.DateOnSaleToGmt,

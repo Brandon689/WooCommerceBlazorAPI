@@ -1,10 +1,6 @@
 ﻿using RESTFulSense.Clients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Threading.Tasks;
 using WooCommerceAPI.Models.Configurations;
 
 namespace WooCommerceAPI.Brokers.WooCommerces
@@ -68,6 +64,6 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         }
 
         private IRESTFulApiFactoryClient SetupApiClient() =>
-            new RESTFulApiFactoryClient(this.httpClient); 
+            new RESTFulApiFactoryClient(this.httpClient);
     }
 }

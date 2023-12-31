@@ -1,11 +1,5 @@
-﻿using Standard.AI.OpenAI.Models.Services.Foundations.Products.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WooCommerceAPI.Models.Services.Foundations.Products;
-using WooCommerceAPI.Services.Foundations.Products.Exceptions;
+﻿using WooCommerceAPI.Models.Services.Foundations.Products;
+using WooCommerceAPI.Models.Services.Foundations.Products.Exceptions;
 
 namespace WooCommerceAPI.Services.Foundations.Products
 {

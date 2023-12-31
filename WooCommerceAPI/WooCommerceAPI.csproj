@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Brokers\WordPresses\" />
-    <Folder Include="Models\Clients\" />
     <Folder Include="Models\Services\Foundations\Media\" />
     <Folder Include="Models\Services\Foundations\Customers\" />
     <Folder Include="Models\Services\Foundations\Coupons\" />
@@ -25,7 +24,6 @@
     <Folder Include="Models\Services\Foundations\ProductAttributes\" />
     <Folder Include="Models\Services\Foundations\ProductVariations\" />
     <Folder Include="Models\Services\Foundations\Orders\" />
-    <Folder Include="Models\Services\Foundations\Products\Exceptions\" />
   </ItemGroup>
 
 </Project>
