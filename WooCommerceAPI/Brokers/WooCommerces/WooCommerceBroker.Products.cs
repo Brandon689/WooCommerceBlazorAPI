@@ -9,12 +9,12 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 {
     internal partial class WooCommerceBroker
     {
-        public async ValueTask<ExternalProductResponse> PostChatCompletionRequestAsync(
-            ExternalProductRequest externalChatCompletionRequest)
+        public async ValueTask<ExternalProductResponse> PostProductRequestAsync(
+            ExternalProductRequest externalProductRequest)
         {
             return await PostAsync<ExternalProductRequest, ExternalProductResponse>(
                 relativeUrl: "v3/products",
-                content: externalChatCompletionRequest);
+                content: externalProductRequest);
         }
     }
 }

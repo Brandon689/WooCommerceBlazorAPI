@@ -9,6 +9,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
 {
     internal interface IProductService
     {
-        ValueTask<Product> SendChatCompletionAsync(Product chatCompletion);
+        ValueTask<Product> SendProductAsync(Product Product);
     }
 }

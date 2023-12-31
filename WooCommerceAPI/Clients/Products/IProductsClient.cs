@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 
-namespace WooCommerceAPI.Clients
+namespace WooCommerceAPI.Clients.Products
 {
     public interface IProductsClient
     {
-        ValueTask<Product> SendChatCompletionAsync(Product chatCompletion);
+        ValueTask<Product> SendProductAsync(Product Product);
     }
 }

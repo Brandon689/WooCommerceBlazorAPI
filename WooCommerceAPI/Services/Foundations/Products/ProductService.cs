@@ -11,26 +11,26 @@ namespace WooCommerceAPI.Services.Foundations.Products
 {
     internal partial class ProductService : IProductService
     {
-        private readonly WooCommerceBroker openAIBroker;
+        private readonly IWooCommerceBroker openAIBroker;
 
         public ProductService(
-            WooCommerceBroker openAIBroker)
+            IWooCommerceBroker openAIBroker)
         {
             this.openAIBroker = openAIBroker;
         }
 
-        public ValueTask<Product> SendChatCompletionAsync(Product chatCompletion) =>
+        public ValueTask<Product> SendProductAsync(Product Product) =>
         TryCatch(async () =>
         {
-            //ValidateChatCompletionOnSend(chatCompletion);
+            //ValidateProductOnSend(Product);
 
-            ExternalProductRequest externalChatCompletionRequest =
-                ConvertToProductRequest(chatCompletion);
-            string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalChatCompletionRequest);
-            ExternalProductResponse externalChatCompletionResponse =
-                await this.openAIBroker.PostChatCompletionRequestAsync(externalChatCompletionRequest);
+            ExternalProductRequest externalProductRequest =
+                ConvertToProductRequest(Product);
+            string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
+            ExternalProductResponse externalProductResponse =
+                await this.openAIBroker.PostProductRequestAsync(externalProductRequest);
             ;
-            //return ConvertToChatCompletion(chatCompletion, externalChatCompletionResponse);
+            //return ConvertToProduct(Product, externalProductResponse);
 
 
             return new Product();
@@ -45,119 +45,121 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 RegularPrice = product.Request.RegularPrice,
                 Description = product.Request.Description,
                 Type = product.Request.Type,
-                Attributes = product.Request.Attributes.Select(attribute =>
-                {
-                    return new ExternalProductAttribute
-                    {
-                        Name = attribute.Name,
-                        Variation = attribute.Variation,
-                        Options = attribute.Options
-                    };
-                }).ToArray(),
-
-                //Model = chatCompletion.Request.Model,
-
-                //Messages = chatCompletion.Request.Messages.Select(message =>
+                //Attributes = product.Request.Attributes.Select(attribute =>
                 //{
-                //    return new ExternalChatCompletionMessage
+                //    return new ExternalProductAttribute
+                //    {
+                //        Name = attribute.Name,
+                //        Variation = attribute.Variation,
+                //        Options = attribute.Options
+                //    };
+                //}).ToArray(),
+
+                //Model = Product.Request.Model,
+
+                //Messages = Product.Request.Messages.Select(message =>
+                //{
+                //    return new ExternalProductMessage
                 //    {
                 //        Role = message.Role,
                 //        Content = message.Content
                 //    };
                 //}).ToArray(),
 
-                //Temperature = chatCompletion.Request.Temperature,
-                //ProbabilityMass = chatCompletion.Request.ProbabilityMass,
-                //CompletionsPerPrompt = chatCompletion.Request.CompletionsPerPrompt,
-                //Stream = chatCompletion.Request.Stream,
-                //Stop = chatCompletion.Request.Stop,
-                //MaxTokens = chatCompletion.Request.MaxTokens,
-                //PresencePenalty = chatCompletion.Request.PresencePenalty,
-                //FrequencyPenalty = chatCompletion.Request.FrequencyPenalty,
-                //LogitBias = chatCompletion.Request.LogitBias,
-                //User = chatCompletion.Request.User
+                //Temperature = Product.Request.Temperature,
+                //ProbabilityMass = Product.Request.ProbabilityMass,
+                //CompletionsPerPrompt = Product.Request.CompletionsPerPrompt,
+                //Stream = Product.Request.Stream,
+                //Stop = Product.Request.Stop,
+                //MaxTokens = Product.Request.MaxTokens,
+                //PresencePenalty = Product.Request.PresencePenalty,
+                //FrequencyPenalty = Product.Request.FrequencyPenalty,
+                //LogitBias = Product.Request.LogitBias,
+                //User = Product.Request.User
             };
         }
     }
 
     internal partial class ProductService : IProductService
     {
-        private delegate ValueTask<Product> ReturningChatCompletionFunction();
+        private delegate ValueTask<Product> ReturningProductFunction();
 
-        private async ValueTask<Product> TryCatch(ReturningChatCompletionFunction returningChatCompletionFunction)
+        private async ValueTask<Product> TryCatch(ReturningProductFunction returningProductFunction)
         {
             try
             {
-                return await returningChatCompletionFunction();
+                return await returningProductFunction();
             }
-            catch
+            catch (Exception ex)
             {
-                return null;
+                Console.WriteLine(ex);
+                ;
+                throw;
             }
-            //catch (NullChatCompletionException nullChatCompletionException)
+            //catch (NullProductException nullProductException)
             //{
-            //    throw new ChatCompletionValidationException(nullChatCompletionException);
+            //    throw new ProductValidationException(nullProductException);
             //}
-            //catch (InvalidChatCompletionException invalidChatCompletionException)
-            //{
-            //    throw new ChatCompletionValidationException(invalidChatCompletionException);
+            //catch (InvalidProductException invalidProductException)
+            //{x
+            //    throw new ProductValidationException(invalidProductException);
             //}
             //catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             //{
-            //    var invalidConfigurationChatCompletionException =
-            //        new InvalidConfigurationChatCompletionException(httpResponseUrlNotFoundException);
+            //    var invalidConfigurationProductException =
+            //        new InvalidConfigurationProductException(httpResponseUrlNotFoundException);
 
-            //    throw new ChatCompletionDependencyException(invalidConfigurationChatCompletionException);
+            //    throw new ProductDependencyException(invalidConfigurationProductException);
             //}
             //catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             //{
-            //    var unauthorizedChatCompletionException =
-            //        new UnauthorizedChatCompletionException(httpResponseUnauthorizedException);
+            //    var unauthorizedProductException =
+            //        new UnauthorizedProductException(httpResponseUnauthorizedException);
 
-            //    throw new ChatCompletionDependencyException(unauthorizedChatCompletionException);
+            //    throw new ProductDependencyException(unauthorizedProductException);
             //}
             //catch (HttpResponseForbiddenException httpResponseForbiddenException)
             //{
-            //    var unauthorizedChatCompletionException =
-            //        new UnauthorizedChatCompletionException(httpResponseForbiddenException);
+            //    var unauthorizedProductException =
+            //        new UnauthorizedProductException(httpResponseForbiddenException);
 
-            //    throw new ChatCompletionDependencyException(unauthorizedChatCompletionException);
+            //    throw new ProductDependencyException(unauthorizedProductException);
             //}
             //catch (HttpResponseNotFoundException httpResponseNotFoundException)
             //{
-            //    var notFoundChatCompletionException =
-            //        new NotFoundChatCompletionException(httpResponseNotFoundException);
+            //    var notFoundProductException =
+            //        new NotFoundProductException(httpResponseNotFoundException);
 
-            //    throw new ChatCompletionDependencyValidationException(notFoundChatCompletionException);
+            //    throw new ProductDependencyValidationException(notFoundProductException);
             //}
             //catch (HttpResponseBadRequestException httpResponseBadRequestException)
             //{
-            //    var invalidChatCompletionException =
-            //        new InvalidChatCompletionException(httpResponseBadRequestException);
+            //    var invalidProductException =
+            //        new InvalidProductException(httpResponseBadRequestException);
 
-            //    throw new ChatCompletionDependencyValidationException(invalidChatCompletionException);
+            //    throw new ProductDependencyValidationException(invalidProductException);
             //}
             //catch (HttpResponseTooManyRequestsException httpResponseTooManyRequestsException)
             //{
-            //    var excessiveCallChatCompletionException =
-            //        new ExcessiveCallChatCompletionException(httpResponseTooManyRequestsException);
+            //    var excessiveCallProductException =
+            //        new ExcessiveCallProductException(httpResponseTooManyRequestsException);
 
-            //    throw new ChatCompletionDependencyValidationException(excessiveCallChatCompletionException);
+            //    throw new ProductDependencyValidationException(excessiveCallProductException);
             //}
             //catch (HttpResponseException httpResponseException)
             //{
-            //    var failedServerChatCompletionException =
-            //        new FailedServerChatCompletionException(httpResponseException);
+            //    var failedServerProductException =
+            //        new FailedServerProductException(httpResponseException);
 
-            //    throw new ChatCompletionDependencyException(failedServerChatCompletionException);
+            //    throw new ProductDependencyException(failedServerProductException);
             //}
             //catch (Exception exception)
             //{
-            //    var failedChatCompletionServiceException =
-            //        new FailedChatCompletionServiceException(exception);
+            //    var failedProductServiceException =
+            //        new FailedProductServiceException(exception);
 
-            //    throw new ChatCompletionServiceException(
-            //        failedChatCompletionServiceException);
+            //    throw new ProductServiceException(
+            //        failedProductServiceException);
             //}
         }
     }

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerceAPI", "WooCommerceAPI\WooCommerceAPI.csproj", "{E27B492A-3D82-4402-B428-2641EB0F1EC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI", "WooCommerceAPI\WooCommerceAPI.csproj", "{E27B492A-3D82-4402-B428-2641EB0F1EC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WooCommerceAPI.Tests", "WooCommerceAPI.Tests\WooCommerceAPI.Tests.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI.Tests", "WooCommerceAPI.Tests\WooCommerceAPI.Tests.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "ConsoleApp1\TestConsole.csproj", "{A2DD54AC-09C5-4862-965B-C2E68A7419D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

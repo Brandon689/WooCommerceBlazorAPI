@@ -61,12 +61,8 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue(
-                    scheme: "Bearer",
-                    parameter: this.openAIConfigurations.ApiKey);
-
-            httpClient.DefaultRequestHeaders.Add(
-                name: "OpenAI-Organization",
-                value: this.openAIConfigurations.OrganizationId);
+                    scheme: "Basic",
+                    parameter: Convert.ToBase64String(Encoding.UTF8.GetBytes($"{this.openAIConfigurations.ApiKey}:{this.openAIConfigurations.ApiSecret}")));
 
             return httpClient;
         }

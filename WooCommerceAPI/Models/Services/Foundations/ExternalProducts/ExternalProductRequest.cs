@@ -21,8 +21,8 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         [JsonProperty("regular_price")]
         public string RegularPrice { get; set; } = string.Empty;
 
-        [JsonProperty("attributes")]
-        public ExternalProductAttribute[] Attributes { get; set; } = null;
+        //[JsonProperty("attributes")]
+        //public ExternalProductAttribute[] Attributes { get; set; } = null;
 
         //[JsonProperty("images")]
         //public List<MediaResponse> Images { get; set; }
