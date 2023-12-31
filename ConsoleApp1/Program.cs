@@ -21,7 +21,7 @@ var inputProduct = new Product
 {
     Request = new ProductRequest
     {
-        Name = "name 5",
+        Name = "name 8",
         Type = "simple",
         RegularPrice = "10",
         //Attributes = a
