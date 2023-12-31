@@ -29,12 +29,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
             string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
             ExternalProductResponse externalProductResponse =
                 await this.openAIBroker.PostProductRequestAsync(externalProductRequest);
-            ;
-            //return ConvertToProduct(Product, externalProductResponse);
-
-
-            return new Product();
-
+            
+            return ConvertToProduct(Product, externalProductResponse);
         });
 
         private static ExternalProductRequest ConvertToProductRequest(Product product)
@@ -77,6 +73,35 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 //LogitBias = Product.Request.LogitBias,
                 //User = Product.Request.User
             };
+        }
+
+        private Product ConvertToProduct(
+            Product Product,
+            ExternalProductResponse externalProductResponse)
+        {
+
+            Product.Response = new ProductResponse
+            {
+                Id = externalProductResponse.Id,
+                Name = externalProductResponse.Name,
+                RegularPrice = externalProductResponse.RegularPrice,
+                Description = externalProductResponse.Description,
+                Type = externalProductResponse.Type,
+                DateCreated = externalProductResponse.DateCreated,
+                DateModified = externalProductResponse.DateModified,
+                DateModifiedGmt = externalProductResponse.DateModifiedGmt,
+                DateOnSaleFrom  = externalProductResponse.DateOnSaleFrom,
+                DateOnSaleFromGmt = externalProductResponse.DateOnSaleFromGmt,
+                DateOnSaleTo = externalProductResponse.DateOnSaleTo,
+                DateOnSaleToGmt = externalProductResponse.DateOnSaleToGmt,
+                Status = externalProductResponse.Status,
+                Price = externalProductResponse.Price,
+                Featured = externalProductResponse.Featured,
+                Slug = externalProductResponse.Slug,
+                //CreatedDate = this.dateTimeBroker.ConvertToDateTimeOffSet(externalProductResponse.Created),
+            };
+
+            return Product;
         }
     }
 

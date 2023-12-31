@@ -13,7 +13,7 @@ namespace WooCommerceAPI.Brokers.WooCommerces
             ExternalProductRequest externalProductRequest)
         {
             return await PostAsync<ExternalProductRequest, ExternalProductResponse>(
-                relativeUrl: "v3/products",
+                relativeUrl: "/wp-json/wc/v3/products",
                 content: externalProductRequest);
         }
     }

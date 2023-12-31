@@ -17,17 +17,16 @@ var openAIClient = new WooCommerceClient(openAIConfigurations);
 ProductAttribute[] a = new ProductAttribute[3];
 
 
-var inputCompletion = new Product
+var inputProduct = new Product
 {
     Request = new ProductRequest
     {
-        Name = "name 3",
+        Name = "name 5",
         Type = "simple",
         RegularPrice = "10",
         //Attributes = a
     }
 };
 
-Product resultCompletion =
-    await openAIClient.Products.SendProductAsync(
-        inputCompletion);
+Product result = await openAIClient.Products.SendProductAsync(inputProduct);
+Console.WriteLine(result.Response.Name);

@@ -7,105 +7,6 @@ using System.Threading.Tasks;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
-    public class Attribute
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("position")]
-        public int Position { get; set; }
-
-        [JsonProperty("visible")]
-        public bool Visible { get; set; }
-
-        [JsonProperty("variation")]
-        public bool Variation { get; set; }
-
-        [JsonProperty("options")]
-        public string[] Options { get; set; }
-    }
-
-    public class Category
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("slug")]
-        public string Slug { get; set; }
-    }
-
-    public class Collection
-    {
-        [JsonProperty("href")]
-        public string Href { get; set; }
-    }
-
-    public class DefaultAttribute
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("option")]
-        public string Option { get; set; }
-    }
-
-    public class Dimensions
-    {
-        [JsonProperty("length")]
-        public string Length { get; set; }
-
-        [JsonProperty("width")]
-        public string Width { get; set; }
-
-        [JsonProperty("height")]
-        public string Height { get; set; }
-    }
-
-    public class Image
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("date_created")]
-        public DateTime DateCreated { get; set; }
-
-        [JsonProperty("date_created_gmt")]
-        public DateTime DateCreatedGmt { get; set; }
-
-        [JsonProperty("date_modified")]
-        public DateTime DateModified { get; set; }
-
-        [JsonProperty("date_modified_gmt")]
-        public DateTime DateModifiedGmt { get; set; }
-
-        [JsonProperty("src")]
-        public string Src { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("alt")]
-        public string Alt { get; set; }
-    }
-
-    public class Links
-    {
-        [JsonProperty("self")]
-        public List<Self> Self { get; set; }
-
-        [JsonProperty("collection")]
-        public List<Collection> Collection { get; set; }
-    }
-
     public class ExternalProductResponse
     {
         [JsonProperty("id")]
@@ -305,6 +206,105 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 
         [JsonProperty("_links")]
         public Links Links { get; set; }
+    }
+
+    public class Attribute
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("position")]
+        public int Position { get; set; }
+
+        [JsonProperty("visible")]
+        public bool Visible { get; set; }
+
+        [JsonProperty("variation")]
+        public bool Variation { get; set; }
+
+        [JsonProperty("options")]
+        public string[] Options { get; set; }
+    }
+
+    public class Category
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("slug")]
+        public string Slug { get; set; }
+    }
+
+    public class Collection
+    {
+        [JsonProperty("href")]
+        public string Href { get; set; }
+    }
+
+    public class DefaultAttribute
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("option")]
+        public string Option { get; set; }
+    }
+
+    public class Dimensions
+    {
+        [JsonProperty("length")]
+        public string Length { get; set; }
+
+        [JsonProperty("width")]
+        public string Width { get; set; }
+
+        [JsonProperty("height")]
+        public string Height { get; set; }
+    }
+
+    public class Image
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("date_created")]
+        public DateTime DateCreated { get; set; }
+
+        [JsonProperty("date_created_gmt")]
+        public DateTime DateCreatedGmt { get; set; }
+
+        [JsonProperty("date_modified")]
+        public DateTime DateModified { get; set; }
+
+        [JsonProperty("date_modified_gmt")]
+        public DateTime DateModifiedGmt { get; set; }
+
+        [JsonProperty("src")]
+        public string Src { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("alt")]
+        public string Alt { get; set; }
+    }
+
+    public class Links
+    {
+        [JsonProperty("self")]
+        public List<Self> Self { get; set; }
+
+        [JsonProperty("collection")]
+        public List<Collection> Collection { get; set; }
     }
 
     public class Self
