@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using RESTFulSense.Models.Attributes;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalMedia
 {
@@ -15,5 +16,15 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalMedia
 
         [JsonProperty("alt")]
         public string Alt { get; set; } = string.Empty;
+
+
+        [RESTFulStreamContent("file")]
+        public Stream File { get; set; }
+
+        [RESTFulFileName("file")]
+        public string FileName { get; set; }
+
+        [RESTFulStringContent("purpose")]
+        public string Purpose { get; set; }
     }
 }

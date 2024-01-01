@@ -1,5 +1,4 @@
 ﻿using WooCommerceAPI.Models.Services.Foundations.Media;
-using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Clients.Media
 {

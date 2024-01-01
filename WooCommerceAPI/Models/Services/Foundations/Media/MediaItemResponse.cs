@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WooCommerceAPI.Models.Services.Foundations.Media
+﻿namespace WooCommerceAPI.Models.Services.Foundations.Media
 {
     public class MediaItemResponse
     {

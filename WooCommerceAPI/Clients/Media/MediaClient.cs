@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WooCommerceAPI.Models.Services.Foundations.Media;
-using WooCommerceAPI.Models.Services.Foundations.Products;
+﻿using WooCommerceAPI.Models.Services.Foundations.Media;
 using WooCommerceAPI.Services.Foundations.Media;
 
 namespace WooCommerceAPI.Clients.Media

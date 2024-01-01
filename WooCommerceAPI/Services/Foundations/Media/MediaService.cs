@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WooCommerceAPI.Brokers.WooCommerces;
-using WooCommerceAPI.Brokers.WordPresses;
+﻿using WooCommerceAPI.Brokers.WordPresses;
 using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
 using WooCommerceAPI.Models.Services.Foundations.Media;
-using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Services.Foundations.Media
 {
@@ -23,10 +16,11 @@ namespace WooCommerceAPI.Services.Foundations.Media
         public async ValueTask<MediaItem> SendMediaItemAsync(MediaItem mediaItem) //=>
         {
 
-            ExternalMediaItemRequest externalMediaItemRequest = new ExternalMediaItemRequest();
+            ExternalMediaItemRequest externalMediaItemRequest = Convert(mediaItem);
 
-            var r = await this.wordPressBroker.PostMediaRequestAsync(null);
-            return null;
+            ExternalMediaItemResponse externalMediaItemResponse =
+                await this.wordPressBroker.PostMediaRequestAsync(externalMediaItemRequest);
+            return ConvertToMediaItem(mediaItem, externalMediaItemResponse);
         }
 
         private ExternalMediaItemRequest Convert(MediaItem mediaItem)
@@ -38,6 +32,20 @@ namespace WooCommerceAPI.Services.Foundations.Media
                 Alt = mediaItem.Request.Alt,
                 Name = mediaItem.Request.Name
             };
+        }
+        private MediaItem ConvertToMediaItem(
+            MediaItem mediaItem,
+            ExternalMediaItemResponse externalMediaItemResponse
+            )
+        {
+            mediaItem.Response = new MediaItemResponse()
+            {
+                Id = externalMediaItemResponse.Id,
+                Src = externalMediaItemResponse.Src,
+                Name = externalMediaItemResponse.Name,
+                Alt = externalMediaItemResponse.Alt
+            };
+            return mediaItem;
         }
         //TryCatch(async () =>
         //{

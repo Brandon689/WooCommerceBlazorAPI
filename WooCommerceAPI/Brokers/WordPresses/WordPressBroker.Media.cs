@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
-using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+﻿using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
 
 namespace WooCommerceAPI.Brokers.WordPresses
 {
@@ -14,7 +8,7 @@ namespace WooCommerceAPI.Brokers.WordPresses
 
         public async ValueTask<ExternalMediaItemResponse> PostMediaRequestAsync(ExternalMediaItemRequest externalMediaItemRequest)
         {
-            return await PostAsync<ExternalMediaItemRequest, ExternalMediaItemResponse>(
+            return await PostFormAsync<ExternalMediaItemRequest, ExternalMediaItemResponse>(
                 relativeUrl: MediaRelativeUrl,
                 content: externalMediaItemRequest);
         }
