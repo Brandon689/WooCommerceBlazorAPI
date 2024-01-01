@@ -4,6 +4,10 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <RepositoryUrl>https://github.com/Brandon689/WooCommerceAPI</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageProjectUrl>https://github.com/Brandon689/WooCommerceAPI</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,8 +26,18 @@
     <Folder Include="Models\Services\Foundations\ProductTags\" />
     <Folder Include="Models\Services\Foundations\ProductCategories\" />
     <Folder Include="Models\Services\Foundations\ProductAttributes\" />
-    <Folder Include="Models\Services\Foundations\ProductVariations\" />
     <Folder Include="Models\Services\Foundations\Orders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

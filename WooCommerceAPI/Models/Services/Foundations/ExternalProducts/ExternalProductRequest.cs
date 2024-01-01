@@ -16,26 +16,17 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         [JsonProperty("regular_price")]
         public string RegularPrice { get; set; } = string.Empty;
 
-        //[JsonProperty("attributes")]
-        //public ExternalProductAttribute[] Attributes { get; set; } = null;
+        [JsonProperty("attributes")]
+        public ExternalProductAttribute[] Attributes { get; set; } = null;
 
-        //[JsonProperty("images")]
-        //public List<MediaResponse> Images { get; set; }
+        [JsonProperty("images")]
+        public ExternalImage[] Images { get; set; }
     }
 
-    internal class ExternalProductAttribute
+    internal class ExternalImage
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("visible")]
-        public bool Visible { get; set; } = true;
-
-        [JsonProperty("variation")]
-        public bool Variation { get; set; }
-
-        [JsonProperty("options")]
-        public string[] Options { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
     }
 }
 

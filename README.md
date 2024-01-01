@@ -17,14 +17,14 @@ using dotenv.net;
 
 DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { "../../../.env" }));
 
-var openAIConfigurations = new WooCommerceConfigurations
+var wooCommerceConfigurations = new WooCommerceConfigurations
 {
     ApiKey = Environment.GetEnvironmentVariable("WC_CONSUMER_KEY"),
     ApiSecret = Environment.GetEnvironmentVariable("WC_CONSUMER_SECRET"),
     ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
 };
 
-var openAIClient = new WooCommerceClient(openAIConfigurations);
+var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 
 ProductAttribute[] a = new ProductAttribute[3];
 
@@ -40,6 +40,6 @@ var inputProduct = new Product
     }
 };
 
-Product result = await openAIClient.Products.SendProductAsync(inputProduct);
+Product result = await wooCommerceClient.Products.SendProductAsync(inputProduct);
 Console.WriteLine(result.Response.Name);
 ```

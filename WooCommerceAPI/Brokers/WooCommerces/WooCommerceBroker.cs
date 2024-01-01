@@ -7,13 +7,13 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 {
     internal partial class WooCommerceBroker : IWooCommerceBroker
     {
-        private readonly WooCommerceConfigurations openAIConfigurations;
+        private readonly WooCommerceConfigurations wooCommerceConfigurations;
         private readonly IRESTFulApiFactoryClient apiClient;
         private readonly HttpClient httpClient;
 
-        public WooCommerceBroker(WooCommerceConfigurations openAIConfigurations)
+        public WooCommerceBroker(WooCommerceConfigurations wooCommerceConfigurations)
         {
-            this.openAIConfigurations = openAIConfigurations;
+            this.wooCommerceConfigurations = wooCommerceConfigurations;
             this.httpClient = SetupHttpClient();
             this.apiClient = SetupApiClient();
         }
@@ -52,13 +52,13 @@ namespace WooCommerceAPI.Brokers.WooCommerces
             var httpClient = new HttpClient()
             {
                 BaseAddress =
-                    new Uri(uriString: this.openAIConfigurations.ApiUrl),
+                    new Uri(uriString: this.wooCommerceConfigurations.ApiUrl),
             };
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue(
                     scheme: "Basic",
-                    parameter: Convert.ToBase64String(Encoding.UTF8.GetBytes($"{this.openAIConfigurations.ApiKey}:{this.openAIConfigurations.ApiSecret}")));
+                    parameter: Convert.ToBase64String(Encoding.UTF8.GetBytes($"{this.wooCommerceConfigurations.ApiKey}:{this.wooCommerceConfigurations.ApiSecret}")));
 
             return httpClient;
         }

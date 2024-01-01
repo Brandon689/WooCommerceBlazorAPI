@@ -13,9 +13,9 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 (Rule: IsInvalid(Product.Request),
                 Parameter: nameof(Product.Request)));
 
-            Validate(
-                (Rule: IsInvalid(Product.Request.Attributes),
-                Parameter: nameof(ProductRequest.Attributes)));
+            //Validate(
+            //    (Rule: IsInvalid(Product.Request.Attributes),
+            //    Parameter: nameof(ProductRequest.Attributes)));
 
             //Validate(
             //    (Rule: IsInvalid(Product.Request.Attributes),

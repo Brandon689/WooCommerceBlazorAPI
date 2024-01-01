@@ -1,32 +1,51 @@
 ﻿using WooCommerceAPI.Brokers.WooCommerces;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
+using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 
 namespace WooCommerceAPI.Services.Foundations.Products
 {
     internal partial class ProductService : IProductService
     {
-        private readonly IWooCommerceBroker openAIBroker;
+        private readonly IWooCommerceBroker wooCommerceBroker;
 
-        public ProductService(
-            IWooCommerceBroker openAIBroker)
+        public ProductService(IWooCommerceBroker wooCommerceBroker)
         {
-            this.openAIBroker = openAIBroker;
+            this.wooCommerceBroker = wooCommerceBroker;
         }
 
-        public ValueTask<Product> SendProductAsync(Product Product) =>
+        public ValueTask<Product> SendProductAsync(Product product) =>
         TryCatch(async () =>
         {
-            ValidateProductOnSend(Product);
+            ValidateProductOnSend(product);
 
-            ExternalProductRequest externalProductRequest =
-                ConvertToProductRequest(Product);
-            string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
+            ExternalProductRequest externalProductRequest = ConvertToProductRequest(product);
+            //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
             ExternalProductResponse externalProductResponse =
-                await this.openAIBroker.PostProductRequestAsync(externalProductRequest);
+                await this.wooCommerceBroker.PostProductRequestAsync(externalProductRequest);
 
-            return ConvertToProduct(Product, externalProductResponse);
+            return ConvertToProduct(product, externalProductResponse);
         });
+
+        public ValueTask<ProductVariations> SendProductVariationsAsync(ProductVariations productVariations) =>
+        TryCatch(async () =>
+        {
+            //ValidateProductOnSend(Product);
+
+            ExternalProductVariationsRequest externalProductRequest = ConvertToProductVariationsRequest(productVariations.Request);
+            string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
+            File.WriteAllText("../../../epvr.json", f);
+            ExternalProductResponse externalProductResponse =
+                await this.wooCommerceBroker.PostProductVariationsRequestAsync(externalProductRequest, productVariations.Request.ProductId);
+
+            Product product = new();
+            productVariations.Response = ConvertToProduct(product, externalProductResponse);
+            return productVariations;
+        });
+
+
+
 
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {
@@ -36,37 +55,25 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 RegularPrice = product.Request.RegularPrice,
                 Description = product.Request.Description,
                 Type = product.Request.Type,
-                //Attributes = product.Request.Attributes.Select(attribute =>
-                //{
-                //    return new ExternalProductAttribute
-                //    {
-                //        Name = attribute.Name,
-                //        Variation = attribute.Variation,
-                //        Options = attribute.Options
-                //    };
-                //}).ToArray(),
-
-                //Model = Product.Request.Model,
-
-                //Messages = Product.Request.Messages.Select(message =>
-                //{
-                //    return new ExternalProductMessage
-                //    {
-                //        Role = message.Role,
-                //        Content = message.Content
-                //    };
-                //}).ToArray(),
-
-                //Temperature = Product.Request.Temperature,
-                //ProbabilityMass = Product.Request.ProbabilityMass,
-                //CompletionsPerPrompt = Product.Request.CompletionsPerPrompt,
-                //Stream = Product.Request.Stream,
-                //Stop = Product.Request.Stop,
-                //MaxTokens = Product.Request.MaxTokens,
-                //PresencePenalty = Product.Request.PresencePenalty,
-                //FrequencyPenalty = Product.Request.FrequencyPenalty,
-                //LogitBias = Product.Request.LogitBias,
-                //User = Product.Request.User
+                Attributes = product.Request.Attributes.Select(attribute =>
+                {
+                    return new ExternalProductAttribute
+                    {
+                        Id = attribute.Id,
+                        Position = attribute.Position,
+                        Visible = attribute.Visible,
+                        Name = attribute.Name,
+                        Variation = attribute.Variation,
+                        Options = attribute.Options
+                    };
+                }).ToArray(),
+                Images = product.Request.Images.Select(message =>
+                {
+                    return new ExternalImage
+                    {
+                        Id = message.Id
+                    };
+                }).ToArray(),
             };
         }
 
@@ -97,6 +104,25 @@ namespace WooCommerceAPI.Services.Foundations.Products
             };
 
             return Product;
+        }
+
+        private static ExternalProductVariationsRequest ConvertToProductVariationsRequest(ProductVariationsRequest product)
+        {
+            return new ExternalProductVariationsRequest
+            {
+                Create = product.Create.Select(create =>
+                    new ExternalF
+                    {
+                        RegularPrice = create.RegularPrice,
+                        Attributes = create.Attributes.Select(attr =>
+                            new ExternalA
+                            {
+                                //Id = attr.Id,
+                                Option = attr.Option,
+                                Name = attr.Name
+                            }).ToArray()
+                    }).ToArray()
+            };
         }
     }
 }

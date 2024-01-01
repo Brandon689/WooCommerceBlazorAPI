@@ -8,9 +8,9 @@ namespace WooCommerceAPI.Clients.WooCommerces
 {
     public class WooCommerceClient : IWooCommerceClient
     {
-        public WooCommerceClient(WooCommerceConfigurations openAIConfigurations)
+        public WooCommerceClient(WooCommerceConfigurations wooCommerceConfigurations)
         {
-            IServiceProvider serviceProvider = RegisterServices(openAIConfigurations);
+            IServiceProvider serviceProvider = RegisterServices(wooCommerceConfigurations);
             InitializeClients(serviceProvider);
         }
 
@@ -21,13 +21,13 @@ namespace WooCommerceAPI.Clients.WooCommerces
             Products = serviceProvider.GetRequiredService<IProductsClient>();
         }
 
-        private static IServiceProvider RegisterServices(WooCommerceConfigurations openAIConfigurations)
+        private static IServiceProvider RegisterServices(WooCommerceConfigurations wooCommerceConfigurations)
         {
             var serviceCollection = new ServiceCollection()
                 .AddTransient<IWooCommerceBroker, WooCommerceBroker>()
                 .AddTransient<IProductService, ProductService>()
                 .AddTransient<IProductsClient, ProductsClient>()
-                .AddSingleton(openAIConfigurations);
+                .AddSingleton(wooCommerceConfigurations);
 
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
 

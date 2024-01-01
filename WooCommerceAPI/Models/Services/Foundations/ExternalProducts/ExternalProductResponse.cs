@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
@@ -307,6 +308,4 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         [JsonProperty("href")]
         public string Href { get; set; }
     }
-
-
 }

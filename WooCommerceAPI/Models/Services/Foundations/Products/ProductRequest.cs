@@ -11,16 +11,7 @@
         public string RegularPrice { get; set; } = string.Empty;
 
         public ProductAttribute[] Attributes { get; set; } = null;
-    }
 
-    public class ProductAttribute
-    {
-        public string Name { get; set; }
-
-        public bool Visible { get; set; } = true;
-
-        public bool Variation { get; set; }
-
-        public string[] Options { get; set; }
+        public ProductImage[] Images { get; set; } = null;
     }
 }
