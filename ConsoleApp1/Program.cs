@@ -45,58 +45,58 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
 {
     Create = new[]
     {
-        new F
+        new ProductVariation
         {
             RegularPrice = "1500.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Red" },
-                new A { Name = "ZZZ", Option = "Small" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Red" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Small" }
             }
         },
-                new F
+                new ProductVariation
         {
             RegularPrice = "1540.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Red" },
-                new A { Name = "ZZZ", Option = "Medium" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Red" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Medium" }
             }
         },
-                        new F
+                        new ProductVariation
         {
             RegularPrice = "1250.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Red" },
-                new A { Name = "ZZZ", Option = "Large" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Red" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Large" }
             }
         },
-        new F
+        new ProductVariation
         {
             RegularPrice = "1150.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Blue" },
-                new A { Name = "ZZZ", Option = "Small" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Small" }
             }
         },
-        new F
+        new ProductVariation
         {
             RegularPrice = "52.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Blue" },
-                new A { Name = "ZZZ", Option = "Medium" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Medium" }
             }
         },
-        new F
+        new ProductVariation
         {
             RegularPrice = "53.00",
             Attributes = new[]
             {
-                new A { Name = "CCC", Option = "Blue" },
-                new A { Name = "ZZZ", Option = "Large" }
+                new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
+                new ProductVariationAttribute { Name = "ZZZ", Option = "Large" }
             }
         }
     }

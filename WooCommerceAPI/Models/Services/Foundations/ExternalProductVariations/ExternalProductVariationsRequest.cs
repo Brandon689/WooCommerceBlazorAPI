@@ -1,23 +1,24 @@
 ﻿using Newtonsoft.Json;
+using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 {
     internal class ExternalProductVariationsRequest
     {
         [JsonProperty("create")]
-        public ExternalF[] Create { get; set; }
+        public ExternalProductVariation[] Create { get; set; }
     }
 
-    internal class ExternalF
+    internal class ExternalProductVariation
     {
         [JsonProperty("regular_price")]
         public string RegularPrice { get; set; } = string.Empty;
 
         [JsonProperty("attributes")]
-        public ExternalA[] Attributes { get; set; }
+        public ExternalProductVariationAttribute[] Attributes { get; set; }
     }
 
-    internal class ExternalA
+    internal class ExternalProductVariationAttribute
     {
         [JsonProperty("id")]
         public int Id { get; set; } = 0;
@@ -27,5 +28,8 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 
         [JsonProperty("option")]
         public string Option { get; set; } = string.Empty;
+
+        [JsonProperty("image")]
+        public ExternalMediaItem Image { get; set; } = null;
     }
 }

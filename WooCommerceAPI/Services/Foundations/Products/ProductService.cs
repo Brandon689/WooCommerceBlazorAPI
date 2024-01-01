@@ -111,11 +111,11 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return new ExternalProductVariationsRequest
             {
                 Create = product.Create.Select(create =>
-                    new ExternalF
+                    new ExternalProductVariation
                     {
                         RegularPrice = create.RegularPrice,
                         Attributes = create.Attributes.Select(attr =>
-                            new ExternalA
+                            new ExternalProductVariationAttribute
                             {
                                 //Id = attr.Id,
                                 Option = attr.Option,
