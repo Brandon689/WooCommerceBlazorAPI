@@ -2,7 +2,7 @@
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalMedia
 {
-    internal class ExternalMediaItem
+    internal class ExternalMediaItemRequest
     {
         [JsonProperty("id")]
         public int Id { get; set; } = 0;

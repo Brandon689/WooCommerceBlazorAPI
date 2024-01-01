@@ -44,9 +44,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return productVariations;
         });
 
-
-
-
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {
             return new ExternalProductRequest

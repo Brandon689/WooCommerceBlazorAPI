@@ -5,7 +5,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
 {
     internal interface IProductService
     {
-        ValueTask<Product> SendProductAsync(Product Product);
-        ValueTask<ProductVariations> SendProductVariationsAsync(ProductVariations Product);
+        ValueTask<Product> SendProductAsync(Product product);
+        ValueTask<ProductVariations> SendProductVariationsAsync(ProductVariations product);
     }
 }

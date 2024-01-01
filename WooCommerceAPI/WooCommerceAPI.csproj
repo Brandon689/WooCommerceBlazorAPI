@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Brokers\WordPresses\" />
     <Folder Include="Models\Services\Foundations\Customers\" />
     <Folder Include="Models\Services\Foundations\Coupons\" />
     <Folder Include="Models\Services\Foundations\Settings\" />

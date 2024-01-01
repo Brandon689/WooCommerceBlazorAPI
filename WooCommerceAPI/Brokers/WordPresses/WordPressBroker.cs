@@ -1,19 +1,23 @@
 ﻿using RESTFulSense.Clients;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading.Tasks;
 using WooCommerceAPI.Models.Configurations;
 
-namespace WooCommerceAPI.Brokers.WooCommerces
+namespace WooCommerceAPI.Brokers.WordPresses
 {
-    internal partial class WooCommerceBroker : IWooCommerceBroker
+    internal partial class WordPressBroker : IWordPressBroker
     {
-        private readonly WooCommerceConfigurations wooCommerceConfigurations;
+        private readonly WordPressConfigurations wordPressConfigurations;
         private readonly IRESTFulApiFactoryClient apiClient;
         private readonly HttpClient httpClient;
 
-        public WooCommerceBroker(WooCommerceConfigurations wooCommerceConfigurations)
+        public WordPressBroker(WordPressConfigurations wordPressConfigurations)
         {
-            this.wooCommerceConfigurations = wooCommerceConfigurations;
+            this.wordPressConfigurations = wordPressConfigurations;
             this.httpClient = SetupHttpClient();
             this.apiClient = SetupApiClient();
         }
@@ -51,13 +55,13 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         {
             var httpClient = new HttpClient()
             {
-                BaseAddress = new Uri(uriString: this.wooCommerceConfigurations.ApiUrl),
+                BaseAddress = new Uri(uriString: this.wordPressConfigurations.ApiUrl),
             };
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue(
                     scheme: "Basic",
-                    parameter: Convert.ToBase64String(Encoding.UTF8.GetBytes($"{this.wooCommerceConfigurations.ApiKey}:{this.wooCommerceConfigurations.ApiSecret}")));
+                    parameter: Convert.ToBase64String(Encoding.UTF8.GetBytes($"{this.wordPressConfigurations.UserName}:{this.wordPressConfigurations.AppPassword}")));
 
             return httpClient;
         }

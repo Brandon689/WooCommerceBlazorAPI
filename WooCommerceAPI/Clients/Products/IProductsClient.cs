@@ -5,7 +5,7 @@ namespace WooCommerceAPI.Clients.Products
 {
     public interface IProductsClient
     {
-        ValueTask<Product> SendProductAsync(Product Product);
+        ValueTask<Product> SendProductAsync(Product product);
         ValueTask<ProductVariations> SendProductVariationsAsync(ProductVariations product);
     }
 }

@@ -30,6 +30,6 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
         public string Option { get; set; } = string.Empty;
 
         [JsonProperty("image")]
-        public ExternalMediaItem Image { get; set; } = null;
+        public ExternalMediaItemResponse Image { get; set; } = null;
     }
 }
