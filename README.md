@@ -4,8 +4,24 @@
 
 This is a new standards compliant library for ecommerce developers. It is under heavy development.
 
-Thanks to [hassanhabib](https://github.com/hassanhabib) for the coding Standard.
+## Critical endpoints done
 
+- Create product
+- Batch create product attribute / variations
+- Upload media (wordpress)
+
+## Next
+- List all products
+- Update a product
+- Delete a product
+- Update product variations
+- Delete product variations
+- Update a media item
+- Create a product category
+- List all product categories
+- List all orders
+- Update an order
+- Get an order
 
 ## Hello World
 
@@ -43,3 +59,7 @@ var inputProduct = new Product
 Product result = await wooCommerceClient.Products.SendProductAsync(inputProduct);
 Console.WriteLine(result.Response.Name);
 ```
+
+
+## Acknowledgements
+Thanks to [hassanhabib](https://github.com/hassanhabib) for the coding Standard.
