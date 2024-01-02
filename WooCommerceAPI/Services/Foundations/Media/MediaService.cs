@@ -1,10 +1,10 @@
-﻿using WooCommerceAPI.Brokers.WordPresses;
+using WooCommerceAPI.Brokers.WordPresses;
 using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
 using WooCommerceAPI.Models.Services.Foundations.Media;
 
 namespace WooCommerceAPI.Services.Foundations.Media
 {
-    internal class MediaService : IMediaService
+    internal partial class MediaService : IMediaService
     {
         private readonly IWordPressBroker wordPressBroker;
 
@@ -13,9 +13,8 @@ namespace WooCommerceAPI.Services.Foundations.Media
             this.wordPressBroker = wordPressBroker;
         }
 
-        public async ValueTask<MediaItem> SendMediaItemAsync(MediaItem mediaItem) //=>
+        public async ValueTask<MediaItem> SendMediaItemAsync(MediaItem mediaItem)
         {
-
             ExternalMediaItemRequest externalMediaItemRequest = Convert(mediaItem);
 
             ExternalMediaItemResponse externalMediaItemResponse =
@@ -27,10 +26,13 @@ namespace WooCommerceAPI.Services.Foundations.Media
         {
             return new ExternalMediaItemRequest()
             {
-                Id = mediaItem.Request.Id,
-                Src = mediaItem.Request.Src,
-                Alt = mediaItem.Request.Alt,
-                Name = mediaItem.Request.Name
+                //Id = mediaItem.Request.Id,
+                //Src = mediaItem.Request.Src,
+                //Alt = mediaItem.Request.Alt,
+                //Name = mediaItem.Request.Name
+                File = new FileStream(mediaItem.Request.Src, FileMode.Open),
+                FileName = mediaItem.Request.Src.Split("\\").Last(),
+                AltText = "porpoise"
             };
         }
         private MediaItem ConvertToMediaItem(
@@ -49,14 +51,14 @@ namespace WooCommerceAPI.Services.Foundations.Media
         }
         //TryCatch(async () =>
         //{
-        //    ValidateProductOnSend(product);
+        //    ValidateBreloomOnSend(Breloom);
 
-        //    ExternalProductRequest externalProductRequest = ConvertToProductRequest(product);
-        //    //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
-        //    ExternalProductResponse externalProductResponse =
-        //        await this.wordPressBroker.PostProductRequestAsync(externalProductRequest);
+        //    ExternalBreloomRequest externalBreloomRequest = ConvertToBreloomRequest(Breloom);
+        //    //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalBreloomRequest);
+        //    ExternalBreloomResponse externalBreloomResponse =
+        //        await this.wordPressBroker.PostBreloomRequestAsync(externalBreloomRequest);
 
-        //    return ConvertToProduct(product, externalProductResponse);
+        //    return ConvertToBreloom(Breloom, externalBreloomResponse);
         //});
     }
 }

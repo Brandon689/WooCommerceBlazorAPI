@@ -1,6 +1,9 @@
-﻿namespace WooCommerceAPI.Clients.WordPress
+﻿using WooCommerceAPI.Clients.Media;
+
+namespace WooCommerceAPI.Clients.WordPress
 {
-    internal interface IWordPressClient
+    public interface IWordPressClient
     {
+        IMediaClient Media { get; }
     }
 }

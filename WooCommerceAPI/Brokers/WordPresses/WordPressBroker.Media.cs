@@ -4,7 +4,7 @@ namespace WooCommerceAPI.Brokers.WordPresses
 {
     internal partial class WordPressBroker : IWordPressBroker
     {
-        private const string MediaRelativeUrl = "/wp/v2/media";
+        private const string MediaRelativeUrl = "/wp-json/wp/v2/media";
 
         public async ValueTask<ExternalMediaItemResponse> PostMediaRequestAsync(ExternalMediaItemRequest externalMediaItemRequest)
         {

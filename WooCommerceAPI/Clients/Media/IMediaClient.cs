@@ -2,7 +2,7 @@
 
 namespace WooCommerceAPI.Clients.Media
 {
-    internal interface IMediaClient
+    public interface IMediaClient
     {
         ValueTask<MediaItem> SendMediaItemAsync(MediaItem mediaItem);
     }
