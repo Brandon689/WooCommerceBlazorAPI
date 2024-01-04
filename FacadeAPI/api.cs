@@ -89,6 +89,8 @@ namespace FacadeAPI
 
         public async Task<Product> prod(SPProduct p)
         {
+            await imagereplace03(p);
+
             var product = new Product
             {
                 Request = new ProductRequest
@@ -109,6 +111,34 @@ namespace FacadeAPI
                 }
             };
             return await imagereplace(product);
+        }
+        xo a;
+
+
+        private async Task<SPProduct> imagereplace03(SPProduct p)
+        {
+            a = new();
+            for (int i = 0; i < p.images.Length; i++)
+            {
+                var file = p.images[i].id.ToString();
+                var path = "C:\\2024\\1\\" + file + ".jpg";
+                await a.co(p.images[i].src, path);
+                p.images[i].src = path;
+            }
+            return p;
+        }
+
+        private async Task<Product> imagereplace0(Product p)
+        {
+            a = new();
+            for (int i = 0; i < p.Request.Images.Length; i++)
+            {
+                var file = i.ToString(); //p.Request.Images[i].Id.ToString();
+                var path = "C:\\2024\\1\\" + file + ".jpg";
+                await a.co(p.Request.Images[i].Src, path);
+                p.Request.Images[i].Src = path;
+            }
+            return p;
         }
 
         private async Task<Product> imagereplace(Product p)
