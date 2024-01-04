@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		docs.md = docs.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacadeAPI", "FacadeAPI\FacadeAPI.csproj", "{F7CA538A-4734-44B9-B0C5-ADB5435C6FEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacadeTest", "FacadeTest\FacadeTest.csproj", "{087349DA-234A-42FC-8959-ED66D9FDD49F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +36,14 @@ Global
 		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2DD54AC-09C5-4862-965B-C2E68A7419D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7CA538A-4734-44B9-B0C5-ADB5435C6FEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7CA538A-4734-44B9-B0C5-ADB5435C6FEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7CA538A-4734-44B9-B0C5-ADB5435C6FEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7CA538A-4734-44B9-B0C5-ADB5435C6FEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

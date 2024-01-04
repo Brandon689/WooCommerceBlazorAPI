@@ -3,6 +3,7 @@ using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WooCommerceAPI.Services.Foundations.Products
 {
@@ -18,7 +19,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
         public ValueTask<Product> SendProductAsync(Product product) =>
         TryCatch(async () =>
         {
-            ValidateProductOnSend(product);
+            //ValidateProductOnSend(product);
 
             ExternalProductRequest externalProductRequest = ConvertToProductRequest(product);
             //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
@@ -79,13 +80,26 @@ namespace WooCommerceAPI.Services.Foundations.Products
 
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {
-            return new ExternalProductRequest
+            var externalProductRequest = new ExternalProductRequest()
             {
                 Name = product.Request.Name,
                 RegularPrice = product.Request.RegularPrice,
                 Description = product.Request.Description,
-                Type = product.Request.Type,
-                Attributes = product.Request.Attributes.Select(attribute =>
+                Type = product.Request.Type
+            };
+            if (product.Request.Images != null)
+            {
+                externalProductRequest.Images = product.Request.Images.Select(message =>
+                {
+                    return new ExternalImage
+                    {
+                        Id = message.Id
+                    };
+                }).ToArray();
+            }
+            if (product.Request.Attributes != null)
+            {
+                externalProductRequest.Attributes = product.Request.Attributes.Select(attribute =>
                 {
                     return new ExternalProductAttribute
                     {
@@ -96,15 +110,9 @@ namespace WooCommerceAPI.Services.Foundations.Products
                         Variation = attribute.Variation,
                         Options = attribute.Options
                     };
-                }).ToArray(),
-                Images = product.Request.Images.Select(message =>
-                {
-                    return new ExternalImage
-                    {
-                        Id = message.Id
-                    };
-                }).ToArray(),
-            };
+                }).ToArray();
+            }
+            return externalProductRequest;
         }
 
         private Product ConvertToProduct(
@@ -151,7 +159,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
                                 Option = attr.Option,
                                 Name = attr.Name
                             }).ToArray(),
-                        Image = new Models.Services.Foundations.ExternalMedia.ExternalMediaItemRequest2()
+                        Image = create.Image == null ? null : new Models.Services.Foundations.ExternalMedia.ExternalMediaItemRequest2()
                         {
                             Id = create.Image.Id,
                             Src = create.Image.Src,

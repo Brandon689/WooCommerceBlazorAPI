@@ -40,6 +40,20 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 
+var inputProduct2 = new Product
+{
+    Request = new ProductRequest
+    {
+        Name = $"name {GenerateUniqueId()}",
+        Type = "simple",
+        RegularPrice = "10",
+        Images = new ProductImage[] { new ProductImage() { Id = 50413 } }
+    }
+};
+
+Product result3 = await wooCommerceClient.Products.SendProductAsync(inputProduct2);
+Console.WriteLine(result3.Response.Name);
+
 
 //var getAll = await wooCommerceClient.Products.GetAllProductsAsync(4, 100);
 

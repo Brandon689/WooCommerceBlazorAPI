@@ -31,7 +31,7 @@ namespace WooCommerceAPI.Services.Foundations.Media
                 //Alt = mediaItem.Request.Alt,
                 //Name = mediaItem.Request.Name
                 File = new FileStream(mediaItem.Request.Src, FileMode.Open),
-                FileName = mediaItem.Request.Src.Split("\\").Last(),
+                FileName = Path.GetFileName(mediaItem.Request.Src),
                 AltText = "porpoise"
             };
         }
@@ -49,16 +49,5 @@ namespace WooCommerceAPI.Services.Foundations.Media
             };
             return mediaItem;
         }
-        //TryCatch(async () =>
-        //{
-        //    ValidateBreloomOnSend(Breloom);
-
-        //    ExternalBreloomRequest externalBreloomRequest = ConvertToBreloomRequest(Breloom);
-        //    //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalBreloomRequest);
-        //    ExternalBreloomResponse externalBreloomResponse =
-        //        await this.wordPressBroker.PostBreloomRequestAsync(externalBreloomRequest);
-
-        //    return ConvertToBreloom(Breloom, externalBreloomResponse);
-        //});
     }
 }
