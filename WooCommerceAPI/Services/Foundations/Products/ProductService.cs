@@ -44,6 +44,27 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return productVariations;
         });
 
+
+
+        public ValueTask<Product> GetProductAsync(int id) =>
+        TryCatch(async () =>
+        {
+            //ValidateGetProductOnSend(getProduct);
+
+            ExternalProductResponse externalGetProductResponse =
+                await this.wooCommerceBroker.GetProductRequestAsync(id);
+
+            return ConvertToProduct(new Product(), externalGetProductResponse);
+        });
+
+
+
+
+
+
+
+
+
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {
             return new ExternalProductRequest

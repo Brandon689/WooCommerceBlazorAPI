@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI", "WooCommer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI.Tests", "WooCommerceAPI.Tests\WooCommerceAPI.Tests.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "ConsoleApp1\TestConsole.csproj", "{A2DD54AC-09C5-4862-965B-C2E68A7419D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "ConsoleApp1\TestConsole.csproj", "{A2DD54AC-09C5-4862-965B-C2E68A7419D6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DEC5DEE7-5962-480D-AA48-3881872222EE}"
+	ProjectSection(SolutionItems) = preProject
+		docs.md = docs.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

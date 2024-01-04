@@ -1,8 +1,6 @@
 ﻿using dotenv.net;
 using WooCommerceAPI.Clients.WooCommerces;
-using WooCommerceAPI.Clients.WordPress;
 using WooCommerceAPI.Models.Configurations;
-using WooCommerceAPI.Models.Services.Foundations.Media;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 
@@ -10,33 +8,27 @@ DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { "../../../.env" }))
 
 
 
-var wordPressConfigurations = new WordPressConfigurations
-{
-    UserName = Environment.GetEnvironmentVariable("WP_USER"),
-    AppPassword = Environment.GetEnvironmentVariable("WP_APP_PASSWORD"),
-    ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
-};
+//var wordPressConfigurations = new WordPressConfigurations
+//{
+//    UserName = Environment.GetEnvironmentVariable("WP_USER"),
+//    AppPassword = Environment.GetEnvironmentVariable("WP_APP_PASSWORD"),
+//    ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
+//};
 
 
 
 
-var wpclient = new WordPressClient(wordPressConfigurations);
+//var wpclient = new WordPressClient(wordPressConfigurations);
 
-MediaItem mi = new();
-mi.Request = new();
-mi.Request.Src = @"C:\Users\Brandon\Pictures\2184719.jpeg";
+//MediaItem mi = new();
+//mi.Request = new();
+//mi.Request.Src = @"C:\Users\Brandon\Pictures\2184719.jpeg";
 
-var r = await wpclient.Media.SendMediaItemAsync(mi);
-
-
-
-return;
+//var r = await wpclient.Media.SendMediaItemAsync(mi);
 
 
 
-
-
-
+//return;
 
 
 var wooCommerceConfigurations = new WooCommerceConfigurations
@@ -47,6 +39,9 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 };
 
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
+
+
+var get = await wooCommerceClient.Products.GetProductAsync(50436);
 
 ProductAttribute[] a = new ProductAttribute[]
 {

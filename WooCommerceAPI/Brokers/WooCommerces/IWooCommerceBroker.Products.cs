@@ -7,5 +7,7 @@ namespace WooCommerceAPI.Brokers.WooCommerces
     {
         ValueTask<ExternalProductResponse> PostProductRequestAsync(ExternalProductRequest externalProductRequest);
         ValueTask<ExternalProductResponse> PostProductVariationsRequestAsync(ExternalProductVariationsRequest externalProductVariationsRequest, int productId);
+
+        ValueTask<ExternalProductResponse> GetProductRequestAsync(int id);
     }
 }

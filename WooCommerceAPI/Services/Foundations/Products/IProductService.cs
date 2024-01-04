@@ -7,5 +7,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
     {
         ValueTask<Product> SendProductAsync(Product product);
         ValueTask<ProductVariations> SendProductVariationsAsync(ProductVariations product);
+        ValueTask<Product> GetProductAsync(int id);
     }
 }

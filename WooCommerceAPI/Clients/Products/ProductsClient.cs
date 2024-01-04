@@ -69,5 +69,17 @@ namespace WooCommerceAPI.Clients.Products
                     completionServiceException.InnerException as Xeption);
             }
         }
+
+        public async ValueTask<Product> GetProductAsync(int id)
+        {
+            try
+            {
+                return await productService.GetProductAsync(id);
+            }
+            catch (ProductValidationException completionValidationException)
+            {
+                return null;
+            }
+        }
     }
 }

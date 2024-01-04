@@ -22,5 +22,10 @@ namespace WooCommerceAPI.Brokers.WooCommerces
                 relativeUrl: $"{ProductsRelativeUrl}/{productId}/variations/batch",
                 content: externalProductVariationsRequest);
         }
+
+        public async ValueTask<ExternalProductResponse> GetProductRequestAsync(int id)
+        {
+            return await GetAsync<ExternalProductResponse>(relativeUrl: $"{ProductsRelativeUrl}/{id}");
+        }
     }
 }
