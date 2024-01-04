@@ -57,9 +57,21 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return ConvertToProduct(new Product(), externalGetProductResponse);
         });
 
+        public ValueTask<Product[]> GetAllProductsAsync(int page, int perPage) =>
+        TryCatchAll(async () =>
+        {
+            //ValidateGetProductOnSend(getProduct);
 
+            ExternalProductResponse[] externalGetProductResponse =
+                await this.wooCommerceBroker.GetAllProductsRequestAsync(page, perPage);
 
-
+            Product[] products = new Product[externalGetProductResponse.Length];
+            for (int i = 0; i < externalGetProductResponse.Length; i++)
+            {
+                products[i] = ConvertToProduct(new Product(), externalGetProductResponse[i]);
+            }
+            return products;
+        });
 
 
 

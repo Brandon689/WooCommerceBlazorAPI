@@ -81,5 +81,17 @@ namespace WooCommerceAPI.Clients.Products
                 return null;
             }
         }
+
+        public async ValueTask<Product[]> GetAllProductsAsync(int page, int perPage)
+        {
+            try
+            {
+                return await productService.GetAllProductsAsync(page, perPage);
+            }
+            catch (ProductValidationException completionValidationException)
+            {
+                return null;
+            }
+        }
     }
 }

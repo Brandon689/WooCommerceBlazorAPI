@@ -41,6 +41,9 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 
 
+var getAll = await wooCommerceClient.Products.GetAllProductsAsync(1, 15);
+
+
 var get = await wooCommerceClient.Products.GetProductAsync(50436);
 
 ProductAttribute[] a = new ProductAttribute[]
