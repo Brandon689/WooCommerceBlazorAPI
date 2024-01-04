@@ -16,6 +16,9 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 
         [JsonProperty("attributes")]
         public ExternalProductVariationAttribute[] Attributes { get; set; }
+
+        [JsonProperty("image")]
+        public ExternalMediaItemRequest2 Image { get; set; } = null;
     }
 
     internal class ExternalProductVariationAttribute
@@ -28,8 +31,5 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 
         [JsonProperty("option")]
         public string Option { get; set; } = string.Empty;
-
-        [JsonProperty("image")]
-        public ExternalMediaItemResponse Image { get; set; } = null;
     }
 }

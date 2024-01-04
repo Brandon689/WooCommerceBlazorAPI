@@ -13,6 +13,8 @@ namespace WooCommerceAPI.Models.Services.Foundations.ProductVariations
         public string RegularPrice { get; set; } = string.Empty;
 
         public ProductVariationAttribute[] Attributes { get; set; }
+
+        public MediaItemRequest Image { get; set; } = null;
     }
 
     public class ProductVariationAttribute
@@ -22,7 +24,5 @@ namespace WooCommerceAPI.Models.Services.Foundations.ProductVariations
         public string Option { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
-
-        public MediaItem Image { get; set; } = null;
     }
 }

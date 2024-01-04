@@ -150,7 +150,14 @@ namespace WooCommerceAPI.Services.Foundations.Products
                                 //Id = attr.Id,
                                 Option = attr.Option,
                                 Name = attr.Name
-                            }).ToArray()
+                            }).ToArray(),
+                        Image = new Models.Services.Foundations.ExternalMedia.ExternalMediaItemRequest2()
+                        {
+                            Id = create.Image.Id,
+                            Src = create.Image.Src,
+                            Name = create.Image.Name,
+                            Alt = create.Image.Alt
+                        }
                     }).ToArray()
             };
         }
