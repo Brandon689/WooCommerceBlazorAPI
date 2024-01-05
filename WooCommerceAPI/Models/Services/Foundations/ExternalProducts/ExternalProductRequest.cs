@@ -22,70 +22,8 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 
         [JsonProperty("images")]
         public ExternalID[] Images { get; set; }
+
+        [JsonProperty("meta_data")]
+        public ExternalProductMetadata[] Metadata { get; set; }
     }
 }
-
-
-
-
-
-
-//public class ProductRequest
-//{
-//    [JsonProperty("name")]
-//    public string Name { get; set; }
-
-//    [JsonProperty("type")]
-//    public string Type { get; set; }
-
-//    [JsonProperty("description")]
-//    public string Description { get; set; }
-
-//    [JsonProperty("attributes")]
-//    public List<ProductAttribute> Attributes { get; set; }
-
-//    [JsonProperty("images")]
-//    public List<MediaResponse> Images { get; set; }
-//}
-
-//public class VariationRequest
-//{
-//    [JsonProperty("regular_price")]
-//    public string RegularPrice { get; set; }
-
-//    [JsonProperty("attributes")]
-//    public List<VariationAttribute> Attributes { get; set; }
-
-//    [JsonProperty("image")]
-//    public MediaResponse Image { get; set; }
-//}
-
-//public class ProductAttribute
-//{
-//    [JsonProperty("name")]
-//    public string Name { get; set; }
-
-//    [JsonProperty("visible")]
-//    public bool Visible { get; set; }
-
-//    [JsonProperty("variation")]
-//    public bool Variation { get; set; }
-
-//    [JsonProperty("options")]
-//    public List<string> Options { get; set; }
-//}
-
-//public class VariationAttribute
-//{
-//    [JsonProperty("name")]
-//    public string Name { get; set; }
-
-//    [JsonProperty("option")]
-//    public string Option { get; set; }
-//}
-
-//public class BatchVariationRequest
-//{
-//    [JsonProperty("create")]
-//    public List<VariationRequest> Create { get; set; }
-//}

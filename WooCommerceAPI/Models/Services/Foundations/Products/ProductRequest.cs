@@ -13,5 +13,7 @@
         public ProductAttribute[] Attributes { get; set; } = null;
 
         public ID[] Images { get; set; } = null;
+
+        public ProductMetadata[] MetaData { get; set; }
     }
 }

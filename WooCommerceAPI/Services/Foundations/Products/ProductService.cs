@@ -21,7 +21,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
             //ValidateProductOnSend(product);
 
             ExternalProductRequest externalProductRequest = ConvertToProductRequest(product);
-            //string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
             ExternalProductResponse externalProductResponse =
                 await this.wooCommerceBroker.PostProductRequestAsync(externalProductRequest);
 
@@ -108,6 +107,17 @@ namespace WooCommerceAPI.Services.Foundations.Products
                     };
                 }).ToArray();
             }
+            if (product.Request.MetaData != null)
+            {
+                externalProductRequest.Metadata = product.Request.MetaData.Select(x =>
+                {
+                    return new ExternalProductMetadata
+                    {
+                        Key = x.Key,
+                        Value = x.Value
+                    };
+                }).ToArray();
+            }
             return externalProductRequest;
         }
 
@@ -135,6 +145,15 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 Featured = externalProductResponse.Featured,
                 Slug = externalProductResponse.Slug,
                 //CreatedDate = this.dateTimeBroker.ConvertToDateTimeOffSet(externalProductResponse.Created),
+                MetaData = externalProductResponse.MetaData.Select(x =>
+                {
+                    return new ProductMetadata
+                    {
+                        Id = x.Id,
+                        Key = x.Key,
+                        Value = x.Value
+                    };
+                }).ToArray()
             };
 
             return Product;

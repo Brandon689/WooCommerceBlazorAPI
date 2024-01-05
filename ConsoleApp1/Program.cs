@@ -39,15 +39,21 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 };
 
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
+var get = await wooCommerceClient.Products.GetProductAsync(50674);
 
 var inputProduct2 = new Product
 {
     Request = new ProductRequest
     {
-        Name = $"name {GenerateUniqueId()}",
+        Name = $"title {GenerateUniqueId()}",
         Type = "simple",
-        RegularPrice = "10",
-        Images = new ID[] { new ID() { Id = 50413 } }
+        RegularPrice = "1",
+        Images = new ID[] { new ID() { Id = 50413 } },
+        MetaData = new ProductMetadata[]
+        {
+            new ProductMetadata() { Key = "simon", Value = "kruger" },
+            new ProductMetadata() { Key = "tony", Value = "robbins" }
+        }
     }
 };
 
@@ -58,7 +64,6 @@ Console.WriteLine(result3.Response.Name);
 //var getAll = await wooCommerceClient.Products.GetAllProductsAsync(4, 100);
 
 
-//var get = await wooCommerceClient.Products.GetProductAsync(50436);
 
 ProductAttribute[] a = new ProductAttribute[]
 {

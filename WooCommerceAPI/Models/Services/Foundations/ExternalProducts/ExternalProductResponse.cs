@@ -198,7 +198,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public int MenuOrder { get; set; }
 
         [JsonProperty("meta_data")]
-        public List<object> MetaData { get; set; }
+        public List<ExternalProductMetadata> MetaData { get; set; }
 
         [JsonProperty("_links")]
         public Links Links { get; set; }

@@ -49,5 +49,7 @@
         public string PriceHtml { get; set; }
 
         public bool OnSale { get; set; }
+
+        public ProductMetadata[] MetaData { get; set; }
     }
 }

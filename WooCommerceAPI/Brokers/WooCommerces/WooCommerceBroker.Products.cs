@@ -10,6 +10,10 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         public async ValueTask<ExternalProductResponse> PostProductRequestAsync(
             ExternalProductRequest externalProductRequest)
         {
+            var ke = await PostAsync<ExternalProductRequest, dynamic>(
+                relativeUrl: ProductsRelativeUrl,
+                content: externalProductRequest);
+
             return await PostAsync<ExternalProductRequest, ExternalProductResponse>(
                 relativeUrl: ProductsRelativeUrl,
                 content: externalProductRequest);
