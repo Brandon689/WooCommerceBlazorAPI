@@ -12,6 +12,6 @@
 
         public ProductAttribute[] Attributes { get; set; } = null;
 
-        public ProductImage[] Images { get; set; } = null;
+        public ID[] Images { get; set; } = null;
     }
 }

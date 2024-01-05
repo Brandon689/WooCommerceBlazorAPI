@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using WooCommerceAPI.Models.Services.Foundations.ExternalMedia;
+using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 {
@@ -18,7 +18,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
         public ExternalProductVariationAttribute[] Attributes { get; set; }
 
         [JsonProperty("image")]
-        public ExternalMediaItemRequest2 Image { get; set; } = null;
+        public ExternalID Image { get; set; } = null;
     }
 
     internal class ExternalProductVariationAttribute

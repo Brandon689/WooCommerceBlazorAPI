@@ -45,12 +45,10 @@ namespace FacadeAPI
                 var g = p.images.FirstOrDefault(x => x.id == p.variants[i].image_id);
 
                 if (g != null)
-                { }
-                v.Image = new MediaItemRequest()
                 {
-                    //Src = g.src,
-                    Id = g.wordpress_id
-                };
+                    v.Image = new ID(id: g.wordpress_id);
+                }
+
                 var atr = new List<ProductVariationAttribute>();
                 atr.Add(new ProductVariationAttribute()
                 {
@@ -105,7 +103,7 @@ namespace FacadeAPI
                     Name = p.title,
                     Type = p.variants.Length == 1 ? "simple" : "variable",
                     RegularPrice = p.variants[0].price,
-                    Images = p.images.Where(x => x.variant_ids.Length == 0).Select(image => new ProductImage()
+                    Images = p.images.Where(x => x.variant_ids.Length == 0).Select(image => new ID()
                     {
                         //Src = image.src
                         Id = image.wordpress_id
@@ -204,7 +202,7 @@ namespace FacadeAPI
                     Name = name,
                     Type = type,
                     RegularPrice = regularPrice,
-                    Images = new ProductImage[] { new ProductImage() { Id = 50522 } }
+                    Images = new ID[] { new ID() { Id = 50522 } }
                 }
             };
 

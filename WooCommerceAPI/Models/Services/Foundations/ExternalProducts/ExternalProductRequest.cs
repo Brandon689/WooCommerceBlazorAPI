@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
@@ -20,16 +21,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public ExternalProductAttribute[] Attributes { get; set; } = null;
 
         [JsonProperty("images")]
-        public ExternalImage[] Images { get; set; }
-    }
-
-    internal class ExternalImage
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        //[JsonProperty("src")]
-        //public string Src { get; set; }
+        public ExternalID[] Images { get; set; }
     }
 }
 

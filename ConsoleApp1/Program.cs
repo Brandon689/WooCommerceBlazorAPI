@@ -47,7 +47,7 @@ var inputProduct2 = new Product
         Name = $"name {GenerateUniqueId()}",
         Type = "simple",
         RegularPrice = "10",
-        Images = new ProductImage[] { new ProductImage() { Id = 50413 } }
+        Images = new ID[] { new ID() { Id = 50413 } }
     }
 };
 
@@ -82,7 +82,7 @@ var inputProduct = new Product
         Type = "variable",
         //RegularPrice = "10",
         Attributes = a,
-        Images = new ProductImage[] { new ProductImage() { Id = 50413 } }
+        Images = new ID[] { new ID() { Id = 50413 } }
     }
 };
 
@@ -98,7 +98,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Red" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Small" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 50522 }
+            Image = new ID() { Id = 50522 }
         },
         new ProductVariation
         {
@@ -108,7 +108,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Red" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Medium" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 50413 }
+            Image = new ID() { Id = 50413 }
 
         },
         new ProductVariation
@@ -119,7 +119,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Red" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Large" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 50304 }
+            Image = new ID() { Id = 50304 }
 
         },
         new ProductVariation
@@ -130,7 +130,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Small" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 49937 }
+            Image = new ID() { Id = 49937 }
 
         },
         new ProductVariation
@@ -141,7 +141,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Medium" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 49782 }
+            Image = new ID() { Id = 49782 }
 
         },
         new ProductVariation
@@ -152,7 +152,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
                 new ProductVariationAttribute { Name = "CCC", Option = "Blue" },
                 new ProductVariationAttribute { Name = "ZZZ", Option = "Large" }
             },
-            Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Id = 49761 }
+            Image = new ID() { Id = 49761 }
         }
     }
 };

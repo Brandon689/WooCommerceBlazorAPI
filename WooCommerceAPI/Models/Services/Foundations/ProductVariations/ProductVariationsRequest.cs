@@ -1,4 +1,4 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.Media;
+﻿using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ProductVariations
 {
@@ -14,7 +14,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ProductVariations
 
         public ProductVariationAttribute[] Attributes { get; set; }
 
-        public MediaItemRequest Image { get; set; } = null;
+        public ID Image { get; set; } = null;
     }
 
     public class ProductVariationAttribute

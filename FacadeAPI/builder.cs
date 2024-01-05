@@ -16,7 +16,7 @@ namespace FacadeAPI
                     Name = name,
                     Type = type,
                     RegularPrice = regularPrice,
-                    Images = new ProductImage[] { new ProductImage() { Id = 50413 } }
+                    Images = new ID[] { new ID() { Id = 50413 } }
                 }
             };
             return this;

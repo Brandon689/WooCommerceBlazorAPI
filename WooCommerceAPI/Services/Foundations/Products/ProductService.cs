@@ -90,11 +90,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
             {
                 externalProductRequest.Images = product.Request.Images.Select(message =>
                 {
-                    return new ExternalImage
-                    {
-                        Id = message.Id,
-                        //Src=message.Src
-                    };
+                    return new ExternalID(id: message.Id);
                 }).ToArray();
             }
             if (product.Request.Attributes != null)
@@ -159,13 +155,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
                                 Option = attr.Option,
                                 Name = attr.Name
                             }).ToArray(),
-                        Image = create.Image == null ? null : new Models.Services.Foundations.ExternalMedia.ExternalMediaItemRequest2()
-                        {
-                            Id = create.Image.Id,
-                            Src = create.Image.Src,
-                            Name = create.Image.Name,
-                            Alt = create.Image.Alt
-                        }
+                        Image = create.Image == null ? null : new ExternalID(id: create.Image.Id)
                     }).ToArray()
             };
         }
