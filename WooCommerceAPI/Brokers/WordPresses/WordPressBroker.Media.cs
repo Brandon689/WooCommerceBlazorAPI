@@ -8,6 +8,10 @@ namespace WooCommerceAPI.Brokers.WordPresses
 
         public async ValueTask<ExternalMediaItemResponse> PostMediaRequestAsync(ExternalMediaItemRequest externalMediaItemRequest)
         {
+            //var j = await PostFormAsync<ExternalMediaItemRequest, dynamic>(
+            //    relativeUrl: MediaRelativeUrl,
+            //    content: externalMediaItemRequest);
+
             return await PostFormAsync<ExternalMediaItemRequest, ExternalMediaItemResponse>(
                 relativeUrl: MediaRelativeUrl,
                 content: externalMediaItemRequest);

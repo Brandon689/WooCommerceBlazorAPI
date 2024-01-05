@@ -30,7 +30,7 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 
         public async ValueTask<ExternalProductResponse[]> GetAllProductsRequestAsync(int page, int perPage)
         {
-            var v= await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
+            var v = await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
             return v;
         }
     }

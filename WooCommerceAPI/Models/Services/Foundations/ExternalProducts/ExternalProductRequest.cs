@@ -27,6 +27,9 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
     {
         [JsonProperty("id")]
         public int Id { get; set; }
+
+        //[JsonProperty("src")]
+        //public string Src { get; set; }
     }
 }
 

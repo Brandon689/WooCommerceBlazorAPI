@@ -1,10 +1,6 @@
 ﻿using dotenv.net;
 using FacadeAPI;
-using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
-using WooCommerceAPI.Clients.WooCommerces;
-using WooCommerceAPI.Models.Services.Foundations.Media;
-using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 
 
@@ -33,9 +29,10 @@ var facade = new WooCommerceFacade(
 
 
 ;
+await facade.ImageDownloadToFS(sp.product);
+await facade.ImageUploadToStore(sp.product);
 
-
-var spe = await facade.prod(sp.product);
+var spe = await facade.BuildRequestProduct(sp.product);
 
 //var result = await facade.CreateProductAsync("name", "simple", "10");
 var result = await facade.CreateProductAsync(spe);
@@ -44,7 +41,7 @@ var result = await facade.CreateProductAsync(spe);
 
 
 
-var yo = facade.hime(sp.product);
+var yo = facade.BuildProductVariations(sp.product);
 ;
 
 ProductVariations pv = new()
@@ -52,7 +49,7 @@ ProductVariations pv = new()
     Request = yo
 };
 pv.Request.ProductId = result.Response.Id;
-var result2 = await facade.yy(pv);
+var result2 = await facade.SendProductVariationsAsync(pv);
 
 
 //var attribute1 = new ProductAttributeBuilder()

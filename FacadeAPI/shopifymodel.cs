@@ -13,6 +13,9 @@
         public int height { get; set; }
         public string src { get; set; }
         public long[] variant_ids { get; set; }
+
+        public int wordpress_id { get; set; }
+
     }
 
     public class Option

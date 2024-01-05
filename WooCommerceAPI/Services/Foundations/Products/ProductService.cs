@@ -3,7 +3,6 @@ using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WooCommerceAPI.Services.Foundations.Products
 {
@@ -93,7 +92,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 {
                     return new ExternalImage
                     {
-                        Id = message.Id
+                        Id = message.Id,
+                        //Src=message.Src
                     };
                 }).ToArray();
             }

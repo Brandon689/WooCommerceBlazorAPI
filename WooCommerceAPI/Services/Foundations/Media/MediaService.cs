@@ -43,9 +43,9 @@ namespace WooCommerceAPI.Services.Foundations.Media
             mediaItem.Response = new MediaItemResponse()
             {
                 Id = externalMediaItemResponse.Id,
-                Src = externalMediaItemResponse.Src,
-                Name = externalMediaItemResponse.Name,
-                Alt = externalMediaItemResponse.Alt
+                Src = externalMediaItemResponse.Guid.rendered,
+                Name = externalMediaItemResponse.Title.Rendered,
+                Alt = externalMediaItemResponse.alt_text
             };
             return mediaItem;
         }

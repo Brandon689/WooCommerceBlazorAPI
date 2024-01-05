@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using WooCommerceAPI.Clients.WooCommerces;
+﻿using WooCommerceAPI.Clients.WooCommerces;
 using WooCommerceAPI.Clients.WordPress;
 using WooCommerceAPI.Models.Configurations;
 using WooCommerceAPI.Models.Services.Foundations.Media;
@@ -32,8 +31,8 @@ namespace FacadeAPI
             this.wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
             this.wordPressClient = new WordPressClient(wordPressConfigurations);
         }
-        
-        public ProductVariationsRequest hime(SPProduct p)
+
+        public ProductVariationsRequest BuildProductVariations(SPProduct p)
         {
             ProductVariation[] px = new ProductVariation[p.variants.Length];
 
@@ -42,8 +41,16 @@ namespace FacadeAPI
                 ProductVariation v = new();
 
                 v.RegularPrice = p.variants[i].price;
-                //v.Image = new WooCommerceAPI.Models.Services.Foundations.Media.MediaItemRequest() { Src = p.images.FirstOrDefault(x => x.id == z.image_id).src };
 
+                var g = p.images.FirstOrDefault(x => x.id == p.variants[i].image_id);
+
+                if (g != null)
+                { }
+                v.Image = new MediaItemRequest()
+                {
+                    //Src = g.src,
+                    Id = g.wordpress_id
+                };
                 var atr = new List<ProductVariationAttribute>();
                 atr.Add(new ProductVariationAttribute()
                 {
@@ -87,9 +94,9 @@ namespace FacadeAPI
             return sourceObject;
         }
 
-        public async Task<Product> prod(SPProduct p)
+        public async Task<Product> BuildRequestProduct(SPProduct p)
         {
-            await imagereplace03(p);
+            //await ImageDownloadToFS(p);
 
             var product = new Product
             {
@@ -100,7 +107,8 @@ namespace FacadeAPI
                     RegularPrice = p.variants[0].price,
                     Images = p.images.Where(x => x.variant_ids.Length == 0).Select(image => new ProductImage()
                     {
-                        Src = image.src
+                        //Src = image.src
+                        Id = image.wordpress_id
                     }).ToArray(),
                     Attributes = p.options.Select(option => new ProductAttribute()
                     {
@@ -110,12 +118,13 @@ namespace FacadeAPI
                     }).ToArray(),
                 }
             };
-            return await imagereplace(product);
+            return product;
+            //return await ImageUploadToStore(product);
         }
         xo a;
 
 
-        private async Task<SPProduct> imagereplace03(SPProduct p)
+        public async Task<SPProduct> ImageDownloadToFS(SPProduct p)
         {
             a = new();
             for (int i = 0; i < p.images.Length; i++)
@@ -128,35 +137,60 @@ namespace FacadeAPI
             return p;
         }
 
-        private async Task<Product> imagereplace0(Product p)
-        {
-            a = new();
-            for (int i = 0; i < p.Request.Images.Length; i++)
-            {
-                var file = i.ToString(); //p.Request.Images[i].Id.ToString();
-                var path = "C:\\2024\\1\\" + file + ".jpg";
-                await a.co(p.Request.Images[i].Src, path);
-                p.Request.Images[i].Src = path;
-            }
-            return p;
-        }
+        //private async Task<Product> imagereplace0(Product p)
+        //{
+        //    a = new();
+        //    for (int i = 0; i < p.Request.Images.Length; i++)
+        //    {
+        //        var file = i.ToString(); //p.Request.Images[i].Id.ToString();
+        //        var path = "C:\\2024\\1\\" + file + ".jpg";
+        //        await a.co(p.Request.Images[i].Src, path);
+        //        p.Request.Images[i].Src = path;
+        //    }
+        //    return p;
+        //}
 
-        private async Task<Product> imagereplace(Product p)
+
+        public async Task<SPProduct> ImageUploadToStore(SPProduct p)
         {
-            for (int i = 0; i < p.Request.Images.Length; i++)
+            for (int i = 0; i < p.images.Length; i++)
             {
-                p.Request.Images[i].Src = (await this.wordPressClient.Media.SendMediaItemAsync(new MediaItem()
+
+                var j = await this.wordPressClient.Media.SendMediaItemAsync(new MediaItem()
                 {
                     Request = new MediaItemRequest()
                     {
-                        Src = p.Request.Images[i].Src
+                        Src = p.images[i].src
                     }
-                })).Response.Src;
+                });
+
+                p.images[i].src = j.Response.Src;
+                p.images[i].wordpress_id = j.Response.Id;
             }
             return p;
         }
 
-        public async Task<ProductVariations> yy(ProductVariations y)
+
+        //private async Task<Product> ImageUploadToStore(Product p)
+        //{
+        //    for (int i = 0; i < p.Request.Images.Length; i++)
+        //    {
+
+        //        var j = await this.wordPressClient.Media.SendMediaItemAsync(new MediaItem()
+        //        {
+        //            Request = new MediaItemRequest()
+        //            {
+        //                Src = p.Request.Images[i].Src,
+        //                //Id = p.Request.Images[i].Id,
+        //            }
+        //        });
+
+        //        p.Request.Images[i].Src = j.Response.Src;
+        //    }
+        //    return p;
+        //}
+
+        public async Task<ProductVariations> SendProductVariationsAsync(ProductVariations y)
         {
             return await this.wooCommerceClient.Products.SendProductVariationsAsync(y);
         }
