@@ -10,10 +10,10 @@ This is a new standards compliant library for ecommerce developers. It is under 
 - Batch create product attribute / variations
 - Upload media (wordpress)
 - List all products
+- Update a product
 
 ## Next
 
-- Update a product
 - Delete a product
 - Update product variations
 - Delete product variations
