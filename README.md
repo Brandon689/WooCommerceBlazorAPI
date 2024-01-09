@@ -6,12 +6,13 @@ This is a new standards compliant library for ecommerce developers. It is under 
 
 ## Critical endpoints done
 
-- Create product
+- Create product (simple, variable, metadata)
 - Batch create product attribute / variations
 - Upload media (wordpress)
+- List all products
 
 ## Next
-- List all products
+
 - Update a product
 - Delete a product
 - Update product variations
