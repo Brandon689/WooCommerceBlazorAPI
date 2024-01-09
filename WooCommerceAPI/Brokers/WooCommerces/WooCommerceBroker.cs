@@ -2,6 +2,7 @@
 using System.Net.Http.Headers;
 using System.Text;
 using WooCommerceAPI.Models.Configurations;
+using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 
 namespace WooCommerceAPI.Brokers.WooCommerces
 {
@@ -42,7 +43,7 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         }
 
         private async ValueTask<T> PutAsync<T>(string relativeUrl, T content) =>
-            await this.apiClient.PutContentAsync(relativeUrl, content);
+            await this.apiClient.PutContentAsync(relativeUrl, content, "application/json");
 
         private async ValueTask<T> DeleteAsync<T>(string relativeUrl) =>
             await this.apiClient.DeleteContentAsync<T>(relativeUrl);

@@ -43,8 +43,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return productVariations;
         });
 
-
-
         public ValueTask<Product> GetProductAsync(int id) =>
         TryCatch(async () =>
         {
@@ -72,9 +70,37 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return products;
         });
 
+        public ValueTask<Product> UpdateProductAsync(Product product, int id) =>
+        TryCatch(async () =>
+        {
+            //ValidateGetProductOnSend(getProduct);
+            var externalProductRequest = new ExternalProductRequest()
+            {
+                Name = product.Request.Name,
+                RegularPrice = product.Request.RegularPrice,
+                Description = product.Request.Description,
+                Type = product.Request.Type
+            };
+            var externalGetProductResponse =
+                await this.wooCommerceBroker.UpdateProductRequestAsync(externalProductRequest, id);
 
+            return new Product();
+            //return ConvertToProduct(new Product(), externalGetProductResponse);
+        });
+        //{
+        //    var externalProductRequest = new ExternalProductRequest()
+        //    {
+        //        Name = product.Request.Name,
+        //        RegularPrice = product.Request.RegularPrice,
+        //        Description = product.Request.Description,
+        //        Type = product.Request.Type
+        //    };
+        //    var externalGetProductResponse =
+        //        await this.wooCommerceBroker.UpdateProductRequestAsync(externalProductRequest, id);
 
-
+        //    return null;
+        //    //return ConvertToProduct(new Product(), externalGetProductResponse);
+        //}
 
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {

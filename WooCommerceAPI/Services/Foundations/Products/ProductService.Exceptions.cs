@@ -85,7 +85,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
             }
         }
 
-
         private async ValueTask<Product[]> TryCatchAll(ReturningProductsFunction returningProductsFunction)
         {
             try

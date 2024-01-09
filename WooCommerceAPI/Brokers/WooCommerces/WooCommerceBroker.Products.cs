@@ -37,5 +37,11 @@ namespace WooCommerceAPI.Brokers.WooCommerces
             var v = await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
             return v;
         }
+
+        public async ValueTask<ExternalProductRequest> UpdateProductRequestAsync(ExternalProductRequest product, int id)
+        {
+            var v = await PutAsync<ExternalProductRequest>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
+            return v;
+        }
     }
 }

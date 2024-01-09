@@ -93,5 +93,17 @@ namespace WooCommerceAPI.Clients.Products
                 return null;
             }
         }
+
+        public async ValueTask<Product> UpdateProductAsync(Product product, int id)
+        {
+            try
+            {
+                return await productService.UpdateProductAsync(product, id);
+            }
+            catch (ProductValidationException completionValidationException)
+            {
+                return null;
+            }
+        }
     }
 }

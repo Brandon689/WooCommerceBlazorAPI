@@ -41,6 +41,21 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 var get = await wooCommerceClient.Products.GetProductAsync(50674);
 
+Product k = new()
+{
+    Request = new ProductRequest()
+    {
+        Name = "spec",
+        RegularPrice = "711"
+    }
+};
+
+var up = await wooCommerceClient.Products.UpdateProductAsync(k, 50674);
+
+
+
+
+
 var inputProduct2 = new Product
 {
     Request = new ProductRequest
