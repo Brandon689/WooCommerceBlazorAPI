@@ -366,3 +366,4 @@ FodyWeavers.xsd
 /ConsoleApp1/.env
 /ConsoleApp1/epvr.json
 /FacadeTest/epvr.json
+/WooCommerceAPI/WooCommerceAPI.csproj
