@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI", "WooCommerceAPI\WooCommerceAPI.csproj", "{E27B492A-3D82-4402-B428-2641EB0F1EC5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI.Tests.Unit", "WooCommerceAPI.Tests\WooCommerceAPI.Tests.Unit.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerceAPI.Tests.Unit", "WooCommerceAPI.Tests.Unit\WooCommerceAPI.Tests.Unit.csproj", "{C0AC0BA0-2C8E-4D2B-8CA1-E38042FE4138}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestConsole", "ConsoleApp1\TestConsole.csproj", "{A2DD54AC-09C5-4862-965B-C2E68A7419D6}"
 EndProject

@@ -179,6 +179,20 @@ namespace WooCommerceAPI.Services.Foundations.Products
                         Key = x.Key,
                         Value = x.Value
                     };
+                }).ToArray(),
+                Images = externalProductResponse.Images.Select(x =>
+                {
+                    return new Image
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        Src = x.Src,
+                        Alt = x.Alt,
+                        DateCreated = x.DateCreated,
+                        DateCreatedGmt = x.DateCreatedGmt,
+                        DateModified = x.DateModified,
+                        DateModifiedGmt = x.DateModifiedGmt
+                    };
                 }).ToArray()
             };
 

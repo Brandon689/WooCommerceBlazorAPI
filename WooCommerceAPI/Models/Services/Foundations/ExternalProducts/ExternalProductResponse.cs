@@ -1,5 +1,4 @@
-﻿
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
@@ -114,7 +113,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public bool ManageStock { get; set; }
 
         [JsonProperty("stock_quantity")]
-        public object StockQuantity { get; set; }
+        public int? StockQuantity { get; set; }
 
         [JsonProperty("stock_status")]
         public string StockStatus { get; set; }
@@ -180,13 +179,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public List<object> Tags { get; set; }
 
         [JsonProperty("images")]
-        public List<Image> Images { get; set; }
+        public ExternalImage[] Images { get; set; }
 
         [JsonProperty("attributes")]
-        public List<Attribute> Attributes { get; set; }
+        public Attribute[] Attributes { get; set; }
 
         [JsonProperty("default_attributes")]
-        public List<DefaultAttribute> DefaultAttributes { get; set; }
+        public DefaultAttribute[] DefaultAttributes { get; set; }
 
         [JsonProperty("variations")]
         public List<object> Variations { get; set; }
@@ -267,7 +266,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public string Height { get; set; }
     }
 
-    public class Image
+    public class ExternalImage
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -291,6 +290,25 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public string Name { get; set; }
 
         [JsonProperty("alt")]
+        public string Alt { get; set; }
+    }
+
+    public class Image
+    {
+        public int Id { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        public DateTime DateCreatedGmt { get; set; }
+
+        public DateTime DateModified { get; set; }
+
+        public DateTime DateModifiedGmt { get; set; }
+
+        public string Src { get; set; }
+
+        public string Name { get; set; }
+
         public string Alt { get; set; }
     }
 

@@ -1,4 +1,6 @@
-﻿namespace WooCommerceAPI.Models.Services.Foundations.Products
+﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+
+namespace WooCommerceAPI.Models.Services.Foundations.Products
 {
     public class ProductResponse
     {
@@ -49,6 +51,8 @@
         public string PriceHtml { get; set; }
 
         public bool OnSale { get; set; }
+
+        public Image[] Images { get; set; }
 
         public ProductMetadata[] MetaData { get; set; }
     }
