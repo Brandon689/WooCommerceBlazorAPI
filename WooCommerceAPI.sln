@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacadeAPI", "FacadeAPI\Faca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FacadeTest", "FacadeTest\FacadeTest.csproj", "{087349DA-234A-42FC-8959-ED66D9FDD49F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerce.MudBlazorWebApp", "WooCommerce.MudBlazorWebApp\WooCommerce.MudBlazorWebApp.csproj", "{B02773AE-57FA-4FC4-8130-37099DC6E87E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087349DA-234A-42FC-8959-ED66D9FDD49F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B02773AE-57FA-4FC4-8130-37099DC6E87E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B02773AE-57FA-4FC4-8130-37099DC6E87E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B02773AE-57FA-4FC4-8130-37099DC6E87E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B02773AE-57FA-4FC4-8130-37099DC6E87E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

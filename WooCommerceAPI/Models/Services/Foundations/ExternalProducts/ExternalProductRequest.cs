@@ -17,13 +17,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         [JsonProperty("regular_price")]
         public string RegularPrice { get; set; } = string.Empty;
 
-        [JsonProperty("attributes")]
+        [JsonProperty("attributes", NullValueHandling = NullValueHandling.Ignore)]
         public ExternalProductAttribute[] Attributes { get; set; } = null;
 
-        [JsonProperty("images")]
+        [JsonProperty("images", NullValueHandling = NullValueHandling.Ignore)]
         public ExternalID[] Images { get; set; }
 
-        [JsonProperty("meta_data")]
+        [JsonProperty("meta_data", NullValueHandling = NullValueHandling.Ignore)]
         public ExternalProductMetadata[] Metadata { get; set; }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using KellermanSoftware.CompareNetObjects;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tynamix.ObjectFiller;
 using WooCommerceAPI.Brokers.WooCommerces;
 using WooCommerceAPI.Services.Foundations.Products;

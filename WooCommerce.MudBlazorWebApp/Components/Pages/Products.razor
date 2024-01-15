@@ -1,0 +1,189 @@
+﻿@page "/products"
+@using WooCommerce.MudBlazorWebApp.Services
+@using WooCommerceAPI.Models.Services.Foundations.Products
+@inject WooCommerceService WooService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<h3>Product List</h3>
+
+@if (Elements == null)
+{
+    <MudCard>
+        <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="200px" />
+        <MudCardContent>
+            <MudSkeleton Width="30%" Height="42px;" />
+            <MudSkeleton Width="80%" />
+            <MudSkeleton Width="100%" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudSkeleton Width="64px" Height="40px" Class="ml-2" />
+            <MudSkeleton Width="105px" Height="40px" Class="ml-3" />
+        </MudCardActions>
+    </MudCard>
+}
+else
+{
+    <MudButton OnClick="@(() => EditProductF())">Edit product</MudButton>
+    <MudSwitch @bind-Value="@_selectOnRowClick">Select on row click</MudSwitch>
+    <MudText Inline="true">Item: @_selectedItemText</MudText>
+    <MudText>Selected items (@selectedItems?.Count)</MudText>
+
+    <MudTable @ref="_table" T="ProductResponse" Items="@Elements" MultiSelection="true" @bind-SelectedItems="selectedItems" Hover="true"
+              OnRowClick="@OnRowClick" @bind-SelectOnRowClick="@_selectOnRowClick">
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Image">
+                @if (!string.IsNullOrWhiteSpace(context.Images.FirstOrDefault()?.Src))
+                {
+                    <MudImage Src="@context.Images[0].Src" Style="width: 100px; height: 100px;" />
+                }
+                else
+                {
+                    <span>No Image Available</span>
+                }
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50, 100 }" />
+        </PagerContent>
+        <FooterContent>
+            <MudTd colspan="5">Select All</MudTd>
+        </FooterContent>
+    </MudTable>
+
+    //@product.Images[0].Src
+
+
+@* 
+    <button class="btn btn-primary">Action 1</button>
+    <button class="btn btn-secondary">Action 2</button>
+    <button class="btn btn-primary" @onclick="() => EditProduct(selectedProductId)">Edit</button>
+
+
+    <p>Selected Products: @selectedProductIds.Count</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" @onchange="SelectAll" checked="@(selectedProductIds.Count == products.Length)" /></th>
+                <th>Image</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td><input type="checkbox" value="@product.Id" @onchange="() => SelectProduct(product.Id)" checked="@selectedProductIds.Contains(product.Id)" /></td>
+                    <td>
+                        @if (product.Images != null && product.Images.Length > 0)
+                        {
+                            <img src="@product.Images[0].Src" alt="@product.Images[0].Alt" style="width:100px; height:auto;">
+                        }
+                    </td>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Sku</td>
+                    <td>@product.Price</td>
+                    <td>@product.Status</td>
+                </tr>
+            }
+        </tbody>
+    </table> *@
+}
+
+
+
+@code {
+    private HashSet<ProductResponse> selectedItems = new HashSet<ProductResponse>();
+    private IEnumerable<ProductResponse> Elements = new List<ProductResponse>();
+    private bool _selectOnRowClick = true;
+    private MudTable<ProductResponse> _table;
+    private string _selectedItemText = "No row clicked";
+
+    protected override async Task OnInitializedAsync()
+    {
+        //var p4 = await WooService.GetProductAsync(50687);
+        var p = await WooService.GetAllProductsAsync();
+        Elements = p.Select(x => x.Response);
+        //products = p.Select(x => x.Response).ToArray();
+        //Elements = await httpClient.GetFromJsonAsync<List<ProductResponse>>("webapi/periodictable");
+    }
+
+    private void OnRowClick(TableRowClickEventArgs<ProductResponse> args)
+    {
+        _selectedItemText = $"{args.Item.Name} ({args.Item.Id})";
+    }
+
+    private void EditProductF()
+    {
+        if (selectedItems.Count == 1)
+        {
+            Product product = new()
+            {
+                Response = selectedItems.First()
+            };
+           // productService.SetCurrentProduct(product);
+            NavigationManager.NavigateTo($"/editproduct/{selectedItems.First().Id}");
+        }
+    }
+}
+
+
+@* 
+@code {
+    private ProductResponse[] products;
+    private HashSet<int> selectedProductIds = new HashSet<int>();
+    private int selectedProductId;
+
+    private void EditProduct(int productId)
+    {
+        if (productId != 0)
+        {
+            NavigationManager.NavigateTo($"/editproduct/{productId}");
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var p = await WooService.GetAllProductsAsync();
+        products = p.Select(x => x.Response).ToArray();
+    }
+
+    private void SelectProduct(int productId)
+    {
+        selectedProductId = productId;
+
+        if (selectedProductIds.Contains(productId))
+        {
+            selectedProductIds.Remove(productId);
+        }
+        else
+        {
+            selectedProductIds.Add(productId);
+        }
+        StateHasChanged(); // Add this to refresh the UI
+    }
+
+    private void SelectAll(ChangeEventArgs e)
+    {
+        Console.WriteLine("ooga booga");
+        if ((bool)e.Value)
+        {
+            selectedProductIds = new HashSet<int>(products.Select(p => p.Id));
+        }
+        else
+        {
+            selectedProductIds.Clear();
+        }
+        StateHasChanged(); // Add this to refresh the UI
+    }
+} *@

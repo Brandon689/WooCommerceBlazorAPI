@@ -73,6 +73,10 @@ namespace WooCommerceAPI.Services.Foundations.Products
         public ValueTask<Product> UpdateProductAsync(Product product, int id) =>
         TryCatch(async () =>
         {
+            if (product.Request == null && product.Response != null)
+            {
+                ConvertResponseToProductRequest(product);
+            }
             //ValidateGetProductOnSend(getProduct);
             var externalProductRequest = new ExternalProductRequest()
             {
@@ -198,6 +202,43 @@ namespace WooCommerceAPI.Services.Foundations.Products
 
             return Product;
         }
+
+        private Product ConvertResponseToProductRequest(Product Product)
+        {
+            Product.Request = new ProductRequest
+            {
+                Name = Product.Response.Name,
+                RegularPrice = Product.Response.RegularPrice,
+                Description = Product.Response.Description,
+                Type = Product.Response.Type,
+                //Status = Product.Response.Status,
+                //MetaData = externalProductResponse.MetaData.Select(x =>
+                //{
+                //    return new ProductMetadata
+                //    {
+                //        Id = x.Id,
+                //        Key = x.Key,
+                //        Value = x.Value
+                //    };
+                //}).ToArray(),
+                //Images = externalProductResponse.Images.Select(x =>
+                //{
+                //    return new Image
+                //    {
+                //        Id = x.Id,
+                //        Name = x.Name,
+                //        Src = x.Src,
+                //        Alt = x.Alt,
+                //        DateCreated = x.DateCreated,
+                //        DateCreatedGmt = x.DateCreatedGmt,
+                //        DateModified = x.DateModified,
+                //        DateModifiedGmt = x.DateModifiedGmt
+                //    };
+                //}).ToArray()
+            };
+            return Product;
+        }
+
 
         private static ExternalProductVariationsRequest ConvertToProductVariationsRequest(ProductVariationsRequest product)
         {

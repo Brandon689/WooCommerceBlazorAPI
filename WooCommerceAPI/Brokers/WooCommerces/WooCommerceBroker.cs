@@ -2,7 +2,6 @@
 using System.Net.Http.Headers;
 using System.Text;
 using WooCommerceAPI.Models.Configurations;
-using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 
 namespace WooCommerceAPI.Brokers.WooCommerces
 {

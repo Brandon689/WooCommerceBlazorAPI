@@ -184,9 +184,4 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalMedia
     {
         internal string href { get; set; }
     }
-
-
-
-
-
 }

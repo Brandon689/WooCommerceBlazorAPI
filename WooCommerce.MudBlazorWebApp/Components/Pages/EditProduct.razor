@@ -1,0 +1,115 @@
+﻿@page "/editproduct/{ProductId}"
+@using WooCommerce.MudBlazorWebApp.Services
+@using WooCommerceAPI.Models.Services.Foundations.Products
+@inject WooCommerceService WooService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<MudGrid>
+    <MudItem xs="12" sm="7">
+        <MudPaper Class="pa-4">
+            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
+
+                <MudTextField T="string" @bind-Value="product.Response.Name" Label="Name" />
+
+                <MudTextField T="string" Label="Email" />
+                <div class="d-flex">
+                    <MudRadioGroup T="string">
+                        <MudRadio Value="@("Personal")">Personal</MudRadio>
+                        <MudRadio Value="@("Professional")">Professional</MudRadio>
+                    </MudRadioGroup>
+                </div>
+                <div class="d-flex align-center justify-space-between">
+                    <MudCheckBox T="bool" Label="I agree!" />
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!success)" Class="ml-auto">Register</MudButton>
+                </div>
+            </MudForm>
+        </MudPaper>
+        <MudPaper Class="pa-4 mt-4">
+            <MudButton Variant="Variant.Filled" Color="Color.Secondary" DisableElevation="true" OnClick="@(()=>form.ResetAsync())" Class="mx-2">Reset</MudButton>
+            <MudButton Variant="Variant.Filled" DisableElevation="true" OnClick="@(()=>form.ResetValidation())">Reset Validation</MudButton>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
+@code {
+    [Parameter]
+    public string ProductId { get; set; }
+    bool success;
+    string[] errors = { };
+    MudTextField<string> pwField1;
+    MudForm form;
+    private Product product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var p4 = await WooService.GetProductAsync(50687);
+        ;
+        //product = await WooService.GetProductAsync(int.Parse(ProductId));
+    }
+}
+
+@* @page "/editproduct/{ProductId}"
+@using WooCommerce.MudBlazorWebApp.Services
+@using WooCommerceAPI.Models.Services.Foundations.Products
+@inject WooCommerceService WooService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+<h3>Edit Product</h3>
+
+@if (product != null)
+{
+    <EditForm Model="product" OnValidSubmit="HandleValidSubmit" FormName="MyUniqueFormName">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <InputText id="title" class="form-control" @bind-Value="product.Response.Name" />
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <InputText id="price" class="form-control" @bind-Value="product.Response.RegularPrice" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+    <div style="background-color: lightgreen; color: darkgreen">@jim</div>
+}
+else
+{
+    <div class="skeleton-form">
+        <div class="form-group skeleton">
+            <div class="skeleton-label"></div>
+            <div class="skeleton-input"></div>
+        </div>
+        <div class="form-group skeleton">
+            <div class="skeleton-label"></div>
+            <div class="skeleton-input"></div>
+        </div>
+        <div class="skeleton-button"></div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string ProductId { get; set; }
+    public string jim { get; set; }
+    private Product product;
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await WooService.GetProductAsync(int.Parse(ProductId));
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await WooService.UpdateProductAsync(product, int.Parse(ProductId));
+        jim = "success";
+        NavigationManager.NavigateTo("/products");
+    }
+}
+ *@

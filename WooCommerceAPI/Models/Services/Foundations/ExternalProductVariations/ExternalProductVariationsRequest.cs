@@ -14,10 +14,10 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
         [JsonProperty("regular_price")]
         public string RegularPrice { get; set; } = string.Empty;
 
-        [JsonProperty("attributes")]
+        [JsonProperty("attributes", NullValueHandling = NullValueHandling.Ignore)]
         public ExternalProductVariationAttribute[] Attributes { get; set; }
 
-        [JsonProperty("image")]
+        [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
         public ExternalID Image { get; set; } = null;
     }
 

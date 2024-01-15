@@ -4,9 +4,7 @@ using WooCommerceAPI.Models.Configurations;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 
-DotEnv.Load(options: new DotEnvOptions(envFilePaths: new[] { "../../../.env" }));
-
-
+DotEnv.Load();
 
 //var wordPressConfigurations = new WordPressConfigurations
 //{
