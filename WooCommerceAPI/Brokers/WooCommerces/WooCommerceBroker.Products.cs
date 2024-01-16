@@ -1,4 +1,5 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+﻿using System.Text.Json;
+using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
 
 namespace WooCommerceAPI.Brokers.WooCommerces
@@ -10,10 +11,6 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         public async ValueTask<ExternalProductResponse> PostProductRequestAsync(
             ExternalProductRequest externalProductRequest)
         {
-            var ke = await PostAsync<ExternalProductRequest, dynamic>(
-                relativeUrl: ProductsRelativeUrl,
-                content: externalProductRequest);
-
             return await PostAsync<ExternalProductRequest, ExternalProductResponse>(
                 relativeUrl: ProductsRelativeUrl,
                 content: externalProductRequest);
@@ -34,14 +31,13 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 
         public async ValueTask<ExternalProductResponse[]> GetAllProductsRequestAsync(int page, int perPage)
         {
-            var v = await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
-            return v;
+            //var f = await GetAsync<dynamic[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
+            return await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
         }
 
-        public async ValueTask<ExternalProductRequest> UpdateProductRequestAsync(ExternalProductRequest product, int id)
+        public async ValueTask<ExternalProductResponse> UpdateProductRequestAsync(ExternalProductRequest product, int id)
         {
-            var v = await PutAsync<ExternalProductRequest>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
-            return v;
+            return await PutAsync<ExternalProductRequest, ExternalProductResponse>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
         }
     }
 }

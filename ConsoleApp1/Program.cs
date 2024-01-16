@@ -37,7 +37,7 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 };
 
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
-var get = await wooCommerceClient.Products.GetProductAsync(50674);
+//var get = await wooCommerceClient.Products.GetProductAsync(50674);
 
 Product k = new()
 {
@@ -47,6 +47,19 @@ Product k = new()
         RegularPrice = "711"
     }
 };
+
+
+
+
+var u6p = await wooCommerceClient.Products.UpdateProductAsync(k, 50444);
+
+
+
+
+
+
+
+var getAll = await wooCommerceClient.Products.GetAllProductsAsync(4, 100);
 
 var up = await wooCommerceClient.Products.UpdateProductAsync(k, 50674);
 

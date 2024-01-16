@@ -1,4 +1,5 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+﻿using Newtonsoft.Json;
+using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 
 namespace WooCommerceAPI.Models.Services.Foundations.Products
 {
@@ -55,5 +56,85 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
         public Image[] Images { get; set; }
 
         public ProductMetadata[] MetaData { get; set; }
+
+        public bool Purchasable { get; set; }
+
+        public int TotalSales { get; set; }
+
+        public bool Virtual { get; set; }
+
+        public bool Downloadable { get; set; }
+
+        public List<object> Downloads { get; set; }
+
+        public int DownloadLimit { get; set; }
+
+        public int DownloadExpiry { get; set; }
+
+        public string ExternalUrl { get; set; }
+
+        public string ButtonText { get; set; }
+
+        public string TaxStatus { get; set; }
+
+        public string TaxClass { get; set; }
+
+        public bool ManageStock { get; set; }
+
+        public int? StockQuantity { get; set; }
+
+        public string StockStatus { get; set; }
+
+        public string Backorders { get; set; }
+
+        public bool BackordersAllowed { get; set; }
+
+        public bool Backordered { get; set; }
+
+        public bool SoldIndividually { get; set; }
+
+        public string Weight { get; set; }
+
+        public Dimensions Dimensions { get; set; }
+
+        public bool ShippingRequired { get; set; }
+
+        public bool ShippingTaxable { get; set; }
+
+        public string ShippingClass { get; set; }
+
+        public int ShippingClassId { get; set; }
+
+        public bool ReviewsAllowed { get; set; }
+
+        public string AverageRating { get; set; }
+
+        public int RatingCount { get; set; }
+
+        public List<int> RelatedIds { get; set; }
+
+        public List<object> UpsellIds { get; set; }
+
+        public List<object> CrossSellIds { get; set; }
+
+        public int ParentId { get; set; }
+
+        public string PurchaseNote { get; set; }
+
+        public Category[] Categories { get; set; }
+
+        public List<object> Tags { get; set; }
+
+        public ProductAttribute[] Attributes { get; set; }
+
+        public DefaultAttribute[] DefaultAttributes { get; set; }
+
+        public List<object> Variations { get; set; }
+
+        public List<object> GroupedProducts { get; set; }
+
+        public int MenuOrder { get; set; }
+
+        public Links Links { get; set; }
     }
 }

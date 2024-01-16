@@ -135,20 +135,6 @@ namespace FacadeAPI
             return p;
         }
 
-        //private async Task<Product> imagereplace0(Product p)
-        //{
-        //    a = new();
-        //    for (int i = 0; i < p.Request.Images.Length; i++)
-        //    {
-        //        var file = i.ToString(); //p.Request.Images[i].Id.ToString();
-        //        var path = "C:\\2024\\1\\" + file + ".jpg";
-        //        await a.co(p.Request.Images[i].Src, path);
-        //        p.Request.Images[i].Src = path;
-        //    }
-        //    return p;
-        //}
-
-
         public async Task<SPProduct> ImageUploadToStore(SPProduct p)
         {
             for (int i = 0; i < p.images.Length; i++)
@@ -167,7 +153,6 @@ namespace FacadeAPI
             }
             return p;
         }
-
 
         //private async Task<Product> ImageUploadToStore(Product p)
         //{
@@ -209,10 +194,8 @@ namespace FacadeAPI
             return await this.wooCommerceClient.Products.SendProductAsync(product);
         }
 
-
         public async Task<Product> CreateProductAsync(Product b)
         {
-
             return await this.wooCommerceClient.Products.SendProductAsync(b);
         }
 

@@ -35,7 +35,7 @@
             </MudItem>
         </MudGrid>
     }
-    </MudPaper>
+</MudPaper>
 }
 else
 {
@@ -49,6 +49,12 @@ else
         <HeaderContent>
             <MudTh>Image</MudTh>
             <MudTh>Name</MudTh>
+            <MudTh>SKU</MudTh>
+            <MudTh>Price</MudTh>
+            <MudTh>Quantity</MudTh>
+            <MudTh>Stock</MudTh>
+            <MudTh>Categories</MudTh>
+            <MudTh>Date</MudTh>
         </HeaderContent>
         <RowTemplate>
             <MudTd DataLabel="Image" style="width: 100px;">
@@ -58,10 +64,24 @@ else
             }
             else
             {
-                <span>No Image Available</span>
+                <span Style="width: 100px; height: 100px;">-</span>
             }
             </MudTd>
-            <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Name">
+                <div style=" max-width: 350px; overflow-wrap: break-word; white-space: pre-wrap;">
+                    @context.Name
+                </div>
+            </MudTd>
+            <MudTd DataLabel="SKU">@context.Sku</MudTd>
+            <MudTd DataLabel="Price">@formatPrice(context.Price)</MudTd>
+            <MudTd DataLabel="Quantity">@context.StockQuantity</MudTd>
+            <MudTd DataLabel="Stock">@context.StockStatus</MudTd>
+            <MudTd DataLabel="Categories">
+                <div style=" max-width: 250px; overflow-wrap: break-word; white-space: pre-wrap;">
+                    @String.Join(", ", context.Categories.Select(x => x.Name))
+                </div>
+            </MudTd>
+            <MudTd DataLabel="Stock">@context.DateCreated</MudTd>
         </RowTemplate>
         <PagerContent>
             <MudTablePager PageSizeOptions="new int[] { 25, 50, 100 }" />
@@ -88,6 +108,33 @@ else
     private void OnRowClick(TableRowClickEventArgs<ProductResponse> args)
     {
         _selectedItemText = $"{args.Item.Name} ({args.Item.Id})";
+    }
+
+    private string formatPrice(string originalNumber)
+    {
+        var parts = originalNumber.Split('.');
+
+        if (parts.Length == 2) // If there's a fractional part
+        {
+            string fractionalPart = parts[1];
+            if (fractionalPart.Length > 2)
+            {
+                // If more than two digits after the decimal, truncate
+                fractionalPart = fractionalPart.Substring(0, 2);
+            }
+            else if (fractionalPart.Length < 2)
+            {
+                // If less than two digits after the decimal, pad with zero
+                fractionalPart = fractionalPart.PadRight(2, '0');
+            }
+            originalNumber = parts[0] + "." + fractionalPart;
+        }
+        else if (parts.Length == 1) // If no fractional part
+        {
+            // Add ".00" if there's no decimal point
+            originalNumber += ".00";
+        }
+        return originalNumber;
     }
 
     private void EditProductF()

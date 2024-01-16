@@ -2,7 +2,7 @@
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
-    public class ExternalProductResponse
+    internal class ExternalProductResponse
     {
         [JsonProperty("id")]
         public int Id { get; set; }
@@ -59,16 +59,16 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public string SalePrice { get; set; }
 
         [JsonProperty("date_on_sale_from")]
-        public object DateOnSaleFrom { get; set; }
+        public DateTime? DateOnSaleFrom { get; set; }
 
         [JsonProperty("date_on_sale_from_gmt")]
-        public object DateOnSaleFromGmt { get; set; }
+        public DateTime? DateOnSaleFromGmt { get; set; }
 
         [JsonProperty("date_on_sale_to")]
-        public object DateOnSaleTo { get; set; }
+        public DateTime? DateOnSaleTo { get; set; }
 
         [JsonProperty("date_on_sale_to_gmt")]
-        public object DateOnSaleToGmt { get; set; }
+        public DateTime? DateOnSaleToGmt { get; set; }
 
         [JsonProperty("price_html")]
         public string PriceHtml { get; set; }
@@ -182,7 +182,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public ExternalImage[] Images { get; set; }
 
         [JsonProperty("attributes")]
-        public Attribute[] Attributes { get; set; }
+        public ExternalProductAttribute[] Attributes { get; set; }
 
         [JsonProperty("default_attributes")]
         public DefaultAttribute[] DefaultAttributes { get; set; }
@@ -201,27 +201,6 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 
         [JsonProperty("_links")]
         public Links Links { get; set; }
-    }
-
-    public class Attribute
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("position")]
-        public int Position { get; set; }
-
-        [JsonProperty("visible")]
-        public bool Visible { get; set; }
-
-        [JsonProperty("variation")]
-        public bool Variation { get; set; }
-
-        [JsonProperty("options")]
-        public string[] Options { get; set; }
     }
 
     public class Category

@@ -70,28 +70,14 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return products;
         });
 
-        public ValueTask<Product> UpdateProductAsync(Product product, int id) =>
-        TryCatch(async () =>
-        {
-            if (product.Request == null && product.Response != null)
-            {
-                ConvertResponseToProductRequest(product);
-            }
-            //ValidateGetProductOnSend(getProduct);
-            var externalProductRequest = new ExternalProductRequest()
-            {
-                Name = product.Request.Name,
-                RegularPrice = product.Request.RegularPrice,
-                Description = product.Request.Description,
-                Type = product.Request.Type
-            };
-            var externalGetProductResponse =
-                await this.wooCommerceBroker.UpdateProductRequestAsync(externalProductRequest, id);
-
-            return new Product();
-            //return ConvertToProduct(new Product(), externalGetProductResponse);
-        });
+        //public ValueTask<Product> UpdateProductAsync(Product product, int id) =>
+        //TryCatch(async () =>
         //{
+        //    if (product.Request == null && product.Response != null)
+        //    {
+        //        ConvertResponseToProductRequest(product);
+        //    }
+        //    //ValidateGetProductOnSend(getProduct);
         //    var externalProductRequest = new ExternalProductRequest()
         //    {
         //        Name = product.Request.Name,
@@ -102,9 +88,46 @@ namespace WooCommerceAPI.Services.Foundations.Products
         //    var externalGetProductResponse =
         //        await this.wooCommerceBroker.UpdateProductRequestAsync(externalProductRequest, id);
 
-        //    return null;
+        //    return new Product();
         //    //return ConvertToProduct(new Product(), externalGetProductResponse);
+        //});
+
+
+
+        public async ValueTask<Product> UpdateProductAsync(Product product, int id)
+        {
+            if (product.Request == null && product.Response != null)
+            {
+                ConvertResponseToProductRequest(product);
+            }
+            //ValidateGetProductOnSend(getProduct);
+            //var externalProductRequest = new ExternalProductRequest()
+            //{
+            //    Name = product.Request.Name,
+            //    RegularPrice = product.Request.RegularPrice,
+            //    Description = product.Request.Description,
+            //    Type = product.Request.Type,
+            //    StockQuantity = product.Request.StockQuantity,
+            //    StockStatus = product.Request.StockStatus,
+            //    ManageStock = product.Request.ManageStock,
+            //    Sku = product.Request.Sku,
+            //};
+            var externalProductRequest = ConvertToProductRequest(product);
+            var externalGetProductResponse =
+                await this.wooCommerceBroker.UpdateProductRequestAsync(externalProductRequest, id);
+            return ConvertToProduct(new Product(), externalGetProductResponse);
+        }
+
+        //private static ProductResponse ConvertReqToResponse(ExternalProductRequest request)
+        //{
+        //    return new ProductResponse()
+        //    {
+        //        Name = request.Name,
+        //        Price = request.RegularPrice,
+        //        StockQuantity = request.sto
+        //    };
         //}
+
 
         private static ExternalProductRequest ConvertToProductRequest(Product product)
         {
@@ -113,7 +136,14 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 Name = product.Request.Name,
                 RegularPrice = product.Request.RegularPrice,
                 Description = product.Request.Description,
-                Type = product.Request.Type
+                Type = product.Request.Type,
+                StockQuantity = product.Request.StockQuantity,
+                CatalogVisibility = product.Request.CatalogVisibility,
+                ShortDescription = product.Request.ShortDescription,
+                Featured = product.Request.Featured,
+                StockStatus = product.Request.StockStatus,
+                Slug = product.Request.Slug,
+                Sku = product.Request.Sku,
             };
             if (product.Request.Images != null)
             {
@@ -155,25 +185,67 @@ namespace WooCommerceAPI.Services.Foundations.Products
             Product Product,
             ExternalProductResponse externalProductResponse)
         {
-
             Product.Response = new ProductResponse
             {
-                Id = externalProductResponse.Id,
-                Name = externalProductResponse.Name,
-                RegularPrice = externalProductResponse.RegularPrice,
-                Description = externalProductResponse.Description,
-                Type = externalProductResponse.Type,
+                Backorders = externalProductResponse.Backorders,
+                BackordersAllowed = externalProductResponse.BackordersAllowed,
+                Backordered = externalProductResponse.Backordered,
+                ButtonText = externalProductResponse.ButtonText,
+                CatalogVisibility = externalProductResponse.CatalogVisibility,
+                Categories = externalProductResponse.Categories.Select(c => new Category
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Slug = c.Slug
+                }).ToArray(),
                 DateCreated = externalProductResponse.DateCreated,
+                DateCreatedGmt = externalProductResponse.DateCreatedGmt,
                 DateModified = externalProductResponse.DateModified,
                 DateModifiedGmt = externalProductResponse.DateModifiedGmt,
                 DateOnSaleFrom = externalProductResponse.DateOnSaleFrom,
                 DateOnSaleFromGmt = externalProductResponse.DateOnSaleFromGmt,
                 DateOnSaleTo = externalProductResponse.DateOnSaleTo,
                 DateOnSaleToGmt = externalProductResponse.DateOnSaleToGmt,
+                //DefaultAttributes = externalProductResponse.DefaultAttributes.Select(da => new DefaultAttribute
+                //{
+                //    Id = da.Id,
+                //    Name = da.Name,
+                //    Option = da.Option
+                //}).ToArray(),
+                Description = externalProductResponse.Description,
+                //Dimensions = new Dimensions
+                //{
+                //    Length = externalProductResponse.Dimensions.Length,
+                //    Width = externalProductResponse.Dimensions.Width,
+                //    Height = externalProductResponse.Dimensions.Height
+                //},
+
+
+                Id = externalProductResponse.Id,
+                Name = externalProductResponse.Name,
+                RegularPrice = externalProductResponse.RegularPrice,
+                Type = externalProductResponse.Type,
                 Status = externalProductResponse.Status,
                 Price = externalProductResponse.Price,
                 Featured = externalProductResponse.Featured,
                 Slug = externalProductResponse.Slug,
+                StockQuantity = externalProductResponse.StockQuantity,
+                SoldIndividually = externalProductResponse.SoldIndividually,
+                Weight = externalProductResponse.Weight,
+                StockStatus = externalProductResponse.StockStatus,
+                ManageStock = externalProductResponse.ManageStock,
+                Attributes = externalProductResponse.Attributes.Select(x =>
+                {
+                    return new ProductAttribute
+                    {
+                        Id = x.Id,
+                        Position = x.Position,
+                        Name = x.Name,
+                        Visible = x.Visible,
+                        Variation = x.Variation,
+                        Options = x.Options
+                    };
+                }).ToArray(),
                 //CreatedDate = this.dateTimeBroker.ConvertToDateTimeOffSet(externalProductResponse.Created),
                 MetaData = externalProductResponse.MetaData.Select(x =>
                 {
@@ -238,7 +310,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
             };
             return Product;
         }
-
 
         private static ExternalProductVariationsRequest ConvertToProductVariationsRequest(ProductVariationsRequest product)
         {
