@@ -55,6 +55,7 @@ else
     MudForm form;
     private Product product;
 
+
     protected override async Task OnInitializedAsync()
     {
         product = await WooService.GetCachedProductAsync(int.Parse(ProductId));

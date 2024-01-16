@@ -4,6 +4,15 @@
 	but it is exclusively employed in the 'App.razor' component when authentication is enabled.
 */
 
+.drawer-collapsed {
+    width: 56px; /* or whatever width you prefer for the icon-only state */
+}
+
+    .drawer-collapsed .mud-nav-link span {
+        display: none; /* hides the text labels */
+    }
+
+
 .btn-primary {
     text-transform: uppercase;
     --bs-btn-bg: var(--mud-palette-primary) !important;
