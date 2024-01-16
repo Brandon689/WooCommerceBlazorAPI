@@ -14,10 +14,10 @@ namespace WooCommerce.MudBlazorWebApp.Services
             if (CurrentProduct == null)
             {
                 if (id == 0)
-                    return new Product();
+                    throw new Exception("No valid product Id and no product selected.");
                 CurrentProduct = await GetProductAsync(id);
-                return CurrentProduct;
             }
+            CurrentProduct.Request = new();
             return CurrentProduct;
         }
 
@@ -52,11 +52,11 @@ namespace WooCommerce.MudBlazorWebApp.Services
 
         public async Task<Product[]> GetAllProductsAsync()
         {
-            var product = await _wooCommerceClient.Products.GetAllProductsAsync(2, 2);
+            var product = await _wooCommerceClient.Products.GetAllProductsAsync(3, 50);
             return product;
         }
 
-        public async Task<Product> UpdateProductAsync(Product _product, int id)
+        public async Task<Product> UpdateProductAsync(Product _product, int id = 0)
         {
             var product = await _wooCommerceClient.Products.UpdateProductAsync(_product, id);
             return product;

@@ -94,10 +94,11 @@ namespace WooCommerceAPI.Clients.Products
             }
         }
 
-        public async ValueTask<Product> UpdateProductAsync(Product product, int id)
+        public async ValueTask<Product> UpdateProductAsync(Product product, int id = 0)
         {
             try
             {
+                if (id == 0) id = product.Response.Id;
                 return await productService.UpdateProductAsync(product, id);
             }
             catch (ProductValidationException completionValidationException)
