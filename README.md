@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a new standards compliant library for ecommerce developers. It is under heavy development.
+WooCommerce .NET Api and Blazor Server Admin Panel for ecommerce developers.
 
 ## Critical endpoints done
 
