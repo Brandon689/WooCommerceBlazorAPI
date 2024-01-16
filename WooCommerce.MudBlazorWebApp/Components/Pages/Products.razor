@@ -7,27 +7,42 @@
 
 <h3>Product List</h3>
 
-@if (Elements == null)
+ @if (Elements == null)
 {
-    <MudCard>
-        <MudSkeleton SkeletonType="SkeletonType.Rectangle" Height="200px" />
-        <MudCardContent>
-            <MudSkeleton Width="30%" Height="42px;" />
-            <MudSkeleton Width="80%" />
-            <MudSkeleton Width="100%" />
-        </MudCardContent>
-        <MudCardActions>
-            <MudSkeleton Width="64px" Height="40px" Class="ml-2" />
-            <MudSkeleton Width="105px" Height="40px" Class="ml-3" />
-        </MudCardActions>
-    </MudCard>
+
+<MudPaper Class="pa-4">
+    <MudSkeleton Animation="Animation.Wave" Height="20px" Class="mb-2" />
+    <MudGrid>
+        <MudItem xs="12" sm="6">
+            <MudSkeleton Animation="Animation.Wave" Height="20px" />
+        </MudItem>
+        <MudItem xs="12" sm="6">
+            <MudSkeleton Animation="Animation.Wave" Height="20px" />
+        </MudItem>
+    </MudGrid>
+    <MudSkeleton Animation="Animation.Wave" Height="100px" Class="my-2" />
+    @for (int i = 0; i < 5; i++)
+    {
+        <MudGrid>
+            <MudItem xs="1">
+                <MudSkeleton SkeletonType="SkeletonType.Rectangle" Animation="Animation.Wave" Height="80px" Width="80px" />
+            </MudItem>
+            <MudItem xs="7">
+                <MudSkeleton Animation="Animation.Wave" Height="40px" />
+            </MudItem>
+            <MudItem xs="4">
+                <MudSkeleton Animation="Animation.Wave" Height="40px" />
+            </MudItem>
+        </MudGrid>
+    }
+    </MudPaper>
 }
 else
 {
-    <MudButton OnClick="@(() => EditProductF())">Edit product</MudButton>
     <MudSwitch @bind-Value="@_selectOnRowClick">Select on row click</MudSwitch>
     <MudText Inline="true">Item: @_selectedItemText</MudText>
     <MudText>Selected items (@selectedItems?.Count)</MudText>
+    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => EditProductF())">Edit product</MudButton>
 
     <MudTable @ref="_table" T="ProductResponse" Items="@Elements" MultiSelection="true" @bind-SelectedItems="selectedItems" Hover="true" RowsPerPage="50"
               OnRowClick="@OnRowClick" @bind-SelectOnRowClick="@_selectOnRowClick">
