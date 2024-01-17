@@ -33,7 +33,8 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 //var get = await wooCommerceClient.Products.GetProductAsync(50674);
 
-var vtf= await wooCommerceClient.Orders.GetOrderAsync(50693);
+var orders = await wooCommerceClient.Orders.GetAllOrdersAsync(1, 10);
+var order = await wooCommerceClient.Orders.GetOrderAsync(50693);
 
 
 Product k = new()

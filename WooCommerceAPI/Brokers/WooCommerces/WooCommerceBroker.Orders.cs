@@ -16,5 +16,10 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         {
             return await GetAsync<Order>(relativeUrl: $"{OrdersRelativeUrl}/{id}");
         }
+
+        public async ValueTask<Order[]> GetAllOrdersRequestAsync(int page, int perPage)
+        {
+            return await GetAsync<Order[]>(relativeUrl: $"{OrdersRelativeUrl}?page={page}&per_page={perPage}");
+        }
     }
 }

@@ -11,6 +11,6 @@ namespace WooCommerceAPI.Services.Foundations.Orders
     internal interface IOrderService
     {
         ValueTask<Order> GetOrderAsync(int orderId);
-        //ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage);
+        ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage);
     }
 }

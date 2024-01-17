@@ -21,16 +21,15 @@ namespace WooCommerceAPI.Services.Foundations.Orders
 
         public async ValueTask<Order> GetOrderAsync(int orderId)
         {
-            Order order =
-                await this.wooCommerceBroker.GetOrderRequestAsync(orderId);
-
+            Order order = await this.wooCommerceBroker.GetOrderRequestAsync(orderId);
             return order;
             //return ConvertToProduct(new Product(), order);
         }
 
-        //public async ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage)
-        //{
-
-        //}
+        public async ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage)
+        {
+            Order[] orders = await this.wooCommerceBroker.GetAllOrdersRequestAsync(page, perPage);
+            return orders;
+        }
     }
 }

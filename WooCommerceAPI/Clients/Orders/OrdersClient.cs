@@ -15,5 +15,10 @@ namespace WooCommerceAPI.Clients.Orders
         {
             return await orderService.GetOrderAsync(orderId);
         }
+
+        public async ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage)
+        {
+            return await orderService.GetAllOrdersAsync(page, perPage);
+        }
     }
 }
