@@ -3,6 +3,7 @@
 @using WooCommerceAPI.Models.Services.Foundations.Products
 @using System.ComponentModel.DataAnnotations
 @inject WooCommerceService WooService
+@inject CacheService CacheService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
@@ -58,7 +59,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        product = await WooService.GetCachedProductAsync(int.Parse(ProductId));
+        if (CacheService.ColdSingle())
+        {
+            product = await WooService.GetProductAsync(int.Parse(ProductId));
+            CacheService.SetCurrentProduct(product);
+        }
+        else
+        {
+            product = CacheService.GetCurrentProduct();
+        }
+        product.Request = new();
         product.Request.Name = product.Response.Name;
         product.Request.Price = product.Response.Price;
         product.Request.RegularPrice = product.Response.RegularPrice;
@@ -73,7 +83,7 @@ else
         {
             successCode = 2;
             StateHasChanged();
-            WooService.SetCurrentProduct(product);
+            CacheService.SetCurrentProduct(product);
             product.Request.ManageStock = true;
             await WooService.UpdateProductAsync(product);
             successCode = 0;

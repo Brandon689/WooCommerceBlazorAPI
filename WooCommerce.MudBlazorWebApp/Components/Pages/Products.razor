@@ -2,6 +2,7 @@
 @using WooCommerce.MudBlazorWebApp.Services
 @using WooCommerceAPI.Models.Services.Foundations.Products
 @inject WooCommerceService WooService
+@inject CacheService CacheService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
@@ -101,8 +102,16 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var p = await WooService.GetAllProductsAsync();
-        Elements = p.Select(x => x.Response);
+        if (CacheService.Cold())
+        {
+            var p = await WooService.GetAllProductsAsync();
+            Elements = p.Select(x => x.Response);
+            CacheService.SetProducts(p);
+        }
+        else
+        {
+            Elements = CacheService.GetProducts().Select(x => x.Response);
+        }
     }
 
     private void OnRowClick(TableRowClickEventArgs<ProductResponse> args)
@@ -145,7 +154,7 @@ else
             {
                 Response = selectedItems.First()
             };
-            WooService.SetCurrentProduct(product);
+            CacheService.SetCurrentProduct(product);
             NavigationManager.NavigateTo($"/editproduct/{selectedItems.First().Id}");
         }
     }

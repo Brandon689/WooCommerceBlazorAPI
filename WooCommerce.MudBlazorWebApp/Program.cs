@@ -23,6 +23,7 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 
 builder.Services.AddSingleton(wooCommerceConfigurations);
 builder.Services.AddScoped<WooCommerceService>();
+builder.Services.AddScoped<CacheService>();
 
 var app = builder.Build();
 

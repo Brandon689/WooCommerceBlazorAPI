@@ -7,29 +7,18 @@ namespace WooCommerce.MudBlazorWebApp.Services
     public class WooCommerceService
     {
         private readonly WooCommerceClient _wooCommerceClient;
-        private Product? CurrentProduct { get; set; } = null;
 
-        public async Task<Product> GetCachedProductAsync(int id = 0)
-        {
-            if (CurrentProduct == null)
-            {
-                if (id == 0)
-                    throw new Exception("No valid product Id and no product selected.");
-                CurrentProduct = await GetProductAsync(id);
-            }
-            CurrentProduct.Request = new();
-            return CurrentProduct;
-        }
-
-        public Product GetCurrentProduct()
-        {
-            return CurrentProduct;
-        }
-
-        public void SetCurrentProduct(Product product)
-        {
-            CurrentProduct = product;
-        }
+        //public async Task<Product> GetCachedProductAsync(int id = 0)
+        //{
+        //    if (CurrentProduct == null)
+        //    {
+        //        if (id == 0)
+        //            throw new Exception("No valid product Id and no product selected.");
+        //        CurrentProduct = await GetProductAsync(id);
+        //    }
+        //    CurrentProduct.Request = new();
+        //    return CurrentProduct;
+        //}
 
         public WooCommerceService(WooCommerceConfigurations config)
         {
@@ -52,7 +41,7 @@ namespace WooCommerce.MudBlazorWebApp.Services
 
         public async Task<Product[]> GetAllProductsAsync()
         {
-            var product = await _wooCommerceClient.Products.GetAllProductsAsync(3, 50);
+            var product = await _wooCommerceClient.Products.GetAllProductsAsync(1, 50);
             return product;
         }
 

@@ -11,7 +11,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         [JsonProperty("type")]
         public string? Type { get; set; } = "simple";
 
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string? Description { get; set; } = string.Empty;
 
         [JsonProperty("regular_price")]
@@ -29,7 +29,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 
 
 
-        [JsonProperty("slug")]
+        [JsonProperty("slug", NullValueHandling = NullValueHandling.Ignore)]
         public string? Slug { get; set; }
 
         //[JsonProperty("permalink")]
@@ -47,19 +47,19 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         //[JsonProperty("date_modified_gmt", NullValueHandling = NullValueHandling.Ignore)]
         //public DateTime DateModifiedGmt { get; set; }
 
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public string? Status { get; set; }
 
-        [JsonProperty("featured")]
+        [JsonProperty("featured", NullValueHandling = NullValueHandling.Ignore)]
         public bool? Featured { get; set; }
 
         [JsonProperty("catalog_visibility", NullValueHandling = NullValueHandling.Ignore)]
         public string? CatalogVisibility { get; set; }
 
-        [JsonProperty("short_description")]
+        [JsonProperty("short_description", NullValueHandling = NullValueHandling.Ignore)]
         public string? ShortDescription { get; set; }
 
-        [JsonProperty("sku")]
+        [JsonProperty("sku", NullValueHandling = NullValueHandling.Ignore)]
         public string? Sku { get; set; }
 
         //[JsonProperty("price")]
@@ -119,13 +119,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         //[JsonProperty("tax_class")]
         //public string? TaxClass { get; set; }
 
-        [JsonProperty("manage_stock")]
+        [JsonProperty("manage_stock", NullValueHandling = NullValueHandling.Ignore)]
         public bool? ManageStock { get; set; }
 
-        [JsonProperty("stock_quantity")]
+        [JsonProperty("stock_quantity", NullValueHandling = NullValueHandling.Ignore)]
         public int? StockQuantity { get; set; }
 
-        [JsonProperty("stock_status")]
+        [JsonProperty("stock_status, NullValueHandling = NullValueHandling.Ignore")]
         public string? StockStatus { get; set; }
 
         //[JsonProperty("backorders")]
