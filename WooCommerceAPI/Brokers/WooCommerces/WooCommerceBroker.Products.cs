@@ -8,36 +8,36 @@ namespace WooCommerceAPI.Brokers.WooCommerces
     {
         private const string ProductsRelativeUrl = "/wp-json/wc/v3/products";
 
-        public async ValueTask<ExternalProductResponse> PostProductRequestAsync(
-            ExternalProductRequest externalProductRequest)
+        public async ValueTask<ExternalProduct> PostProductRequestAsync(
+            ExternalProduct externalProductRequest)
         {
-            return await PostAsync<ExternalProductRequest, ExternalProductResponse>(
+            return await PostAsync<ExternalProduct>(
                 relativeUrl: ProductsRelativeUrl,
                 content: externalProductRequest);
         }
 
-        public async ValueTask<ExternalProductResponse> PostProductVariationsRequestAsync(
+        public async ValueTask<ExternalProduct> PostProductVariationsRequestAsync(
             ExternalProductVariationsRequest externalProductVariationsRequest, int productId)
         {
-            return await PostAsync<ExternalProductVariationsRequest, ExternalProductResponse>(
+            return await PostAsync<ExternalProductVariationsRequest, ExternalProduct>(
                 relativeUrl: $"{ProductsRelativeUrl}/{productId}/variations/batch",
                 content: externalProductVariationsRequest);
         }
 
-        public async ValueTask<ExternalProductResponse> GetProductRequestAsync(int id)
+        public async ValueTask<ExternalProduct> GetProductRequestAsync(int id)
         {
-            return await GetAsync<ExternalProductResponse>(relativeUrl: $"{ProductsRelativeUrl}/{id}");
+            return await GetAsync<ExternalProduct>(relativeUrl: $"{ProductsRelativeUrl}/{id}");
         }
 
-        public async ValueTask<ExternalProductResponse[]> GetAllProductsRequestAsync(int page, int perPage)
+        public async ValueTask<ExternalProduct[]> GetAllProductsRequestAsync(int page, int perPage)
         {
             //var f = await GetAsync<dynamic[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
-            return await GetAsync<ExternalProductResponse[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
+            return await GetAsync<ExternalProduct[]>(relativeUrl: $"{ProductsRelativeUrl}?page={page}&per_page={perPage}");
         }
 
-        public async ValueTask<ExternalProductResponse> UpdateProductRequestAsync(ExternalProductRequest product, int id)
+        public async ValueTask<ExternalProduct> UpdateProductRequestAsync(ExternalProduct product, int id)
         {
-            return await PutAsync<ExternalProductRequest, ExternalProductResponse>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
+            return await PutAsync<ExternalProduct>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
         }
     }
 }

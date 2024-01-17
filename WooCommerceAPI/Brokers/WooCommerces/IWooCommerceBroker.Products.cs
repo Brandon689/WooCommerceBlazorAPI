@@ -5,12 +5,12 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 {
     internal partial interface IWooCommerceBroker
     {
-        ValueTask<ExternalProductResponse> PostProductRequestAsync(ExternalProductRequest externalProductRequest);
-        ValueTask<ExternalProductResponse> PostProductVariationsRequestAsync(ExternalProductVariationsRequest externalProductVariationsRequest, int productId);
+        ValueTask<ExternalProduct> PostProductRequestAsync(ExternalProduct externalProductRequest);
+        ValueTask<ExternalProduct> PostProductVariationsRequestAsync(ExternalProductVariationsRequest externalProductVariationsRequest, int productId);
 
-        ValueTask<ExternalProductResponse> GetProductRequestAsync(int id);
-        ValueTask<ExternalProductResponse[]> GetAllProductsRequestAsync(int page, int perPage);
+        ValueTask<ExternalProduct> GetProductRequestAsync(int id);
+        ValueTask<ExternalProduct[]> GetAllProductsRequestAsync(int page, int perPage);
 
-        ValueTask<ExternalProductResponse> UpdateProductRequestAsync(ExternalProductRequest product, int id);
+        ValueTask<ExternalProduct> UpdateProductRequestAsync(ExternalProduct product, int id);
     }
 }

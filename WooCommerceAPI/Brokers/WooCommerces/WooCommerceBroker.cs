@@ -41,6 +41,9 @@ namespace WooCommerceAPI.Brokers.WooCommerces
                 content);
         }
 
+        private async ValueTask<T> PutAsync<T>(string relativeUrl, T content) =>
+            await this.apiClient.PutContentAsync<T>(relativeUrl, content, "application/json");
+
         private async ValueTask<TResult> PutAsync<TRequest, TResult>(string relativeUrl, TRequest content) =>
             await this.apiClient.PutContentAsync<TRequest, TResult>(relativeUrl, content, "application/json");
 

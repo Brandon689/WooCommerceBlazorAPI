@@ -19,9 +19,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
         TryCatch(async () =>
         {
             //ValidateProductOnSend(product);
-
-            ExternalProductRequest externalProductRequest = ConvertToProductRequest(product);
-            ExternalProductResponse externalProductResponse =
+            ExternalProduct externalProductRequest = ConvertToProductRequest(product);
+            ExternalProduct externalProductResponse =
                 await this.wooCommerceBroker.PostProductRequestAsync(externalProductRequest);
 
             return ConvertToProduct(product, externalProductResponse);
@@ -31,11 +30,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
         TryCatch(async () =>
         {
             //ValidateProductOnSend(Product);
-
             ExternalProductVariationsRequest externalProductRequest = ConvertToProductVariationsRequest(productVariations.Request);
-            string f = Newtonsoft.Json.JsonConvert.SerializeObject(externalProductRequest);
-            File.WriteAllText("../../../epvr.json", f);
-            ExternalProductResponse externalProductResponse =
+            ExternalProduct externalProductResponse =
                 await this.wooCommerceBroker.PostProductVariationsRequestAsync(externalProductRequest, productVariations.Request.ProductId);
 
             Product product = new();
@@ -47,8 +43,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
         TryCatch(async () =>
         {
             //ValidateGetProductOnSend(getProduct);
-
-            ExternalProductResponse externalGetProductResponse =
+            ExternalProduct externalGetProductResponse =
                 await this.wooCommerceBroker.GetProductRequestAsync(id);
 
             return ConvertToProduct(new Product(), externalGetProductResponse);
@@ -58,8 +53,7 @@ namespace WooCommerceAPI.Services.Foundations.Products
         TryCatchAll(async () =>
         {
             //ValidateGetProductOnSend(getProduct);
-
-            ExternalProductResponse[] externalGetProductResponse =
+            ExternalProduct[] externalGetProductResponse =
                 await this.wooCommerceBroker.GetAllProductsRequestAsync(page, perPage);
 
             Product[] products = new Product[externalGetProductResponse.Length];
@@ -93,13 +87,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
         //});
 
 
-
         public async ValueTask<Product> UpdateProductAsync(Product product, int id)
         {
-            if (product.Request == null && product.Response != null)
-            {
-                ConvertResponseToProductRequest(product);
-            }
             //ValidateGetProductOnSend(getProduct);
             //var externalProductRequest = new ExternalProductRequest()
             //{
@@ -118,43 +107,43 @@ namespace WooCommerceAPI.Services.Foundations.Products
             return ConvertToProduct(new Product(), externalGetProductResponse);
         }
 
-        //private static ProductResponse ConvertReqToResponse(ExternalProductRequest request)
-        //{
-        //    return new ProductResponse()
-        //    {
-        //        Name = request.Name,
-        //        Price = request.RegularPrice,
-        //        StockQuantity = request.sto
-        //    };
-        //}
-
-
-        private static ExternalProductRequest ConvertToProductRequest(Product product)
+        private static ExternalProduct ConvertToProductRequest(Product product)
         {
-            var externalProductRequest = new ExternalProductRequest()
+            var externalProductRequest = new ExternalProduct()
             {
-                Name = product.Request.Name,
-                RegularPrice = product.Request.RegularPrice,
-                Description = product.Request.Description,
-                Type = product.Request.Type,
-                StockQuantity = product.Request.StockQuantity,
-                CatalogVisibility = product.Request.CatalogVisibility,
-                ShortDescription = product.Request.ShortDescription,
-                Featured = product.Request.Featured,
-                StockStatus = product.Request.StockStatus,
-                Slug = product.Request.Slug,
-                Sku = product.Request.Sku,
+                Name = product.Name,
+                RegularPrice = product.RegularPrice,
+                Description = product.Description,
+                Type = product.Type,
+                StockQuantity = product.StockQuantity,
+                CatalogVisibility = product.CatalogVisibility,
+                ShortDescription = product.ShortDescription,
+                Featured = product.Featured,
+                StockStatus = product.StockStatus,
+                Slug = product.Slug,
+                Sku = product.Sku,
+                ManageStock = product.ManageStock,
             };
-            if (product.Request.Images != null)
+            if (product.Images != null)
             {
-                externalProductRequest.Images = product.Request.Images.Select(message =>
+                externalProductRequest.Images = product.Images.Select(message =>
                 {
-                    return new ExternalID(id: message.Id);
+                    return new ExternalImage()
+                    {
+                        Id = message.Id,
+                        Name = message.Name,
+                        Src = message.Src,
+                        Alt = message.Alt,
+                        DateModified = message.DateModified,
+                        DateCreated = message.DateCreated,
+                        DateCreatedGmt = message.DateCreatedGmt,
+                        DateModifiedGmt = message.DateModifiedGmt
+                    };
                 }).ToArray();
             }
-            if (product.Request.Attributes != null)
+            if (product.Attributes != null)
             {
-                externalProductRequest.Attributes = product.Request.Attributes.Select(attribute =>
+                externalProductRequest.Attributes = product.Attributes.Select(attribute =>
                 {
                     return new ExternalProductAttribute
                     {
@@ -167,25 +156,33 @@ namespace WooCommerceAPI.Services.Foundations.Products
                     };
                 }).ToArray();
             }
-            if (product.Request.MetaData != null)
+            if (product.MetaData != null)
             {
-                externalProductRequest.Metadata = product.Request.MetaData.Select(x =>
+
+                externalProductRequest.MetaData = product.MetaData.Select(x =>
                 {
                     return new ExternalProductMetadata
-                    {
-                        Key = x.Key,
-                        Value = x.Value
+                    { 
+                    
                     };
                 }).ToArray();
+                //externalProductRequest.MetaData = product.MetaData.Select(x =>
+                //{
+                //    return new ExternalProductMetadata
+                //    {
+                //        //Key = x.Key,
+                //        //Value = x.Value
+                //    };
+                //}).ToArray();
             }
             return externalProductRequest;
         }
 
         private Product ConvertToProduct(
             Product Product,
-            ExternalProductResponse externalProductResponse)
+            ExternalProduct externalProductResponse)
         {
-            Product.Response = new ProductResponse
+            return new Product
             {
                 Backorders = externalProductResponse.Backorders,
                 BackordersAllowed = externalProductResponse.BackordersAllowed,
@@ -272,42 +269,6 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 }).ToArray()
             };
 
-            return Product;
-        }
-
-        private Product ConvertResponseToProductRequest(Product Product)
-        {
-            Product.Request = new ProductRequest
-            {
-                Name = Product.Response.Name,
-                RegularPrice = Product.Response.RegularPrice,
-                Description = Product.Response.Description,
-                Type = Product.Response.Type,
-                //Status = Product.Response.Status,
-                //MetaData = externalProductResponse.MetaData.Select(x =>
-                //{
-                //    return new ProductMetadata
-                //    {
-                //        Id = x.Id,
-                //        Key = x.Key,
-                //        Value = x.Value
-                //    };
-                //}).ToArray(),
-                //Images = externalProductResponse.Images.Select(x =>
-                //{
-                //    return new Image
-                //    {
-                //        Id = x.Id,
-                //        Name = x.Name,
-                //        Src = x.Src,
-                //        Alt = x.Alt,
-                //        DateCreated = x.DateCreated,
-                //        DateCreatedGmt = x.DateCreatedGmt,
-                //        DateModified = x.DateModified,
-                //        DateModifiedGmt = x.DateModifiedGmt
-                //    };
-                //}).ToArray()
-            };
             return Product;
         }
 

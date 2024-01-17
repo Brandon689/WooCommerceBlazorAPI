@@ -10,7 +10,6 @@
 
  @if (Elements == null)
 {
-
 <MudPaper Class="pa-4">
     <MudSkeleton Animation="Animation.Wave" Height="20px" Class="mb-2" />
     <MudGrid>
@@ -45,7 +44,7 @@ else
     <MudText>Selected items (@selectedItems?.Count)</MudText>
     <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => EditProductF())">Edit product</MudButton>
 
-    <MudTable @ref="_table" T="ProductResponse" Items="@Elements" MultiSelection="true" @bind-SelectedItems="selectedItems" Hover="true" RowsPerPage="50"
+    <MudTable @ref="_table" T="Product" Items="@Elements" MultiSelection="true" @bind-SelectedItems="selectedItems" Hover="true" RowsPerPage="50"
               OnRowClick="@OnRowClick" @bind-SelectOnRowClick="@_selectOnRowClick">
         <HeaderContent>
             <MudTh>Image</MudTh>
@@ -94,27 +93,26 @@ else
 }
 
 @code {
-    private HashSet<ProductResponse> selectedItems = new HashSet<ProductResponse>();
-    private IEnumerable<ProductResponse> Elements = null;
+    private HashSet<Product> selectedItems = new HashSet<Product>();
+    private IEnumerable<Product> Elements = null;
     private bool _selectOnRowClick = true;
-    private MudTable<ProductResponse> _table;
+    private MudTable<Product> _table;
     private string _selectedItemText = "No row clicked";
 
     protected override async Task OnInitializedAsync()
     {
         if (CacheService.Cold())
         {
-            var p = await WooService.GetAllProductsAsync();
-            Elements = p.Select(x => x.Response);
-            CacheService.SetProducts(p);
+            Elements = await WooService.GetAllProductsAsync();
+            CacheService.SetProducts(Elements);
         }
         else
         {
-            Elements = CacheService.GetProducts().Select(x => x.Response);
+            Elements = CacheService.GetProducts();
         }
     }
 
-    private void OnRowClick(TableRowClickEventArgs<ProductResponse> args)
+    private void OnRowClick(TableRowClickEventArgs<Product> args)
     {
         _selectedItemText = $"{args.Item.Name} ({args.Item.Id})";
     }
@@ -150,10 +148,8 @@ else
     {
         if (selectedItems.Count == 1)
         {
-            Product product = new()
-            {
-                Response = selectedItems.First()
-            };
+            Product product = selectedItems.First();
+
             CacheService.SetCurrentProduct(product);
             NavigationManager.NavigateTo($"/editproduct/{selectedItems.First().Id}");
         }

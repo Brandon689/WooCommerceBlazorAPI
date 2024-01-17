@@ -13,9 +13,6 @@ DotEnv.Load();
 //    ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
 //};
 
-
-
-
 //var wpclient = new WordPressClient(wordPressConfigurations);
 
 //MediaItem mi = new();
@@ -23,9 +20,6 @@ DotEnv.Load();
 //mi.Request.Src = @"C:\Users\Brandon\Pictures\2184719.jpeg";
 
 //var r = await wpclient.Media.SendMediaItemAsync(mi);
-
-
-
 //return;
 
 
@@ -39,16 +33,14 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
 var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
 //var get = await wooCommerceClient.Products.GetProductAsync(50674);
 
+var vtf= await wooCommerceClient.Orders.GetOrderAsync(50693);
+
+
 Product k = new()
 {
-    Request = new ProductRequest()
-    {
-        Name = "spec",
-        RegularPrice = "711"
-    }
+    Name = "spec",
+    RegularPrice = "711"
 };
-
-
 
 
 var u6p = await wooCommerceClient.Products.UpdateProductAsync(k, 50444);
@@ -69,22 +61,20 @@ var up = await wooCommerceClient.Products.UpdateProductAsync(k, 50674);
 
 var inputProduct2 = new Product
 {
-    Request = new ProductRequest
-    {
         Name = $"title {GenerateUniqueId()}",
         Type = "simple",
         RegularPrice = "1",
-        Images = new ID[] { new ID() { Id = 50413 } },
+        //Images = new I[] { new ID() { Id = 50413 } },
         MetaData = new ProductMetadata[]
         {
             new ProductMetadata() { Key = "simon", Value = "kruger" },
             new ProductMetadata() { Key = "tony", Value = "robbins" }
         }
-    }
+    
 };
 
 Product result3 = await wooCommerceClient.Products.SendProductAsync(inputProduct2);
-Console.WriteLine(result3.Response.Name);
+Console.WriteLine(result3.Name);
 
 
 //var getAll = await wooCommerceClient.Products.GetAllProductsAsync(4, 100);
@@ -107,14 +97,12 @@ ProductAttribute[] a = new ProductAttribute[]
 
 var inputProduct = new Product
 {
-    Request = new ProductRequest
-    {
         Name = $"name {GenerateUniqueId()}",
         Type = "variable",
         //RegularPrice = "10",
         Attributes = a,
-        Images = new ID[] { new ID() { Id = 50413 } }
-    }
+        ///Images = new ID[] { new ID() { Id = 50413 } }
+    
 };
 
 ProductVariationsRequest sourceObject = new ProductVariationsRequest
@@ -190,7 +178,7 @@ ProductVariationsRequest sourceObject = new ProductVariationsRequest
 
 
 Product result = await wooCommerceClient.Products.SendProductAsync(inputProduct);
-Console.WriteLine(result.Response.Name);
+Console.WriteLine(result.Name);
 
 
 
@@ -198,7 +186,7 @@ ProductVariations pv = new()
 {
     Request = sourceObject
 };
-pv.Request.ProductId = result.Response.Id;
+pv.Request.ProductId = (int)result.Id;
 var result2 = await wooCommerceClient.Products.SendProductVariationsAsync(pv);
 ;
 

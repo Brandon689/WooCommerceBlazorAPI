@@ -37,7 +37,7 @@ namespace WooCommerce.MudBlazorWebApp.Services
             activeProduct = product;
             for (int i = 0; i < products.Count; i++)
             {
-                if (products[i].Response.Id == activeProduct.Response.Id)
+                if (products[i].Id == activeProduct.Id)
                     products[i] = activeProduct;
                 break;
             }

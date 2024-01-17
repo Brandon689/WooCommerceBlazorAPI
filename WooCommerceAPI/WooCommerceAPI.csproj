@@ -31,7 +31,6 @@
     <Folder Include="Models\Services\Foundations\ProductTags\" />
     <Folder Include="Models\Services\Foundations\ProductCategories\" />
     <Folder Include="Models\Services\Foundations\ProductAttributes\" />
-    <Folder Include="Models\Services\Foundations\Orders\" />
   </ItemGroup>
 
   <ItemGroup>

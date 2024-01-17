@@ -98,7 +98,7 @@ namespace WooCommerceAPI.Clients.Products
         {
             try
             {
-                if (id == 0) id = product.Response.Id;
+                if (id == 0) id = (int)product.Id;
                 return await productService.UpdateProductAsync(product, id);
             }
             catch (ProductValidationException completionValidationException)

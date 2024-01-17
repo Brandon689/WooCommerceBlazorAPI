@@ -9,9 +9,9 @@ namespace WooCommerceAPI.Services.Foundations.Products
         {
             ValidateProductIsNotNull(Product);
 
-            Validate(
-                (Rule: IsInvalid(Product.Request),
-                Parameter: nameof(Product.Request)));
+            //Validate(
+            //    (Rule: IsInvalid(Product.Request),
+            //    Parameter: nameof(Product.Request)));
 
             //Validate(
             //    (Rule: IsInvalid(Product.Request.Attributes),

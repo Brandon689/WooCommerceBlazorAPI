@@ -7,7 +7,7 @@
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
-@if (product == null || product.Request == null)
+@if (product == null)
 {
     <MudProgressCircular Color="Color.Default" Indeterminate="true" />
 }
@@ -17,10 +17,11 @@ else
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
                 <MudForm @ref="form">
-                    <MudTextField T="string" @bind-Value="product.Request.Name" Label="Name" />
-                    <MudTextField T="string" @bind-Value="product.Request.Price" Label="Price" />
-                    <MudTextField T="string" @bind-Value="product.Request.Sku" Label="Sku" />
-                    <MudTextField T="int?" @bind-Value="product.Request.StockQuantity" Label="Stock Quantity" />
+                    <MudTextField T="string" @bind-Value="product.Name" Label="Name" />
+                    <MudTextField T="string" @bind-Value="product.RegularPrice" Label="Price" />
+                    <MudTextField T="string" @bind-Value="product.Sku" Label="Sku" />
+                    <MudTextField T="string" @bind-Value="product.Status" Label="Status" />
+                    <MudTextField T="int?" @bind-Value="product.StockQuantity" Label="Stock Quantity" />
                 </MudForm>
             </MudPaper>
             <MudPaper Class="pa-4 mt-4">
@@ -56,7 +57,6 @@ else
     MudForm form;
     private Product product;
 
-
     protected override async Task OnInitializedAsync()
     {
         if (CacheService.ColdSingle())
@@ -68,13 +68,6 @@ else
         {
             product = CacheService.GetCurrentProduct();
         }
-        product.Request = new();
-        product.Request.Name = product.Response.Name;
-        product.Request.Price = product.Response.Price;
-        product.Request.RegularPrice = product.Response.RegularPrice;
-        product.Request.StockQuantity = product.Response.StockQuantity;
-        product.Request.ManageStock = product.Response.ManageStock;
-        product.Request.StockStatus = product.Response.StockStatus;
     }
 
     private async Task SubmitEdits()
@@ -84,7 +77,7 @@ else
             successCode = 2;
             StateHasChanged();
             CacheService.SetCurrentProduct(product);
-            product.Request.ManageStock = true;
+            product.ManageStock = true;
             await WooService.UpdateProductAsync(product);
             successCode = 0;
         }
