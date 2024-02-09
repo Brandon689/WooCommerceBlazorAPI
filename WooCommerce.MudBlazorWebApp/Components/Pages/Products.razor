@@ -110,18 +110,6 @@ else
         {
             Elements = CacheService.GetProducts();
         }
-        // HttpClient httpClient = new();
-        // using (HttpResponseMessage response = await httpClient.GetAsync(fileUrl, HttpCompletionOption.ResponseHeadersRead))
-        // {
-        //     response.EnsureSuccessStatusCode();
-
-        //     using (var fileStream = System.IO.File.Create(localFilePath))
-        //     {
-        //         await response.Content.CopyToAsync(fileStream);
-        //         fileStream.Close();
-        //     }
-        //     Console.WriteLine($"File downloaded successfully to: {localFilePath}");
-        // }
     }
 
     private void OnRowClick(TableRowClickEventArgs<Product> args)

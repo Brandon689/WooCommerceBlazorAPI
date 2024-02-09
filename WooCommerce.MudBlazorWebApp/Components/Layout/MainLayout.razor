@@ -5,19 +5,33 @@
 <MyMudProviders />
 
 <MudLayout>
-    <MudDrawerContainer Class="mud-height-full">
-        <MudDrawer @bind-Open="@open" Fixed="false" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
+    <div class="d-flex mud-theme-tertiary flex-grow-1 gap-4 fixed" style="width: 100%">
+        <div class="flex-auto py-4"></div>
+@*         <MudPaper Class="flex-none d-flex py-4" Width="64px" Elevation="0" />
+        <MudPaper Class="flex-1 d-flex py-4" Elevation="0" />
+        <MudPaper Class="flex-1 d-flex py-4" Elevation="0" /> *@
+    </div>
+    <MudDrawerContainer Class="mud-height-full fixed">
+        <MudDrawer @bind-Open="@open" Fixed="true" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
             <MudNavMenu>
+                <MudNavLink class="mb-4" Href="dashboard" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+                
                 <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CardGiftcard">Products</MudNavLink>
-                <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">Stores</MudNavLink>
+                <MudNavLink Href="stores" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">Stores</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">Library</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Community</MudNavLink>
+
+                <MudNavLink Href="orders" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.ShoppingCart">Orders</MudNavLink>
+                <MudNavLink Href="services" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Rocket">Services</MudNavLink>
+                <MudNavLink Href="tools" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.PanTool">Tools</MudNavLink>
+                <MudNavLink Href="settings" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Outlined.Settings">Settings</MudNavLink>
+
                 <MudNavLink OnClick="@ToggleDrawer" Icon="@Icons.Material.Filled.ArrowCircleLeft">Collapse menu</MudNavLink>
             </MudNavMenu>
         </MudDrawer>
     </MudDrawerContainer>
     <MudMainContent>
-        <MudContainer Style="max-width: 1440px;" Class="my-8 pt-6">
+        <MudContainer Style="max-width: 1440px;">
             @Body
         </MudContainer>
     </MudMainContent>

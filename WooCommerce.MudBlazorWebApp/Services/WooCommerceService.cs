@@ -41,7 +41,7 @@ namespace WooCommerce.MudBlazorWebApp.Services
 
         public async Task<Product[]> GetAllProductsAsync()
         {
-            var product = await _wooCommerceClient.Products.GetAllProductsAsync(1, 50);
+            var product = await _wooCommerceClient.Products.GetAllProductsAsync(9, 20);
             return product;
         }
 
