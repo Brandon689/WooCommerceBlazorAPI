@@ -370,3 +370,5 @@ FodyWeavers.xsd
 /WooCommerce.MudBlazorWebApp/.env
 /ConsoleApp2/ConsoleApp2.csproj
 /WooCommerce.MudBlazorWebApp/wwwroot/uploads
+/ConsoleApp2/Program.cs
+/ConsoleApp1/Program.cs
