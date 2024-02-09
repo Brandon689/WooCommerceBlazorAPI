@@ -10,90 +10,106 @@
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
-@if (product2 == null)
+@if (uiProduct == null)
 {
     <MudProgressCircular Color="Color.Default" Indeterminate="true" />
 }
 else
 {
-    @if (product2.Images != null)
-    {
-        <MudGrid>
-            @for (int i = 0; i < product2.Images.Count; i++)
-            {
-                int localindex = i;
-            <MudItem>
-                    <MudImage Src="@product2.Images[localindex].Src" Width="200" />
-                <MudButton Variant="Variant.Filled" tabindex="@i" OnClick="@(e => RemoveImage(localindex))" StartIcon="@Icons.Material.Filled.Close" IconColor="Color.Primary"></MudButton>
-            </MudItem>
-            }
-        </MudGrid>
-    }
-
-    <MudFileUpload T="IBrowserFile" OnFilesChanged="UploadFiles" Multiple>
-        <ButtonTemplate>
-            <MudButton HtmlTag="label"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary"
-                       StartIcon="@Icons.Material.Filled.CloudUpload"
-                       for="@context.Id">
-                Upload image
-            </MudButton>
-        </ButtonTemplate>
-    </MudFileUpload>
-    
-    @if (files != null)
-    {
-        <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
-        <MudList>
-            @foreach (var file in files)
-            {
-                <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                    @file.Name <code>@file.Size bytes</code>
-                </MudListItem>
-            }
-        </MudList>
-    }
-
 
     <MudGrid>
-        <MudItem xs="12" sm="7">
-            <MudPaper Class="pa-4">
-                <MudForm @ref="form">
-                    <MudTextField T="string" @bind-Value="product.Name" Label="Name" />
-                    <MudTextField T="string" @bind-Value="product.RegularPrice" Label="Price" />
-                    <MudTextField T="string" @bind-Value="product.Sku" Label="Sku" />
-                    <MudTextField T="string" @bind-Value="product.Status" Label="Status" />
-
-                    <MudSelect T="string" @bind-Value="product.Status" Label="Coffee" AnchorOrigin="Origin.BottomCenter">
-                        <MudSelectItem Value="@("published")" />
-                        <MudSelectItem Value="@("draft")" />
-                        <MudSelectItem Value="@("pending review")" />
-                    </MudSelect>
-
-                    <MudTextField T="int?" @bind-Value="product.StockQuantity" Label="Stock Quantity" />
-                </MudForm>
-            </MudPaper>
-            <MudPaper Class="pa-4 mt-4">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
-            </MudPaper>
-
-            <MudContainer Class="pa-4 mt-4">
-            @if (successCode == 0)
+        <MudItem xs="6">
+            @if (uiProduct.Images != null)
             {
-                <MudText Color="Color.Success">Success</MudText>
+                <MudGrid>
+                    @for (int i = 0; i < uiProduct.Images.Count; i++)
+                    {
+                        int localindex = i;
+                        <MudItem>
+                            <MudImage Src="@uiProduct.Images[localindex].Src" Width="200" />
+                            <MudButton Variant="Variant.Filled" tabindex="@i" OnClick="@(e => RemoveImage(localindex))" StartIcon="@Icons.Material.Filled.Close" IconColor="Color.Primary"></MudButton>
+                        </MudItem>
+                    }
+                </MudGrid>
+                <MudFileUpload T="IBrowserFile" OnFilesChanged="UploadFiles" Multiple>
+                    <ButtonTemplate>
+                        <MudButton HtmlTag="label"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   StartIcon="@Icons.Material.Filled.CloudUpload"
+                                   for="@context.Id">
+                            Upload image
+                        </MudButton>
+                    </ButtonTemplate>
+                </MudFileUpload>
+                @if (files != null)
+                {
+                    <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
+                    <MudList>
+                        @foreach (var file in files)
+                        {
+                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                                @file.Name <code>@file.Size bytes</code>
+                            </MudListItem>
+                        }
+                    </MudList>
+                }
             }
-            else if (successCode == 1)
-            {
-                <MudText Color="@Color.Error">
-                    Try again
-                </MudText>
-            }
-            else if (successCode == 2)
-            {
-                <MudProgressCircular Color="Color.Default" Indeterminate="true" />
-            }
-            </MudContainer>
+
+        </MudItem>
+        <MudItem  xs="6">
+
+
+
+            @* dwd *@
+
+            <MudGrid>
+                <MudItem xs="12" sm="7">
+                    <MudPaper Class="pa-4">
+                        <MudForm @ref="form">
+                            <MudTextField T="string" @bind-Value="uiProduct.Name" Label="Name" />
+                            <MudTextField T="string" @bind-Value="uiProduct.RegularPrice" Label="Price" />
+                            <MudTextField T="string" @bind-Value="uiProduct.Sku" Label="Sku" />
+                            <MudTextField T="string" @bind-Value="uiProduct.Status" Label="Status" />
+
+                            <MudSelect T="string" @bind-Value="uiProduct.Status" Label="Status" AnchorOrigin="Origin.BottomCenter">
+                                <MudSelectItem Value="@("published")" />
+                                <MudSelectItem Value="@("draft")" />
+                                <MudSelectItem Value="@("pending review")" />
+                            </MudSelect>
+
+                            <MudTextField T="int?" @bind-Value="uiProduct.StockQuantity" Label="Stock Quantity" />
+                        </MudForm>
+                    </MudPaper>
+                    <MudPaper Class="pa-4 mt-4">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
+                    </MudPaper>
+
+                    <MudContainer Class="pa-4 mt-4">
+                        @if (successCode == 0)
+                        {
+                            <MudText Color="Color.Success">Success</MudText>
+                        }
+                        else if (successCode == 1)
+                        {
+                            <MudText Color="@Color.Error">
+                                Try again
+                            </MudText>
+                        }
+                        else if (successCode == 2)
+                        {
+                            <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+                        }
+                    </MudContainer>
+                </MudItem>
+            </MudGrid>
+
+            @* dwd *@
+
+
+
+
+
         </MudItem>
     </MudGrid>
 }
@@ -103,13 +119,11 @@ else
     public string ProductId { get; set; }
 
     int successCode = -1;
-    string[] errors = { };
     MudTextField<string> pwField1;
     MudForm form;
     private Product product;
-    private ProductV product2 { get; set; }
+    private ProductV uiProduct { get; set; }
     IList<IBrowserFile> files = new List<IBrowserFile>();
-    //private string selectedCoffee = "Espresso";
     private async Task UploadFiles(InputFileChangeEventArgs args)
     {
         foreach (var file in args.GetMultipleFiles())
@@ -126,7 +140,7 @@ else
                 string imagePath = Path.Combine("uploads", "images", file.Name); // Relative path inside wwwroot
                 string imageUrl = $"{NavigationManager.BaseUri}{imagePath}"; // Full URL
 
-                product2.Images.Add(new ImageV()
+                uiProduct.Images.Add(new ImageV()
                 {
                     Src = imageUrl,
                     LocalPath = path, // not correct value
@@ -152,13 +166,19 @@ else
         {
             product = CacheService.GetCurrentProduct();
         }
-        product2 = new();
-        product2.Title = product.Name;
-        //product2.Quantity = (int)product.StockQuantity;
-        product2.Images = new();
+        uiProduct = new();
+        uiProduct.Name = product.Name;
+        uiProduct.StockQuantity = product.StockQuantity;
+        uiProduct.Sku = product.Sku;
+        uiProduct.Status = product.Status;
+        uiProduct.Description = product.Description;
+        uiProduct.Images = new();
+        uiProduct.Price = product.Price;
+        uiProduct.RegularPrice = product.RegularPrice;
+        uiProduct.SalePrice = product.SalePrice;
         for (int i = 0; i < product.Images.Length; i++)
         {
-            product2.Images.Add(
+            uiProduct.Images.Add(
                 new ImageV()
                 {
                     Src = product.Images[i].Src,
@@ -166,13 +186,11 @@ else
                 }
             );
         }
-
-        //selectedCoffee = product.Status;
     }
 
     private void RemoveImage(int j)
     {
-        product2.Images.RemoveAt(j);
+        uiProduct.Images.RemoveAt(j);
         StateHasChanged();
     }
 
@@ -186,24 +204,18 @@ else
             product.ManageStock = true;
 
             // 1. upload images
-            for (int i = 0; i < product2.Images.Count; i++)
+            for (int i = 0; i < uiProduct.Images.Count; i++)
             {
-                if (!product2.Images[i].newImg)
+                if (!uiProduct.Images[i].newImg)
                     continue;
-                var x = await WordPressService.UploadMediaAsync(product2.Images[i].LocalPath);
-                //product2.Images[i].Src = x.Response.Src;
-                product2.Images[i].Id = x.Response.Id;
-                // images[i].Id = x.Response.Id;
-                // images[i].Src = null;
-                // images[i].Alt = null;
-                // images[i].Name = null;
+                var x = await WordPressService.UploadMediaAsync(uiProduct.Images[i].LocalPath);
+                uiProduct.Images[i].Id = x.Response.Id;
             }
-            Image[] m = new Image[product2.Images.Count];
-            //product.Images = product2.Images.ToArray();
-            for (int i = 0; i < product2.Images.Count; i++)
+            Image[] m = new Image[uiProduct.Images.Count];
+            for (int i = 0; i < uiProduct.Images.Count; i++)
             {
                 Image c = new();
-                c.Id = product2.Images[i].Id;
+                c.Id = uiProduct.Images[i].Id;
                 m[i] = c;
             }
             product.Images = m;

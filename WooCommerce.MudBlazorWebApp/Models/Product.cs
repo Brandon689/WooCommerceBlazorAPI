@@ -1,18 +1,131 @@
-﻿namespace WooCommerce.MudBlazorWebApp.Models
+﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+using WooCommerceAPI.Models.Services.Foundations.Products;
+
+namespace WooCommerce.MudBlazorWebApp.Models
 {
     public class ProductV
     {
         public List<ImageV> Images { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
+
+        public int? Id { get; set; }
+
+        public string? Name { get; set; }
+
+        public string? Type { get; set; }
+
+        public string? Description { get; set; }
+
+        public string? RegularPrice { get; set; }
+
+        public ProductAttribute[]? Attributes { get; set; }
+
+        public ProductMetadata[]? MetaData { get; set; }
+
+        public string? Slug { get; set; }
+
+        public string? Permalink { get; set; }
+
+        public DateTime? DateCreated { get; set; }
+
+        public DateTime? DateCreatedGmt { get; set; }
+
+        public DateTime? DateModified { get; set; }
+
+        public DateTime? DateModifiedGmt { get; set; }
+
+        public string? Status { get; set; }
+
+        public bool? Featured { get; set; }
+
+        public string? CatalogVisibility { get; set; }
+
+        public string? ShortDescription { get; set; }
+
+        public string? Sku { get; set; }
+
+        public string? Price { get; set; }
+
+        public string? SalePrice { get; set; }
+
+        public DateTime? DateOnSaleFrom { get; set; }
+
+        public DateTime? DateOnSaleFromGmt { get; set; }
+
+        public DateTime? DateOnSaleTo { get; set; }
+
+        public DateTime? DateOnSaleToGmt { get; set; }
+
+        public string? PriceHtml { get; set; }
+
+        public bool? OnSale { get; set; }
+
+        public bool? Purchasable { get; set; }
+
+        public int? TotalSales { get; set; }
+
+        public bool? Virtual { get; set; }
+
+        public bool? Downloadable { get; set; }
+
+        public string? ExternalUrl { get; set; }
+
+        public string? ButtonText { get; set; }
+
+        public string? TaxStatus { get; set; }
+
+        public string? TaxClass { get; set; }
+
+        public bool? ManageStock { get; set; }
+
+        public int? StockQuantity { get; set; }
+
+        public string? StockStatus { get; set; }
+
+        public string? Backorders { get; set; }
+
+        public bool? BackordersAllowed { get; set; }
+
+        public bool? Backordered { get; set; }
+
+        public bool? SoldIndividually { get; set; }
+
+        public string? Weight { get; set; }
+
+        public Dimensions Dimensions { get; set; }
+
+        public bool? ShippingRequired { get; set; }
+
+        public bool? ShippingTaxable { get; set; }
+
+        public string? ShippingClass { get; set; }
+
+        public int? ShippingClassId { get; set; }
+
+        public bool? ReviewsAllowed { get; set; }
+
+        public string? AverageRating { get; set; }
+
+        public int? RatingCount { get; set; }
+
+        public int? ParentId { get; set; }
+
+        public string? PurchaseNote { get; set; }
+
+        public Category[]? Categories { get; set; }
+
+        public int? MenuOrder { get; set; }
+
+        public Links Links { get; set; }
     }
 
     public class ImageV
     {
         public string Src { get; set; }
+
         public string LocalPath { get; set; }
+
         public int Id { get; set; }
+
         public bool newImg { get; set; }
     }
 }

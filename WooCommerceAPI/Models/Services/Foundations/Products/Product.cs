@@ -139,6 +139,5 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
         public int? MenuOrder { get; set; }
 
         public Links Links { get; set; }
-
     }
 }
