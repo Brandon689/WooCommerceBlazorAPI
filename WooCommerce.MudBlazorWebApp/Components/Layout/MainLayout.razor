@@ -5,27 +5,17 @@
 <MyMudProviders />
 
 <MudLayout>
-@*     <MudAppBar Elevation="0">
-		<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" />
-        <MudSpacer />
-        <MudIconButton Icon="@Icons.Custom.Brands.MudBlazor" Color="Color.Inherit" Link="https://mudblazor.com/" Target="_blank" />
-    </MudAppBar> *@
-        <MudDrawerContainer Class="mud-height-full">
-            <MudDrawer @bind-Open="@open" Fixed="false" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
-                <MudNavMenu>
-                <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PresentToAll">Products</MudNavLink>
+    <MudDrawerContainer Class="mud-height-full">
+        <MudDrawer @bind-Open="@open" Fixed="false" Elevation="1" Variant="@DrawerVariant.Mini" OpenMiniOnHover="false">
+            <MudNavMenu>
+                <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.CardGiftcard">Products</MudNavLink>
                 <MudNavLink Href="products" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Store">Stores</MudNavLink>
-                    <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">Library</MudNavLink>
-                    <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Community</MudNavLink>
-                </MudNavMenu>
-            </MudDrawer>
-            <div class="d-flex justify-center align-center mud-height-full">
-                <MudButton OnClick="@ToggleDrawer" Color="Color.Primary">Toggle</MudButton>
-            </div>
-        </MudDrawerContainer>
-
-
-   
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.LibraryBooks">Library</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Group">Community</MudNavLink>
+                <MudNavLink OnClick="@ToggleDrawer" Icon="@Icons.Material.Filled.ArrowCircleLeft">Collapse menu</MudNavLink>
+            </MudNavMenu>
+        </MudDrawer>
+    </MudDrawerContainer>
     <MudMainContent>
         <MudContainer Style="max-width: 1440px;" Class="my-8 pt-6">
             @Body

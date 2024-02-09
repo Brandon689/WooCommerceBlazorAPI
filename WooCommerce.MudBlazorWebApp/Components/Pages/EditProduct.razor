@@ -16,27 +16,22 @@
 }
 else
 {
-    <div style="display: flex">
-        <div style="flex: 2">
-            <MudPaper Class="pa-4">
-                <MudForm @ref="form">
-                    <MudTextField T="string" @bind-Value="uiProduct.Name" Label="Name" />
-                    <MudTextField T="string" @bind-Value="uiProduct.RegularPrice" Label="Price" />
-                    <MudTextField T="string" @bind-Value="uiProduct.Sku" Label="Sku" />
-                    <MudTextField T="string" @bind-Value="uiProduct.Status" Label="Status" />
+    <div class="d-flex">
+        <div Class="pr-4 flex-auto">
+            <MudForm @ref="form">
+                <MudTextField T="string" @bind-Value="uiProduct.Name" Label="Name" />
+                <MudTextField T="string" @bind-Value="uiProduct.RegularPrice" Label="Price" />
+                <MudTextField T="string" @bind-Value="uiProduct.Sku" Label="Sku" />
 
-                    <MudSelect T="string" @bind-Value="uiProduct.Status" Label="Status" AnchorOrigin="Origin.BottomCenter">
-                        <MudSelectItem Value="@("published")" />
-                        <MudSelectItem Value="@("draft")" />
-                        <MudSelectItem Value="@("pending review")" />
-                    </MudSelect>
+                <MudSelect T="string" @bind-Value="uiProduct.Status" Label="Status" AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem Value="@("published")" />
+                    <MudSelectItem Value="@("draft")" />
+                    <MudSelectItem Value="@("pending review")" />
+                </MudSelect>
 
-                    <MudTextField T="int?" @bind-Value="uiProduct.StockQuantity" Label="Stock Quantity" />
-                </MudForm>
-            </MudPaper>
-            <MudPaper Class="pa-4 mt-4">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
-            </MudPaper>
+                <MudTextField T="int?" @bind-Value="uiProduct.StockQuantity" Label="Stock Quantity" />
+            </MudForm>
+            <MudButton Class="mr-4 mt-4" Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
 
             <MudContainer Class="pa-4 mt-4">
                 @if (successCode == 0)
@@ -56,7 +51,7 @@ else
             </MudContainer>
 
         </div>
-        <div style="flex: 1">
+        <div class="flex-1" style="margin-top: 6px">
             @if (uiProduct.Images != null)
             {
                 <MudGrid>
@@ -81,18 +76,6 @@ else
                         </MudButton>
                     </ButtonTemplate>
                 </MudFileUpload>
-                @if (files != null)
-                {
-                    <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
-                    <MudList>
-                        @foreach (var file in files)
-                        {
-                            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
-                                @file.Name <code>@file.Size bytes</code>
-                            </MudListItem>
-                        }
-                    </MudList>
-                }
             }
         </div>
     </div>
