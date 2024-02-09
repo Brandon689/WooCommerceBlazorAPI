@@ -123,6 +123,11 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 Slug = product.Slug,
                 Sku = product.Sku,
                 ManageStock = product.ManageStock,
+                Status = product.Status,
+                Permalink = product.Permalink,
+                SalePrice = product.SalePrice,
+                Weight = product.Weight,
+                Dimensions = product.Dimensions,
             };
             if (product.Images != null)
             {
@@ -162,8 +167,8 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 externalProductRequest.MetaData = product.MetaData.Select(x =>
                 {
                     return new ExternalProductMetadata
-                    { 
-                    
+                    {
+
                     };
                 }).ToArray();
                 //externalProductRequest.MetaData = product.MetaData.Select(x =>

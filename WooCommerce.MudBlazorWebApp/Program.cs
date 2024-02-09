@@ -21,8 +21,17 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
     ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
 };
 
+var wordPressConfigurations = new WordPressConfigurations
+{
+    UserName = Environment.GetEnvironmentVariable("WP_USER"),
+    AppPassword = Environment.GetEnvironmentVariable("WP_APP_PASSWORD"),
+    ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
+};
+
 builder.Services.AddSingleton(wooCommerceConfigurations);
+builder.Services.AddSingleton(wordPressConfigurations);
 builder.Services.AddScoped<WooCommerceService>();
+builder.Services.AddScoped<WordPressService>();
 builder.Services.AddScoped<CacheService>();
 
 var app = builder.Build();

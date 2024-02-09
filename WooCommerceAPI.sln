@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WooCommerce.MudBlazorWebApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RESTFulSense", "..\..\Github_Forks\RESTFulSense\RESTFulSense\RESTFulSense.csproj", "{457D2D1E-B306-4B14-91F0-8D0805C1D18F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{22E029F4-AE40-4F24-9F01-E37888A8D11C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp2", "ConsoleApp2\ConsoleApp2.csproj", "{22E029F4-AE40-4F24-9F01-E37888A8D11C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
 
 namespace WooCommerceAPI.Brokers.WooCommerces

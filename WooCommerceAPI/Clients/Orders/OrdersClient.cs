@@ -1,6 +1,5 @@
 ﻿using WooCommerceAPI.Models.Services.Foundations.Orders;
 using WooCommerceAPI.Services.Foundations.Orders;
-using WooCommerceAPI.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Clients.Orders
 {

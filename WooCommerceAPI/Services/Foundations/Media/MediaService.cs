@@ -26,13 +26,9 @@ namespace WooCommerceAPI.Services.Foundations.Media
         {
             return new ExternalMediaItemRequest()
             {
-                //Id = mediaItem.Request.Id,
-                //Src = mediaItem.Request.Src,
-                //Alt = mediaItem.Request.Alt,
-                //Name = mediaItem.Request.Name
                 File = new FileStream(mediaItem.Request.Src, FileMode.Open),
                 FileName = Path.GetFileName(mediaItem.Request.Src),
-                AltText = "porpoise"
+                AltText = "alt"
             };
         }
         private MediaItem ConvertToMediaItem(

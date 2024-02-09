@@ -1,0 +1,86 @@
+﻿@page "/johto"
+@rendermode InteractiveServer
+<h3>Johto</h3>
+
+<MudFileUpload T="IBrowserFile" FilesChanged="UploadFiles" Multiple>
+    <ButtonTemplate>
+        <MudButton HtmlTag="label"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.CloudUpload"
+                   for="@context.Id">
+            Upload using FileValueChanged
+        </MudButton>
+    </ButtonTemplate>
+</MudFileUpload>
+
+<MudFileUpload T="IBrowserFile" OnFilesChanged="UploadFiles" Multiple>
+    <ButtonTemplate>
+        <MudButton HtmlTag="label"
+                   Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.Material.Filled.CloudUpload"
+                   for="@context.Id">
+            Upload using OnFilesChanged
+        </MudButton>
+    </ButtonTemplate>
+</MudFileUpload>
+
+@if (files != null)
+{
+    <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
+    <MudList>
+        @foreach (var file in files)
+        {
+            <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                @file.Name <code>@file.Size bytes</code>
+            </MudListItem>
+        }
+    </MudList>
+}
+
+@code
+{
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private async Task UploadFiles(IBrowserFile file)
+    {
+        files.Add(file);
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", file.Name);
+        Console.WriteLine(path);
+        try
+        {
+            await using var fs = new FileStream(path, FileMode.Create);
+            await file.OpenReadStream(2512000).CopyToAsync(fs);
+        }
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+    private async Task UploadFiles(InputFileChangeEventArgs args)
+    {
+        foreach (var file in args.GetMultipleFiles())
+        {
+            // Limit file size here if necessary
+            // You might want also to check for file type and other validations depending on your requirements
+            files.Add(file);
+
+            // Process each file
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", file.Name);
+            try
+            {
+                await using var fs = new FileStream(path, FileMode.Create);
+                await file.OpenReadStream(2512000).CopyToAsync(fs);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        // Refresh the UI if necessary, or perform additional tasks
+    }
+}

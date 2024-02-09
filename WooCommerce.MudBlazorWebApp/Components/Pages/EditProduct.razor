@@ -1,18 +1,61 @@
 ﻿@page "/editproduct/{ProductId}"
+@using WooCommerce.MudBlazorWebApp.Models
 @using WooCommerce.MudBlazorWebApp.Services
 @using WooCommerceAPI.Models.Services.Foundations.Products
+@using WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 @using System.ComponentModel.DataAnnotations
 @inject WooCommerceService WooService
+@inject WordPressService WordPressService
 @inject CacheService CacheService
 @inject NavigationManager NavigationManager
 @rendermode InteractiveServer
 
-@if (product == null)
+@if (product2 == null)
 {
     <MudProgressCircular Color="Color.Default" Indeterminate="true" />
 }
 else
 {
+    @if (product2.Images != null)
+    {
+        <MudGrid>
+            @for (int i = 0; i < product2.Images.Count; i++)
+            {
+                int localindex = i;
+            <MudItem>
+                    <MudImage Src="@product2.Images[localindex].Src" Width="200" />
+                <MudButton Variant="Variant.Filled" tabindex="@i" OnClick="@(e => RemoveImage(localindex))" StartIcon="@Icons.Material.Filled.Close" IconColor="Color.Primary"></MudButton>
+            </MudItem>
+            }
+        </MudGrid>
+    }
+
+    <MudFileUpload T="IBrowserFile" OnFilesChanged="UploadFiles" Multiple>
+        <ButtonTemplate>
+            <MudButton HtmlTag="label"
+                       Variant="Variant.Filled"
+                       Color="Color.Primary"
+                       StartIcon="@Icons.Material.Filled.CloudUpload"
+                       for="@context.Id">
+                Upload image
+            </MudButton>
+        </ButtonTemplate>
+    </MudFileUpload>
+    
+    @if (files != null)
+    {
+        <MudText Typo="@Typo.h6">@files.Count() File@(files.Count() == 1 ? "" : "s"):</MudText>
+        <MudList>
+            @foreach (var file in files)
+            {
+                <MudListItem Icon="@Icons.Material.Filled.AttachFile" @key="@file">
+                    @file.Name <code>@file.Size bytes</code>
+                </MudListItem>
+            }
+        </MudList>
+    }
+
+
     <MudGrid>
         <MudItem xs="12" sm="7">
             <MudPaper Class="pa-4">
@@ -21,6 +64,13 @@ else
                     <MudTextField T="string" @bind-Value="product.RegularPrice" Label="Price" />
                     <MudTextField T="string" @bind-Value="product.Sku" Label="Sku" />
                     <MudTextField T="string" @bind-Value="product.Status" Label="Status" />
+
+                    <MudSelect T="string" @bind-Value="product.Status" Label="Coffee" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem Value="@("published")" />
+                        <MudSelectItem Value="@("draft")" />
+                        <MudSelectItem Value="@("pending review")" />
+                    </MudSelect>
+
                     <MudTextField T="int?" @bind-Value="product.StockQuantity" Label="Stock Quantity" />
                 </MudForm>
             </MudPaper>
@@ -51,11 +101,45 @@ else
 @code {
     [Parameter]
     public string ProductId { get; set; }
+
     int successCode = -1;
     string[] errors = { };
     MudTextField<string> pwField1;
     MudForm form;
     private Product product;
+    private ProductV product2 { get; set; }
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    //private string selectedCoffee = "Espresso";
+    private async Task UploadFiles(InputFileChangeEventArgs args)
+    {
+        foreach (var file in args.GetMultipleFiles())
+        {
+            files.Add(file);
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads\\images", file.Name);
+            try
+            {
+                using (var fs = new FileStream(path, FileMode.Create))
+                {
+                    await file.OpenReadStream(2512000).CopyToAsync(fs);
+                }
+                string imagePath = Path.Combine("uploads", "images", file.Name); // Relative path inside wwwroot
+                string imageUrl = $"{NavigationManager.BaseUri}{imagePath}"; // Full URL
+
+                product2.Images.Add(new ImageV()
+                {
+                    Src = imageUrl,
+                    LocalPath = path, // not correct value
+                    newImg = true
+                });
+                StateHasChanged();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -68,6 +152,28 @@ else
         {
             product = CacheService.GetCurrentProduct();
         }
+        product2 = new();
+        product2.Title = product.Name;
+        //product2.Quantity = (int)product.StockQuantity;
+        product2.Images = new();
+        for (int i = 0; i < product.Images.Length; i++)
+        {
+            product2.Images.Add(
+                new ImageV()
+                {
+                    Src = product.Images[i].Src,
+                    Id = product.Images[i].Id
+                }
+            );
+        }
+
+        //selectedCoffee = product.Status;
+    }
+
+    private void RemoveImage(int j)
+    {
+        product2.Images.RemoveAt(j);
+        StateHasChanged();
     }
 
     private async Task SubmitEdits()
@@ -78,6 +184,29 @@ else
             StateHasChanged();
             CacheService.SetCurrentProduct(product);
             product.ManageStock = true;
+
+            // 1. upload images
+            for (int i = 0; i < product2.Images.Count; i++)
+            {
+                if (!product2.Images[i].newImg)
+                    continue;
+                var x = await WordPressService.UploadMediaAsync(product2.Images[i].LocalPath);
+                //product2.Images[i].Src = x.Response.Src;
+                product2.Images[i].Id = x.Response.Id;
+                // images[i].Id = x.Response.Id;
+                // images[i].Src = null;
+                // images[i].Alt = null;
+                // images[i].Name = null;
+            }
+            Image[] m = new Image[product2.Images.Count];
+            //product.Images = product2.Images.ToArray();
+            for (int i = 0; i < product2.Images.Count; i++)
+            {
+                Image c = new();
+                c.Id = product2.Images[i].Id;
+                m[i] = c;
+            }
+            product.Images = m;
             await WooService.UpdateProductAsync(product);
             successCode = 0;
         }

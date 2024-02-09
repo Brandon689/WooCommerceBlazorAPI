@@ -35,12 +35,12 @@ namespace WooCommerce.MudBlazorWebApp.Services
         public void SetCurrentProduct(Product product)
         {
             activeProduct = product;
-            for (int i = 0; i < products.Count; i++)
-            {
-                if (products[i].Id == activeProduct.Id)
-                    products[i] = activeProduct;
-                break;
-            }
+            //for (int i = 0; i < products.Count; i++)
+            //{
+            //    if (products[i].Id == activeProduct.Id)
+            //        products[i] = activeProduct;
+            //    break;
+            //}
         }
     }
 }
