@@ -16,18 +16,57 @@
 }
 else
 {
+    <div style="display: flex">
+        <div style="flex: 2">
+            <MudPaper Class="pa-4">
+                <MudForm @ref="form">
+                    <MudTextField T="string" @bind-Value="uiProduct.Name" Label="Name" />
+                    <MudTextField T="string" @bind-Value="uiProduct.RegularPrice" Label="Price" />
+                    <MudTextField T="string" @bind-Value="uiProduct.Sku" Label="Sku" />
+                    <MudTextField T="string" @bind-Value="uiProduct.Status" Label="Status" />
 
-    <MudGrid>
-        <MudItem xs="6">
+                    <MudSelect T="string" @bind-Value="uiProduct.Status" Label="Status" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem Value="@("published")" />
+                        <MudSelectItem Value="@("draft")" />
+                        <MudSelectItem Value="@("pending review")" />
+                    </MudSelect>
+
+                    <MudTextField T="int?" @bind-Value="uiProduct.StockQuantity" Label="Stock Quantity" />
+                </MudForm>
+            </MudPaper>
+            <MudPaper Class="pa-4 mt-4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
+            </MudPaper>
+
+            <MudContainer Class="pa-4 mt-4">
+                @if (successCode == 0)
+                {
+                    <MudText Color="Color.Success">Success</MudText>
+                }
+                else if (successCode == 1)
+                {
+                    <MudText Color="@Color.Error">
+                        Try again
+                    </MudText>
+                }
+                else if (successCode == 2)
+                {
+                    <MudProgressCircular Color="Color.Default" Indeterminate="true" />
+                }
+            </MudContainer>
+
+        </div>
+        <div style="flex: 1">
             @if (uiProduct.Images != null)
             {
                 <MudGrid>
                     @for (int i = 0; i < uiProduct.Images.Count; i++)
                     {
                         int localindex = i;
-                        <MudItem>
+                        <MudItem Style="display: flex; flex-direction: column;">
                             <MudImage Src="@uiProduct.Images[localindex].Src" Width="200" />
-                            <MudButton Variant="Variant.Filled" tabindex="@i" OnClick="@(e => RemoveImage(localindex))" StartIcon="@Icons.Material.Filled.Close" IconColor="Color.Primary"></MudButton>
+                            <MudButton Variant="Variant.Filled" tabindex="@i" OnClick="@(e => RemoveImage(localindex))" StartIcon="@Icons.Material.Filled.Close" IconColor="Color.Primary">
+                            </MudButton>
                         </MudItem>
                     }
                 </MudGrid>
@@ -55,63 +94,8 @@ else
                     </MudList>
                 }
             }
-
-        </MudItem>
-        <MudItem  xs="6">
-
-
-
-            @* dwd *@
-
-            <MudGrid>
-                <MudItem xs="12" sm="7">
-                    <MudPaper Class="pa-4">
-                        <MudForm @ref="form">
-                            <MudTextField T="string" @bind-Value="uiProduct.Name" Label="Name" />
-                            <MudTextField T="string" @bind-Value="uiProduct.RegularPrice" Label="Price" />
-                            <MudTextField T="string" @bind-Value="uiProduct.Sku" Label="Sku" />
-                            <MudTextField T="string" @bind-Value="uiProduct.Status" Label="Status" />
-
-                            <MudSelect T="string" @bind-Value="uiProduct.Status" Label="Status" AnchorOrigin="Origin.BottomCenter">
-                                <MudSelectItem Value="@("published")" />
-                                <MudSelectItem Value="@("draft")" />
-                                <MudSelectItem Value="@("pending review")" />
-                            </MudSelect>
-
-                            <MudTextField T="int?" @bind-Value="uiProduct.StockQuantity" Label="Stock Quantity" />
-                        </MudForm>
-                    </MudPaper>
-                    <MudPaper Class="pa-4 mt-4">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true" OnClick="@SubmitEdits">Submit</MudButton>
-                    </MudPaper>
-
-                    <MudContainer Class="pa-4 mt-4">
-                        @if (successCode == 0)
-                        {
-                            <MudText Color="Color.Success">Success</MudText>
-                        }
-                        else if (successCode == 1)
-                        {
-                            <MudText Color="@Color.Error">
-                                Try again
-                            </MudText>
-                        }
-                        else if (successCode == 2)
-                        {
-                            <MudProgressCircular Color="Color.Default" Indeterminate="true" />
-                        }
-                    </MudContainer>
-                </MudItem>
-            </MudGrid>
-
-            @* dwd *@
-
-
-
-
-
-        </MudItem>
-    </MudGrid>
+        </div>
+    </div>
 }
 
 @code {
