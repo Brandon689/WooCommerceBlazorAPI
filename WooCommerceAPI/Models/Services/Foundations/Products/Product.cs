@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+using WooCommerceAPI.Models.Services.Foundations.ProductTags;
 
 namespace WooCommerceAPI.Models.Services.Foundations.Products
 {
@@ -15,8 +15,6 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
         public string? Description { get; set; }
 
         public string? RegularPrice { get; set; }
-
-        public ProductAttribute[]? Attributes { get; set; }
 
         public Image[]? Images { get; set; }
 
@@ -98,7 +96,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
 
         public string? Weight { get; set; }
 
-        public Dimensions Dimensions { get; set; }
+        public Dimensions? Dimensions { get; set; }
 
         public bool? ShippingRequired { get; set; }
 
@@ -114,11 +112,11 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
 
         public int? RatingCount { get; set; }
 
-        //public List<int> RelatedIds { get; set; }
+        public int[] RelatedIds { get; set; }
 
         //public List<object> UpsellIds { get; set; }
 
-        public List<object> CrossSellIds { get; set; }
+        public object[] CrossSellIds { get; set; }
 
         public int? ParentId { get; set; }
 
@@ -126,18 +124,18 @@ namespace WooCommerceAPI.Models.Services.Foundations.Products
 
         public Category[]? Categories { get; set; }
 
-        //public List<object> Tags { get; set; }
+        public Tag[]? Tags { get; set; }
 
-        //public ProductAttribute[] Attributes { get; set; }
+        public ProductAttribute[]? Attributes { get; set; }
 
-        //public DefaultAttribute[] DefaultAttributes { get; set; }
+        public DefaultAttribute[]? DefaultAttributes { get; set; }
 
-        //public List<object> Variations { get; set; }
+        public int[]? Variations { get; set; }
 
         //public List<object> GroupedProducts { get; set; }
 
         public int? MenuOrder { get; set; }
 
-        public Links Links { get; set; }
+        public Links? Links { get; set; }
     }
 }

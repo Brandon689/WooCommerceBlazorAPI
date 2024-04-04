@@ -1,5 +1,4 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
-using WooCommerceAPI.Models.Services.Foundations.Products;
+﻿using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerce.MudBlazorWebApp.Models
 {

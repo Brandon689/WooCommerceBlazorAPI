@@ -26,9 +26,9 @@
   <ItemGroup>
     <Folder Include="Models\Services\Foundations\Customers\" />
     <Folder Include="Models\Services\Foundations\Coupons\" />
+    <Folder Include="Models\Services\Foundations\NewFolder\" />
     <Folder Include="Models\Services\Foundations\Settings\" />
     <Folder Include="Models\Services\Foundations\Refunds\" />
-    <Folder Include="Models\Services\Foundations\ProductTags\" />
     <Folder Include="Models\Services\Foundations\ProductCategories\" />
     <Folder Include="Models\Services\Foundations\ProductAttributes\" />
   </ItemGroup>

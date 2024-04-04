@@ -1,0 +1,53 @@
+﻿@page "/editorder/{OrderId}"
+@using WooCommerce.MudBlazorWebApp.Models
+@using WooCommerce.MudBlazorWebApp.Services
+@using WooCommerceAPI.Models.Services.Foundations.Orders
+@inject WooCommerceService WooService
+@inject CacheService CacheService
+
+<h3>EditOrder</h3>
+
+@if (order == null)
+{
+    
+}
+else if (init) {
+    <MudDataGrid Items="@Elements" Filterable="false" SortMode="@SortMode.None" Groupable="false">
+        <Columns>
+            <TemplateColumn CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudImage Width="140" Src="@context.Item.Thumbnail" />
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.Name" />
+            <PropertyColumn Property="x => x.Price" />
+            <PropertyColumn Property="x => x.Quantity" /> 
+        </Columns>
+    </MudDataGrid>
+}
+
+@code {
+    [Parameter]
+    public string OrderId { get; set; }
+    private Order order;
+    private List<OrderItem> Elements = null;
+    bool init = false;
+    protected override async Task OnInitializedAsync()
+    {
+        order = await WooService.GetOrderAsync(int.Parse(OrderId));
+        Elements = new();
+        for (int i = 0; i < order.LineItems.Count; i++)
+        {
+            var product = await WooService.GetProductAsync((int)order.LineItems[i].ProductId);
+            ;
+            OrderItem oi = new()
+            {
+                Name = product.Name,
+                Price = order.LineItems[i].Price,
+                Thumbnail = product.Images[0].Src
+            };
+            Elements.Add(oi);
+        }
+        init = true;
+    }
+}

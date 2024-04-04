@@ -4,7 +4,7 @@ using System.Text.Json;
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ExternalProductMetadata
+    internal class ExternalProductMetadata
     {
         [JsonProperty("id")]
         public int? Id { get; set; }

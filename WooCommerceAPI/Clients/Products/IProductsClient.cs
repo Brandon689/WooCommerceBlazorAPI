@@ -10,5 +10,6 @@ namespace WooCommerceAPI.Clients.Products
         ValueTask<Product> GetProductAsync(int id);
         ValueTask<Product[]> GetAllProductsAsync(int page, int perPage);
         ValueTask<Product> UpdateProductAsync(Product product, int id = 0);
+        ValueTask<ProductVariation2[]> GetProductVariations(int id = 0);
     }
 }

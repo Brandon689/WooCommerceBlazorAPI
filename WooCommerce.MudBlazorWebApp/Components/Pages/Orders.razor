@@ -1,0 +1,84 @@
+﻿@page "/orders"
+@using WooCommerce.MudBlazorWebApp.Models
+@using WooCommerce.MudBlazorWebApp.Services
+@using WooCommerceAPI.Models.Services.Foundations.Orders
+@using System.ComponentModel.DataAnnotations
+@inject WooCommerceService WooService
+@inject WordPressService WordPressService
+@inject CacheService CacheService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+
+
+
+@if (Elements == null)
+{
+}
+else
+{
+    <MudText Inline="true">Item: @_selectedItemText</MudText>
+    <MudText>Selected items (@selectedItems?.Count)</MudText>
+    <MudButton Variant="Variant.Filled" Color="Color.Secondary" OnClick="@(() => EditProductF())">Edit order</MudButton>
+    <MudTable @ref="_table" T="Order" Items="@Elements" MultiSelection="true" @bind-SelectedItems="selectedItems" Hover="true" RowsPerPage="50">
+        <HeaderContent>
+            <MudTh>Order</MudTh>
+            <MudTh>Date</MudTh>
+            <MudTh>Status</MudTh>
+            <MudTh>Total</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Order">
+                <div style="max-width: 350px; overflow-wrap: break-word; white-space: pre-wrap;">
+                    @($"{context.Number} {context.Shipping.FirstName} {context.Shipping.LastName}")
+                </div>
+            </MudTd>
+            <MudTd DataLabel="Date Created">
+                @context.DateCreated
+            </MudTd>
+            <MudTd DataLabel="SKU">
+                @context.Total
+            </MudTd>
+        </RowTemplate>
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[] { 25, 50, 100 }" />
+        </PagerContent>
+        <FooterContent>
+            <MudTd colspan="5">Select All</MudTd>
+        </FooterContent>
+    </MudTable>
+}
+
+@code {
+    private HashSet<Order> selectedItems = new HashSet<Order>();
+    private IEnumerable<Order> Elements = null;
+    private bool _selectOnRowClick = true;
+    private MudTable<Order> _table;
+    private string _selectedItemText = "No row clicked";
+
+    protected override async Task OnInitializedAsync()
+    {
+        //if (CacheService.Cold())
+        {
+            Elements = await WooService.GetAllOrdersAsync();
+            //CacheService.SetProducts(Elements);
+            ;
+
+            Console.WriteLine(Elements.ElementAt(0).Shipping.FirstName);
+        }
+        // else
+        // {
+        //     Elements = CacheService.GetProducts();
+        // }
+    }
+
+    private void EditProductF()
+    {
+        if (selectedItems.Count == 1)
+        {
+            Order product = selectedItems.First();
+
+            //CacheService.SetCurrentProduct(product);
+            NavigationManager.NavigateTo($"/editorder/{selectedItems.First().Id}");
+        }
+    }
+}

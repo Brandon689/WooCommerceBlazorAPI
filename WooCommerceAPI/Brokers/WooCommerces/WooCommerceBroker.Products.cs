@@ -1,6 +1,7 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
+﻿using System.Text.Json;
+using WooCommerceAPI.Models.Services.Foundations.ExternalProducts;
 using WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations;
-
+using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 namespace WooCommerceAPI.Brokers.WooCommerces
 {
     internal partial class WooCommerceBroker
@@ -25,6 +26,8 @@ namespace WooCommerceAPI.Brokers.WooCommerces
 
         public async ValueTask<ExternalProduct> GetProductRequestAsync(int id)
         {
+            var f = await GetAsync<dynamic>(relativeUrl: $"{ProductsRelativeUrl}/{id}");
+            File.WriteAllText("C:\\2024\\12\\product.json", JsonSerializer.Serialize(f));
             return await GetAsync<ExternalProduct>(relativeUrl: $"{ProductsRelativeUrl}/{id}");
         }
 
@@ -37,6 +40,12 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         public async ValueTask<ExternalProduct> UpdateProductRequestAsync(ExternalProduct product, int id)
         {
             return await PutAsync<ExternalProduct>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
+        }
+
+        public async ValueTask<ProductVariation2[]> GetProductVariations(int id)
+        {
+            var f = await GetAsync<ProductVariation2[]>(relativeUrl: $"{ProductsRelativeUrl}/{id}/variations");
+            return f;
         }
     }
 }

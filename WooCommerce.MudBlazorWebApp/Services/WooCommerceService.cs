@@ -1,5 +1,6 @@
 ﻿using WooCommerceAPI.Clients.WooCommerces;
 using WooCommerceAPI.Models.Configurations;
+using WooCommerceAPI.Models.Services.Foundations.Orders;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerce.MudBlazorWebApp.Services
@@ -7,18 +8,6 @@ namespace WooCommerce.MudBlazorWebApp.Services
     public class WooCommerceService
     {
         private readonly WooCommerceClient _wooCommerceClient;
-
-        //public async Task<Product> GetCachedProductAsync(int id = 0)
-        //{
-        //    if (CurrentProduct == null)
-        //    {
-        //        if (id == 0)
-        //            throw new Exception("No valid product Id and no product selected.");
-        //        CurrentProduct = await GetProductAsync(id);
-        //    }
-        //    CurrentProduct.Request = new();
-        //    return CurrentProduct;
-        //}
 
         public WooCommerceService(WooCommerceConfigurations config)
         {
@@ -49,6 +38,26 @@ namespace WooCommerce.MudBlazorWebApp.Services
         {
             var product = await _wooCommerceClient.Products.UpdateProductAsync(_product, id);
             return product;
+        }
+
+        public async Task<Order> GetOrderAsync(int orderId)
+        {
+            try
+            {
+                var o = await _wooCommerceClient.Orders.GetOrderAsync(orderId);
+                return o;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
+
+        public async Task<Order[]> GetAllOrdersAsync()
+        {
+            var o = await _wooCommerceClient.Orders.GetAllOrdersAsync(1, 10);
+            return o;
         }
     }
 }

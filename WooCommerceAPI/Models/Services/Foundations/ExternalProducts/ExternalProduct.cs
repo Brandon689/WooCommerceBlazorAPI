@@ -90,7 +90,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public bool? Downloadable { get; set; }
 
         [JsonProperty("downloads")]
-        public List<object>? Downloads { get; set; }
+        public object[]? Downloads { get; set; }
 
         [JsonProperty("download_limit")]
         public int? DownloadLimit { get; set; }
@@ -135,7 +135,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public string? Weight { get; set; }
 
         [JsonProperty("dimensions")]
-        public Dimensions? Dimensions { get; set; }
+        public ExternalDimensions? Dimensions { get; set; }
 
         [JsonProperty("shipping_required")]
         public bool? ShippingRequired { get; set; }
@@ -159,13 +159,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public int? RatingCount { get; set; }
 
         [JsonProperty("related_ids")]
-        public List<int>? RelatedIds { get; set; }
+        public int[]? RelatedIds { get; set; }
 
         [JsonProperty("upsell_ids")]
-        public List<object>? UpsellIds { get; set; }
+        public object[]? UpsellIds { get; set; }
 
         [JsonProperty("cross_sell_ids")]
-        public List<object>? CrossSellIds { get; set; }
+        public object[]? CrossSellIds { get; set; }
 
         [JsonProperty("parent_id")]
         public int? ParentId { get; set; }
@@ -174,10 +174,10 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public string? PurchaseNote { get; set; }
 
         [JsonProperty("categories")]
-        public List<Category>? Categories { get; set; }
+        public ExternalCategory[]? Categories { get; set; }
 
         [JsonProperty("tags")]
-        public List<object>? Tags { get; set; }
+        public ExternalTag[]? Tags { get; set; }
 
         [JsonProperty("images")]
         public ExternalImage[]? Images { get; set; }
@@ -186,13 +186,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public ExternalProductAttribute[]? Attributes { get; set; }
 
         [JsonProperty("default_attributes")]
-        public DefaultAttribute[]? DefaultAttributes { get; set; }
+        public ExternalDefaultAttribute[]? DefaultAttributes { get; set; }
 
         [JsonProperty("variations")]
-        public List<object>? Variations { get; set; }
+        public int[]? Variations { get; set; }
 
         [JsonProperty("grouped_products")]
-        public List<object>? GroupedProducts { get; set; }
+        public object[]? GroupedProducts { get; set; }
 
         [JsonProperty("menu_order")]
         public int? MenuOrder { get; set; }
@@ -201,117 +201,6 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public ExternalProductMetadata[]? MetaData { get; set; }
 
         [JsonProperty("_links")]
-        public Links? Links { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Category
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string? Name { get; set; }
-
-        [JsonProperty("slug")]
-        public string? Slug { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Collection
-    {
-        [JsonProperty("href")]
-        public string? Href { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class DefaultAttribute
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("name")]
-        public string? Name { get; set; }
-
-        [JsonProperty("option")]
-        public string? Option { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Dimensions
-    {
-        [JsonProperty("length")]
-        public string? Length { get; set; }
-
-        [JsonProperty("width")]
-        public string? Width { get; set; }
-
-        [JsonProperty("height")]
-        public string? Height { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ExternalImage
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; }
-
-        [JsonProperty("date_created")]
-        public DateTime DateCreated { get; set; }
-
-        [JsonProperty("date_created_gmt")]
-        public DateTime DateCreatedGmt { get; set; }
-
-        [JsonProperty("date_modified")]
-        public DateTime DateModified { get; set; }
-
-        [JsonProperty("date_modified_gmt")]
-        public DateTime DateModifiedGmt { get; set; }
-
-        [JsonProperty("src")]
-        public string? Src { get; set; }
-
-        [JsonProperty("name")]
-        public string? Name { get; set; }
-
-        [JsonProperty("alt")]
-        public string? Alt { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Image
-    {
-        public int Id { get; set; }
-
-        public DateTime DateCreated { get; set; }
-
-        public DateTime DateCreatedGmt { get; set; }
-
-        public DateTime DateModified { get; set; }
-
-        public DateTime DateModifiedGmt { get; set; }
-
-        public string? Src { get; set; }
-
-        public string? Name { get; set; }
-
-        public string? Alt { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Links
-    {
-        [JsonProperty("self")]
-        public List<Self> Self { get; set; }
-
-        [JsonProperty("collection")]
-        public List<Collection> Collection { get; set; }
-    }
-
-    [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class Self
-    {
-        [JsonProperty("href")]
-        public string? Href { get; set; }
+        public ExternalLinks? Links { get; set; }
     }
 }

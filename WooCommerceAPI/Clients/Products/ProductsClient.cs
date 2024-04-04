@@ -70,6 +70,11 @@ namespace WooCommerceAPI.Clients.Products
             }
         }
 
+        public async ValueTask<ProductVariation2[]> GetProductVariations(int id = 0)
+        {
+            return await productService.GetProductVariations(id);
+        }
+
         public async ValueTask<Product> GetProductAsync(int id)
         {
             try
