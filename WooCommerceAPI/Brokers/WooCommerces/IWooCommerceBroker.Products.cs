@@ -11,6 +11,6 @@ namespace WooCommerceAPI.Brokers.WooCommerces
         ValueTask<ExternalProduct> GetProductRequestAsync(int id);
         ValueTask<ExternalProduct[]> GetAllProductsRequestAsync(int page, int perPage);
         ValueTask<ExternalProduct> UpdateProductRequestAsync(ExternalProduct product, int id);
-        ValueTask<ProductVariation2[]> GetProductVariations(int id);
+        ValueTask<ProductVariation[]> GetProductVariations(int id);
     }
 }

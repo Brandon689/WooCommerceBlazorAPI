@@ -42,9 +42,9 @@ namespace WooCommerceAPI.Brokers.WooCommerces
             return await PutAsync<ExternalProduct>(relativeUrl: $"{ProductsRelativeUrl}/{id}", content: product);
         }
 
-        public async ValueTask<ProductVariation2[]> GetProductVariations(int id)
+        public async ValueTask<ProductVariation[]> GetProductVariations(int id)
         {
-            var f = await GetAsync<ProductVariation2[]>(relativeUrl: $"{ProductsRelativeUrl}/{id}/variations");
+            var f = await GetAsync<ProductVariation[]>(relativeUrl: $"{ProductsRelativeUrl}/{id}/variations");
             return f;
         }
     }

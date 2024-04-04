@@ -9,16 +9,16 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
         public int Id { get; set; }
 
         [JsonProperty("date_created")]
-        public DateTime DateCreated { get; set; }
+        public DateTime? DateCreated { get; set; }
 
         [JsonProperty("date_created_gmt")]
-        public DateTime DateCreatedGmt { get; set; }
+        public DateTime? DateCreatedGmt { get; set; }
 
         [JsonProperty("date_modified")]
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         [JsonProperty("date_modified_gmt")]
-        public DateTime DateModifiedGmt { get; set; }
+        public DateTime? DateModifiedGmt { get; set; }
 
         [JsonProperty("src")]
         public string? Src { get; set; }
@@ -28,5 +28,13 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProducts
 
         [JsonProperty("alt")]
         public string? Alt { get; set; }
+
+        public ExternalImage()
+        { }
+
+        public ExternalImage(int id)
+        {
+            Id = id;
+        }
     }
 }

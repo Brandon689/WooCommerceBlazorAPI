@@ -11,13 +11,11 @@ namespace WooCommerceAPI.Services.Foundations.Products
     {
         private readonly IWooCommerceBroker wooCommerceBroker = wooCommerceBroker;
 
-
-        public async ValueTask<ProductVariation2[]> GetProductVariations(int id)
+        public async ValueTask<ProductVariation[]> GetProductVariations(int id)
         {
             var c = await this.wooCommerceBroker.GetProductVariations(id);
             return c;
         }
-
 
         public ValueTask<Product> SendProductAsync(Product product) =>
         TryCatch(async () =>
@@ -280,13 +278,13 @@ namespace WooCommerceAPI.Services.Foundations.Products
                     {
                         RegularPrice = create.RegularPrice,
                         Attributes = create.Attributes.Select(attr =>
-                            new ExternalProductVariationAttribute
+                            new ExternalVariationAttribute
                             {
                                 //Id = attr.Id,
                                 Option = attr.Option,
                                 Name = attr.Name
                             }).ToArray(),
-                        Image = create.Image == null ? null : new ExternalID(id: create.Image.Id)
+                        Image = create.Image == null ? null : new ExternalImage(id: create.Image.Id)
                     }).ToArray()
             };
         }

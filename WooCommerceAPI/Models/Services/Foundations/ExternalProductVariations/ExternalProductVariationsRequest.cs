@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using WooCommerceAPI.Models.Services.Foundations.Products;
 
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
 {
@@ -9,27 +8,27 @@ namespace WooCommerceAPI.Models.Services.Foundations.ExternalProductVariations
         public ExternalProductVariation[] Create { get; set; }
     }
 
-    internal class ExternalProductVariation
-    {
-        [JsonProperty("regular_price")]
-        public string RegularPrice { get; set; } = string.Empty;
+    //internal class ExternalProductVariation
+    //{
+    //    [JsonProperty("regular_price")]
+    //    public string RegularPrice { get; set; } = string.Empty;
 
-        [JsonProperty("attributes")]
-        public ExternalProductVariationAttribute[] Attributes { get; set; }
+    //    [JsonProperty("attributes")]
+    //    public ExternalProductVariationAttribute[] Attributes { get; set; }
 
-        [JsonProperty("image")]
-        public ExternalID Image { get; set; } = null;
-    }
+    //    [JsonProperty("image")]
+    //    public ExternalID Image { get; set; } = null;
+    //}
 
-    internal class ExternalProductVariationAttribute
-    {
-        [JsonProperty("id")]
-        public int Id { get; set; } = 0;
+    //internal class ExternalProductVariationAttribute
+    //{
+    //    [JsonProperty("id")]
+    //    public int Id { get; set; } = 0;
 
-        [JsonProperty("name")]
-        public string Name { get; set; } = string.Empty;
+    //    [JsonProperty("name")]
+    //    public string Name { get; set; } = string.Empty;
 
-        [JsonProperty("option")]
-        public string Option { get; set; } = string.Empty;
-    }
+    //    [JsonProperty("option")]
+    //    public string Option { get; set; } = string.Empty;
+    //}
 }
