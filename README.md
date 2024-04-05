@@ -4,25 +4,34 @@
 
 WooCommerce .NET Api and Blazor Server Admin Panel for ecommerce developers.
 
-## Critical endpoints done
+
+## Note
+It is recommended that you utilize a dockerized WordPress dev environment for testing
+Here is the needed instructions to get started, just install Docker and then follow along:
+https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/
+
+
+
+## endpoints done
 
 - Create product (simple, variable, metadata)
 - Batch create product attribute / variations
 - Upload media (wordpress)
 - List all products
 - Update a product
-
+- Update product variations
+- Get product variations
+- Get an order
+- List all orders
+- Update a media item
 ## Next
 
 - Delete a product
-- Update product variations
 - Delete product variations
-- Update a media item
 - Create a product category
 - List all product categories
-- List all orders
 - Update an order
-- Get an order
+
 
 ## Hello World
 
