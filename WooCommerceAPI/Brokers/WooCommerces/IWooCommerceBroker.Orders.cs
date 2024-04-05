@@ -1,4 +1,5 @@
-﻿using WooCommerceAPI.Models.Services.Foundations.Orders;
+﻿using WooCommerceAPI.Models.Services.Foundations.ExternalOrders;
+using WooCommerceAPI.Models.Services.Foundations.Orders;
 
 namespace WooCommerceAPI.Brokers.WooCommerces
 {
@@ -6,5 +7,6 @@ namespace WooCommerceAPI.Brokers.WooCommerces
     {
         ValueTask<Order> GetOrderRequestAsync(int id);
         ValueTask<Order[]> GetAllOrdersRequestAsync(int page, int perPage);
+        ValueTask<ExternalOrder> CreateOrderRequestAsync(ExternalOrder order);
     }
 }

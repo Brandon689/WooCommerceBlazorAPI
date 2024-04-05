@@ -1,5 +1,6 @@
 using WooCommerceAPI.Clients.WooCommerces;
 using WooCommerceAPI.Models.Configurations;
+using WooCommerceAPI.Models.Services.Foundations.Orders;
 using WooCommerceAPI.Models.Services.Foundations.Products;
 using WooCommerceAPI.Models.Services.Foundations.ProductVariations;
 
@@ -85,6 +86,14 @@ app.MapGet("/orders", async (int page, int perPage) =>
     return orders;
 })
 .WithName("GetAllOrders")
+.WithOpenApi();
+
+app.MapPost("/orders", async (Order request) =>
+{
+    var newOrder = await wooCommerceClient.Orders.CreateOrderAsync(request);
+    return newOrder;
+})
+.WithName("CreateOrder")
 .WithOpenApi();
 
 app.Run();

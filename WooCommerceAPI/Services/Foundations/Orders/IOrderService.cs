@@ -6,5 +6,6 @@ namespace WooCommerceAPI.Services.Foundations.Orders
     {
         ValueTask<Order> GetOrderAsync(int orderId);
         ValueTask<Order[]> GetAllOrdersAsync(int page, int perPage);
+        ValueTask<Order> CreateOrderAsync(Order order);
     }
 }
