@@ -11,6 +11,8 @@ Here is the needed instructions to get started, just install Docker and then fol
 https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/
 * Basic Auth is not supported by WooCommerce over HTTP, therefore use OAuth.
 
+## Swagger
+There is now a ASP.NET core server with Swagger Docs
 
 ## endpoints done
 
