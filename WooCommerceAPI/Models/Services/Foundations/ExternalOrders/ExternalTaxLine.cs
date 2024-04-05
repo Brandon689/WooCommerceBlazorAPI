@@ -3,7 +3,7 @@
 namespace WooCommerceAPI.Models.Services.Foundations.Orders
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ExternalTaxLine
+    internal class ExternalTaxLine
     {
         [JsonProperty("id")]
         public int? Id { get; set; }

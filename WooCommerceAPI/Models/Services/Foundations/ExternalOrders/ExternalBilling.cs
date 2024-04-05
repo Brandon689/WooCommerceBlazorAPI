@@ -3,7 +3,7 @@
 namespace WooCommerceAPI.Models.Services.Foundations.Orders
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ExternalBilling
+    internal class ExternalBilling
     {
         [JsonProperty("first_name")]
         public string? FirstName { get; set; }

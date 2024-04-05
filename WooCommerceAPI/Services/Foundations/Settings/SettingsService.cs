@@ -1,6 +1,6 @@
 ﻿namespace WooCommerceAPI.Services.Foundations.Settings
 {
-    internal class SettingsService
+    internal class SettingsService : ISettingsService
     {
     }
 }

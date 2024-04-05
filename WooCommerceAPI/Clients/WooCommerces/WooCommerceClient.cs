@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using WooCommerceAPI.Brokers.WooCommerces;
+using WooCommerceAPI.Clients.Customers;
 using WooCommerceAPI.Clients.Orders;
 using WooCommerceAPI.Clients.Products;
 using WooCommerceAPI.Models.Configurations;
 using WooCommerceAPI.Services.Foundations.Orders;
 using WooCommerceAPI.Services.Foundations.Products;
+using WooCommerceAPI.Services.Foundations.Settings;
 
 namespace WooCommerceAPI.Clients.WooCommerces
 {
@@ -18,11 +20,13 @@ namespace WooCommerceAPI.Clients.WooCommerces
 
         public IProductsClient Products { get; private set; }
         public IOrdersClient Orders { get; private set; }
+        public ICustomersClient Customers { get; private set; }
 
         private void InitializeClients(IServiceProvider serviceProvider)
         {
             Products = serviceProvider.GetRequiredService<IProductsClient>();
             Orders = serviceProvider.GetRequiredService<IOrdersClient>();
+            Customers = serviceProvider.GetRequiredService<ICustomersClient>();
         }
 
         private static IServiceProvider RegisterServices(WooCommerceConfigurations wooCommerceConfigurations, bool oAuth)
@@ -33,6 +37,8 @@ namespace WooCommerceAPI.Clients.WooCommerces
                 .AddTransient<IProductsClient, ProductsClient>()
                 .AddTransient<IOrderService, OrderService>()
                 .AddTransient<IOrdersClient, OrdersClient>()
+                .AddTransient<ICustomersClient, CustomersClient>()
+                .AddTransient<ICustomerService, CustomerService>()
                 .AddSingleton(wooCommerceConfigurations);
 
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();

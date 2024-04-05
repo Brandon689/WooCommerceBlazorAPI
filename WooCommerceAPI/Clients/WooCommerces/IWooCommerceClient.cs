@@ -1,4 +1,5 @@
-﻿using WooCommerceAPI.Clients.Orders;
+﻿using WooCommerceAPI.Clients.Customers;
+using WooCommerceAPI.Clients.Orders;
 using WooCommerceAPI.Clients.Products;
 
 namespace WooCommerceAPI.Clients.WooCommerces
@@ -7,5 +8,6 @@ namespace WooCommerceAPI.Clients.WooCommerces
     {
         IProductsClient Products { get; }
         IOrdersClient Orders { get; }
+        ICustomersClient Customers { get; }
     }
 }

@@ -4,7 +4,7 @@ using WooCommerceAPI.Models.Services.Foundations.Orders;
 namespace WooCommerceAPI.Models.Services.Foundations.ExternalOrders
 {
     [JsonObject(ItemNullValueHandling = NullValueHandling.Ignore)]
-    public class ExternalOrder
+    internal class ExternalOrder
     {
         [JsonProperty("id")]
         public int? Id { get; set; }
