@@ -9,7 +9,7 @@ WooCommerce .NET Api and Blazor Server Admin Panel for ecommerce developers.
 It is recommended that you utilize a dockerized WordPress dev environment for testing.
 Here is the needed instructions to get started, just install Docker and then follow along:
 https://github.com/docker/awesome-compose/tree/master/official-documentation-samples/wordpress/
-
+* Basic Auth is not supported by WooCommerce over HTTP, therefore use OAuth.
 
 
 ## endpoints done
@@ -50,7 +50,7 @@ var wooCommerceConfigurations = new WooCommerceConfigurations
     ApiUrl = Environment.GetEnvironmentVariable("WC_STORE_URL")
 };
 
-var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations);
+var wooCommerceClient = new WooCommerceClient(wooCommerceConfigurations, true);
 
 ProductAttribute[] a = new ProductAttribute[3];
 
