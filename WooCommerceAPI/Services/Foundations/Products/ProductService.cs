@@ -96,9 +96,9 @@ namespace WooCommerceAPI.Services.Foundations.Products
                 Weight = product.Weight,
                 Dimensions = new ExternalDimensions()
                 {
-                    Height = product.Dimensions.Height,
-                    Width = product.Dimensions.Width,
-                    Length = product.Dimensions.Length,
+                    Height = product.Dimensions?.Height,
+                    Width = product.Dimensions?.Width,
+                    Length = product.Dimensions?.Length,
                 },
             };
             if (product.Images != null)

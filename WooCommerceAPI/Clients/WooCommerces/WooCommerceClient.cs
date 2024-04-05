@@ -10,9 +10,9 @@ namespace WooCommerceAPI.Clients.WooCommerces
 {
     public class WooCommerceClient : IWooCommerceClient
     {
-        public WooCommerceClient(WooCommerceConfigurations wooCommerceConfigurations)
+        public WooCommerceClient(WooCommerceConfigurations wooCommerceConfigurations, bool oAuth)
         {
-            IServiceProvider serviceProvider = RegisterServices(wooCommerceConfigurations);
+            IServiceProvider serviceProvider = RegisterServices(wooCommerceConfigurations, oAuth);
             InitializeClients(serviceProvider);
         }
 
@@ -25,10 +25,10 @@ namespace WooCommerceAPI.Clients.WooCommerces
             Orders = serviceProvider.GetRequiredService<IOrdersClient>();
         }
 
-        private static IServiceProvider RegisterServices(WooCommerceConfigurations wooCommerceConfigurations)
+        private static IServiceProvider RegisterServices(WooCommerceConfigurations wooCommerceConfigurations, bool oAuth)
         {
             var serviceCollection = new ServiceCollection()
-                .AddTransient<IWooCommerceBroker, WooCommerceBroker>()
+                .AddTransient<IWooCommerceBroker>(provider => new WooCommerceBroker(wooCommerceConfigurations, oAuth))
                 .AddTransient<IProductService, ProductService>()
                 .AddTransient<IProductsClient, ProductsClient>()
                 .AddTransient<IOrderService, OrderService>()

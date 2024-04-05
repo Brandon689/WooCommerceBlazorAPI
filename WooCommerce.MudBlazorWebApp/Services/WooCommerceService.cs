@@ -11,7 +11,7 @@ namespace WooCommerce.MudBlazorWebApp.Services
 
         public WooCommerceService(WooCommerceConfigurations config)
         {
-            _wooCommerceClient = new WooCommerceClient(config);
+            _wooCommerceClient = new WooCommerceClient(config, oAuth: true);
         }
 
         public async Task<Product> GetProductAsync(int productId)
