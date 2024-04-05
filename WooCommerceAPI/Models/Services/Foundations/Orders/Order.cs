@@ -127,7 +127,7 @@ namespace WooCommerceAPI.Models.Services.Foundations.Orders
         [JsonProperty("refunds")]
         public List<object> Refunds { get; set; }
 
-        [JsonProperty("_links")]
-        public Links Links { get; set; }
+        //[JsonProperty("_links")]
+        //public Links Links { get; set; }
     }
 }
