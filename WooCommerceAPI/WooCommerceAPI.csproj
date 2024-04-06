@@ -24,11 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Clients\SystemStatus\" />
     <Folder Include="Models\Services\Foundations\Coupons\" />
-    <Folder Include="Models\Services\Foundations\Settings\" />
     <Folder Include="Models\Services\Foundations\Refunds\" />
     <Folder Include="Models\Services\Foundations\ProductCategories\" />
     <Folder Include="Models\Services\Foundations\ProductAttributes\" />
+    <Folder Include="Services\Foundations\SystemStatus\" />
   </ItemGroup>
 
   <ItemGroup>

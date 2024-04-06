@@ -1,14 +1,14 @@
-﻿namespace WooCommerceAPI.Brokers.WooCommerces
-{
-    //internal partial class WooCommerceBroker
-    //public class WooS
-    //{
-    //    private const string SettingsRelativeUrl = "/wp-json/wc/v3/settings";
+﻿using WooCommerceAPI.Models.Services.Foundations.Settings;
 
-    //    public async ValueTask<ProductVariation[]> Get(int id)
-    //    {
-    //        var f = await GetAsync<dynamic[]>(relativeUrl: $"{SettingsRelativeUrl}");
-    //        return null;
-    //    }
-    //}
+namespace WooCommerceAPI.Brokers.WooCommerces
+{
+    internal partial class WooCommerceBroker
+    {
+        private const string SettingsRelativeUrl = "/wp-json/wc/v3/settings";
+
+        public async ValueTask<Setting> GetSettings()
+        {
+            return await GetAsync<Setting>(relativeUrl: $"{SettingsRelativeUrl}");
+        }
+    }
 }

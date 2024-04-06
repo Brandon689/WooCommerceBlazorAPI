@@ -1,6 +1,9 @@
-﻿namespace WooCommerceAPI.Services.Foundations.Settings
+﻿using WooCommerceAPI.Models.Services.Foundations.Settings;
+
+namespace WooCommerceAPI.Services.Foundations.Settings
 {
-    internal class ISettingsService
+    internal interface ISettingsService
     {
+        ValueTask<Setting> GetSettings();
     }
 }

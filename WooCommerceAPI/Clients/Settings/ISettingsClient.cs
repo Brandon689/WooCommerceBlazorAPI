@@ -1,6 +1,9 @@
-﻿namespace WooCommerceAPI.Clients.Settings
+﻿using WooCommerceAPI.Models.Services.Foundations.Settings;
+
+namespace WooCommerceAPI.Clients.Settings
 {
-    internal class ISettingsClient
+    public interface ISettingsClient
     {
+        ValueTask<Setting> GetSettings();
     }
 }
